@@ -4,7 +4,7 @@
 @section('content')
 <div class="container-fluid">
   <!-- Page Heading -->
-  <h1 class="h3 mb-2 text-gray-800">Edit data {{ $fakultas->faculty_name}}</h1>
+  <h1 class="h3 mb-2 text-gray-800">Edit data {{ $fakultas->nama}}</h1>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
       <a href="{{ route('fakultas.data') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
       class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali</a>
@@ -22,12 +22,12 @@
         <div class="container-fluid">
           <div class="mb-3" class="pl-5">
             <label for="nama_fakultas" class="form-label">Nama Fakultas</label>
-            <input type="text" name="nama_fakultas" id="nama_fakultas" class="form-control" value="{{ $fakultas->faculty_name }}" >
+            <input type="text" name="nama_fakultas" id="nama_fakultas" class="form-control" value="{{ $fakultas->nama }}" >
           </div>
 
           <div class="mb-3" class="pl-5">
             <label for="code" class="form-label">Code Fakultas</label>
-            <input type="text" name="code" id="code" class="form-control" value="{{ $fakultas->code }}">
+            <input type="text" name="code" id="code" class="form-control" value="{{ $fakultas->kode }}">
           </div>
 
           <button type="submit" class="btn btn-primary">Simpan</button>

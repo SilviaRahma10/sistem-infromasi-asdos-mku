@@ -25,7 +25,7 @@
                         <tr>
                             <th>Id</th>
                             <th>Nama Fakultas</th>
-                            <th>Code Fakultas</th>
+                            <th>kode Fakultas</th>
                             <th></th>
                             <th>Aksi</th>
                             <th></th>
@@ -36,8 +36,8 @@
                         @foreach ($fakultas as $fak)
                          <tr>
                            <td>{{ $fak->id }}</td>
-                           <td>{{ $fak->faculty_name  }}</td>
-                           <td>{{ $fak->code }}</td>
+                           <td>{{ $fak->nama  }}</td>
+                           <td>{{ $fak->kode }}</td>
                             {{-- <td>
                                 <a href="{{ route('prodi.tambah', $fakultas->id) }}"><button type="submit" class="btn btn-primary">Tambah prodi</button> </a>
                             </td> --}}   

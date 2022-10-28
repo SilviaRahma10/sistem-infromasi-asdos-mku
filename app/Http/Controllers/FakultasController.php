@@ -15,8 +15,8 @@ class FakultasController extends Controller
 
    public function simpan(Request $request){
     $fakultas=new Fakultas;
-    $fakultas->faculty_name = $request->nama_fakultas;
-    $fakultas->code = $request->code;
+    $fakultas->nama = $request->nama_fakultas;
+    $fakultas->kode = $request->code;
 
     $fakultas->save();
 
@@ -54,8 +54,8 @@ class FakultasController extends Controller
 
    public function update(Request $request, Fakultas $fakultas)
    {
-    $fakultas->faculty_name = $request->nama_fakultas;
-    $fakultas->code = $request->code;
+    $fakultas->nama = $request->nama_fakultas;
+    $fakultas->kode = $request->code;
     $fakultas->save();
 
     return redirect()

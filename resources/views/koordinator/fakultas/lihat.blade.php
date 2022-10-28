@@ -23,12 +23,12 @@
             <fieldset disabled>
                 <div class="mb-3" class="pl-5">
                     <label for="nama_fakultas" class="form-label">Nama Fakultas</label>
-                    <input type="text" name="nama_fakultas" id="nama_fakultas" class="form-control" value="{{ $fakultas->faculty_name }}">
+                    <input type="text" name="nama_fakultas" id="nama_fakultas" class="form-control" value="{{ $fakultas->nama }}">
                 </div>
 
                 <div class="mb-3" class="pl-5">
                     <label for="code" class="form-label">Code Fakultas</label>
-                    <input type="text" name="code" id="code" class="form-control" value="{{ $fakultas->code }}">
+                    <input type="text" name="code" id="code" class="form-control" value="{{ $fakultas->kode }}">
                 </div>
             </fieldset>
             </div>
