@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="container-fluid">
-  <h1 class="h3 mb-2 text-gray-800">Edit Tahun Akademik {{ $schoolyear->school_year }}</h1>
+  <h1 class="h3 mb-2 text-gray-800">Edit Tahun Akademik {{ $tahun->tahun }}</h1>
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <a href="{{ route('school_year.data') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
@@ -16,25 +16,48 @@
         <h6 class="m-0 font-weight-bold text-primary">Masukkan Data Tahun Akademik</h6>
       </div>
       
-      <form class="pl-5" action="{{ route('school_year.update', $schoolyear->id ) }}" method="POST">
+      <form class="pl-5" action="{{ route('school_year.update', $tahun->id ) }}" method="POST">
         @csrf
         @method('PUT')
           <br>
           <div class="container-fluid">
 
-            <div class="mb-3" class="pl-5">
-              <label for="school_year" class="form-label">Tahun Ajaran</label>
-              <input type="text" name="school_year" id="school_year" class="form-control" value="{{ $schoolyear->school_year }}">
-            </div>
+            <div class="row">
+              <div class="col-md-6">
 
-            <div class="mb-3" class="pl-5">
-                <label for="semester" class="form-label">Semester</label>
-                <br>
-                <select id="semester" name="semester" class="form-select">
-                  <option >{{  $schoolyear->semester }}</option>
-                  <option >Ganjil</option>
-                  <option >Genap</option>
-                </select>
+                <div class="mb-3" class="pl-5">
+                  <label for="tahun" class="form-label">Tahun Ajaran</label>
+                  <input type="text" name="tahun" id="tahun" class="form-control @error('tahun') is-invalid @enderror" value="{{ $tahun->tahun }}">
+
+                  @error('tahun')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
+              </div>
+
+              <div class="col-md-6">
+
+                <div class="mb-3" class="pl-5">
+                    <label for="semester" class="form-label">Semester</label>
+                    <br>
+                    <select id="semester" name="semester" class="form-control @error('semester') is-invalid @enderror">
+                      <option value="{{ $tahun->semester }}">
+                        @if($tahun->semester==1)
+                          Ganjil
+                        @else($tahun->semester==2)
+                          Genap
+                        @endif
+                      
+                      </option>
+                      <option value="{{ 1 }}">Ganjil</option>
+                      <option value="{{ 2 }}">Genap</option>
+                    </select>
+
+                    @error('semester')
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                  </div>
+                </div>
               </div>
 
   

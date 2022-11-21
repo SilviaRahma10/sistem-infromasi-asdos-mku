@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('kelas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_mata_kuliah_prodi')->constrained('mata_kuliah_prodis')->cascadeOnDelete();
-            $table->string('name');
+            $table->string('nama');
             $table->string('hari')->nullable();
             $table->string('waktu')->nullable();
             $table->string('ruang')->nullable();

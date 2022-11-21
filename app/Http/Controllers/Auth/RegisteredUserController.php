@@ -49,6 +49,12 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        // return redirect(RouteServiceProvider::HOME);
+
+        
+    return redirect()
+    ->to(route('mahasiswa.dataDiri', $user->id)) 
+    ->withSuccess('success', 'berhasil mendaftar');
+        
     }
 }

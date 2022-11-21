@@ -10,12 +10,23 @@
 
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Mahasiswa</h1>
+
+    <form action="{{ route('student.search') }}" method="GET" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3  my-md-0 navbar-search" style="float: right;">
+      <div class="input-group pull-right" style="color:white">
+          <input type="search" class="form-control bg-white border-0 small" placeholder="Cari Data Mahasiswa" name="search">
+          <div class="input-group-append">
+              <button class="btn btn-primary" type="submit">
+                  <i class="fas fa-search fa-sm"></i>
+              </button>
+          </div>
+      </div>
+  </form>
     
     <div class="nav-item dropdown back bg-primary" style="width: max-content; border-radius:8px">
       <a style="color:white" class="nav-link dropdown-toggle" href="#" id="dropdown1" data-toggle="dropdown" arial-haspopup="true" arial-expanded="false">Program studi</a>
       <div class="dropdown-menu" arial-labelledby="dropdown1">
           @foreach($prodis as $prodi)
-          <a class="dropdown-item"  href="{{ route('student.pilih', $prodi->id) }}">{{ $prodi->prodi_name }}</a>
+          <a class="dropdown-item"  href="{{ route('student.pilih', $prodi->id) }}">{{ $prodi->nama }}</a>
           @endforeach
       </div>
     </div>
@@ -30,12 +41,13 @@
         
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table " id="dataTable" width="80%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Id</th>
+                            <th>No</th>
                             <th>Nama Mahasiswa</th>
                             <th>NPM</th>
+                            <td>Fakultas</td>
                             <th>Program Studi</th>
                             <th>Angkatan</th>
                             <th>Email</th>
@@ -43,16 +55,19 @@
                             <th>Alamat</th>
                             <th>Jenis Kelamin</th>
                             <th>Aksi</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($students as $student)
+                      @php
+                        $no=1;
+                      @endphp
+                        @foreach ($students as $index => $student)
                         <tr>
-                            <td>{{ $student->id }}</td>
+                          <th scope="row"> {{ $index + $students->firstItem() }}</th>
                             <td>{{ $student->user->name }}</td>
                             <td>{{ $student->npm }}</td>
-                            <td>{{ $student->prodi->prodi_name}}</td>
+                            <td>{{ $student->prodi->fakultas->nama}}</td>
+                            <td>{{ $student->prodi->nama}}</td>
                             <td>{{ $student->angkatan }}</td>
                            <td>{{ $student->user->email }}</td>
                            <td>{{ $student->no_hp }}</td>
@@ -65,15 +80,15 @@
                              <br><br>
 
                            </td>
-                           <td>
-                                {{-- <a href="#" class="btn btn-danger remove-btn" data-id="{{ $students->id }}">hapus</a> --}}
-                            </td> 
-                           </td>
+                           
                          </tr>
 
                          @endforeach
                     </tbody>
                 </table>
+                <div style="float: right">
+                  {{ $students->links() }}
+              </div>
             </div>
         </div>
     </div>

@@ -12,7 +12,8 @@
     <title>@yield('title')</title>
 
     <!-- Custom fonts for this template-->
-    <link href="{{ asset('themes/sb-admin-2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('themes/sb-admin-2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet"
+        type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -20,6 +21,7 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('themes/sb-admin-2/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
+    @yield('custom_head')
 </head>
 
 <body id="page-top">
@@ -29,12 +31,13 @@
         {{-- sidebar --}}
 
         @if (auth()->user()->role == 'admin')
-        @include('includes.sidebarAdmin')
+            @include('includes.sidebarKoordinator')
         @else
-        @include('includes.sidebarKoordinator')
+            @include('includes.sidebarAdmin')
+            
         @endif
 
-{{-- wnd of sidebar --}}
+        {{-- wnd of sidebar --}}
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -42,11 +45,11 @@
             <div id="content">
 
                 <!-- Topbar -->
-@include('includes.navbar')
+                @include('includes.navbar')
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-@yield('content')
+                @yield('content')
                 <!-- /.container-fluid -->
 
             </div>
@@ -56,7 +59,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; LPMPP | 2022</span>
                     </div>
                 </div>
             </footer>
@@ -79,15 +82,23 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Apakah Anda Yakin Untuk Keluar?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Pilih Logout untuk keluar dari sistem</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+
+                        <a class="btn btn-primary" href="route('logout')" 
+                                onclick="event.preventDefault();
+                                this.closest('form').submit();"> 
+                                Logout</a>
+                    </form>
                 </div>
             </div>
         </div>
@@ -98,32 +109,32 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('themes/sb-admin-2/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('themes/sb-admin-2/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ asset('themes/sb-admin-2/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="{{ asset('themes/sb-admin-2/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+    <script src="{{ asset('themes/sb-admin-2/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="{{ asset('themes/sb-admin-2/js/sb-admin-2.min.js')}}"></script>
+    <script src="{{ asset('themes/sb-admin-2/js/sb-admin-2.min.js') }}"></script>
 
     <!-- Page level plugins -->
-    <script src="{{ asset('themes/sb-admin-2/vendor/chart.js/Chart.min.js')}}"></script>
+    <script src="{{ asset('themes/sb-admin-2/vendor/chart.js/Chart.min.js') }}"></script>
 
     <!-- Page level custom scripts -->
-    <script src="{{ asset('themes/sb-admin-2/js/demo/chart-area-demo.js')}}"></script>
+    <script src="{{ asset('themes/sb-admin-2/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('themes/sb-admin-2/js/demo/chart-pie-demo.js') }}"></script>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    
+
 
     @if (session()->has('success'))
         <script>
             Swal.fire(
-  'Berhasil!',
-  '{{ session()->get('success') }}',
-  'success'
-)
+                'Berhasil!',
+                '{{ session()->get('success') }}',
+                'success'
+            )
         </script>
     @endif
 

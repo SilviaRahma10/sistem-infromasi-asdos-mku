@@ -19,23 +19,34 @@
           <div class="container-fluid">
            <fieldset disabled>
 
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3" class="pl-5">
+                  <label for="kode_prodi" class="form-label">Kode Program Studi</label>
+                  <input type="text" name="kode_prodi" id="kode_prodi" class="form-control" value="{{ $prodi->kode }}" >
+                 </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="mb-3" class="pl-5">
+                  <label for="nama_prodi" class="form-label">Nama Program Studi</label>
+                  <input type="text" name="nama_prodi" id="nama_prodi" class="form-control" value="{{ $prodi->nama }}" >
+                </div>
+              </div>
+
+            </div>
+
             <div class="mb-3" class="pl-5">
               <label for="fakultas_id" class="form-label">Fakultas</label>
-              <input type="text" name="fakultas_id" id="fakultas_id" class="form-control" value="{{ $prodi->fakultas->faculty_name }}" >
+              <input type="text" name="fakultas_id" id="fakultas_id" class="form-control" value="{{ $prodi->fakultas->nama }}" >
              </div>
     
             
-              <div class="mb-3" class="pl-5">
-                <label for="kode_prodi" class="form-label">Kode Program Studi</label>
-                <input type="text" name="kode_prodi" id="kode_prodi" class="form-control" value="{{ $prodi->code }}" >
-               </div>
+       
     
-                <div class="mb-3" class="pl-5">
-                    <label for="nama_prodi" class="form-label">Nama Program Studi</label>
-                    <input type="text" name="nama_prodi" id="nama_prodi" class="form-control" value="{{ $prodi->prodi_name }}" >
-                </div>
+
     
-                <div class="mb-3" class="pl-5">
+                {{-- <div class="mb-3" class="pl-5">
                     <label for="akreditasi" class="form-label">Akreditasi</label>
                     <br>
                     <select id="akreditasi" name="akreditasi" class="form-select">
@@ -57,7 +68,7 @@
                     <option>S1</option>
                     <option>D3</option>
                     </select>
-                
+                 --}}
           </fieldset>
         </div>
         </form>

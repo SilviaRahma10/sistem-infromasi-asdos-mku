@@ -11,9 +11,23 @@
             <a href="{{ route('fakultas.tambah') }}"><button type="submit" class="btn btn-primary">
                 <i class="fas fa-plus"></i>
                 Tambah</button></a>
+                
+                <form action="{{ route('fakultas.search') }}" method="GET" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3  my-md-0 navbar-search" style="float: right;">
+                    <div class="input-group pull-right" style="color:white">
+                        <input type="search" class="form-control bg-white border-0 small" placeholder="Cari Data Fakultas" name="search">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
             <br><br>
+
+
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
+        
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Data Fakultas</h6>
         </div>
@@ -23,7 +37,7 @@
                 <table class="table" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Id</th>
+                            <th>No</th>
                             <th>Nama Fakultas</th>
                             <th>kode Fakultas</th>
                             <th></th>
@@ -33,9 +47,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($fakultas as $fak)
+                        @php
+                            $no=1;
+                        @endphp
+    
+                        @foreach ($fakultas as $index => $fak)
                          <tr>
-                           <td>{{ $fak->id }}</td>
+                            <th scope="row"> {{ $index + $fakultas->firstItem() }}</th>
                            <td>{{ $fak->nama  }}</td>
                            <td>{{ $fak->kode }}</td>
                             {{-- <td>
@@ -61,6 +79,9 @@
                          @endforeach
                     </tbody>
                 </table>
+                <div style="float: right">
+                    {{ $fakultas->links() }}
+                </div>
             </div>
         </div>
     </div>

@@ -12,13 +12,24 @@
     <a href="{{ route('lecturer.tambah') }}"><button type="submit" class="btn btn-primary">
         <i class="fas fa-user-plus"></i>
         Tambah</button></a>
-    <br><br>
+    <br>
+    <form action="{{ route('lecturer.search') }}" method="GET" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3  my-md-0 navbar-search" style="float: right;">
+        <div class="input-group pull-right" style="color:white">
+            <input type="search" class="form-control bg-white border-0 small" placeholder="Cari Data Dosen" name="search">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-search fa-sm"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+    <br>
 
     <div class="nav-item dropdown back bg-primary" style="width: max-content; border-radius:8px">
         <a style="color:white" class="nav-link dropdown-toggle" href="#" id="dropdown1" data-toggle="dropdown" arial-haspopup="true" arial-expanded="false">Program studi</a>
         <div class="dropdown-menu" arial-labelledby="dropdown1">
             @foreach($prodis as $prodi)
-            <a class="dropdown-item"  href="{{ route('lecturer.pilih', $prodi->id) }}">{{ $prodi->prodi_name }}</a>
+            <a class="dropdown-item"  href="{{ route('lecturer.pilih', $prodi->id) }}">{{ $prodi->nama }}</a>
             @endforeach
         </div>
       </div>
@@ -36,32 +47,31 @@
                 <table class="table" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Id</th>
+                            <th>No</th>
                             <th>Nama</th>
                             <th>NIP</th>
                             <th>NIDN</th>
                             <th>Program Studi</th>
-                            <th>Email</th>
                             <th>No Hp</th>
                             <th>Jenis Kelamin</th>
-                            <th>pendidikan Tertinggi</th>
                             <th></th>
                             <th>Aksi</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($lecturers as $lecture)
+                            @php
+                                $no=1;
+                            @endphp
+                        @foreach ($lecturers as $index => $lecture)
                          <tr>
-                            <td>{{ $lecture->id }}</td>
-                            <td>{{ $lecture->user->name }}</td>
+                            <th scope="row"> {{ $index + $lecturers->firstItem() }}</th>
+                            <td>{{ $lecture->nama }}</td>
                             <td>{{ $lecture->nip }}</td>
                             <td>{{ $lecture->nidn }}</td>
-                           <td>{{ $lecture->prodi->prodi_name }}</td>
-                           <td>{{ $lecture->user->email }}</td>
+                           <td>{{ $lecture->prodi->nama }}</td>
                            <td>{{ $lecture->no_hp }}</td> 
-                           <td>{{ $lecture->gender }}</td> 
-                           <td>{{ $lecture->highest_education }}</td> 
+                           <td>{{ $lecture->jenis_kelamin }}</td> 
                            <td>
                                 <a href="{{ route('lecturer.lihat', $lecture->id) }}"><button type="submit" class="btn btn-primary">
                                     <i class="fas fa-sharp fa-eye"></i>
@@ -82,6 +92,9 @@
                          @endforeach
                     </tbody>
                 </table>
+                <div style="float: right">
+                    {{ $lecturers->links() }}
+                </div>
             </div>
         </div>
     </div>

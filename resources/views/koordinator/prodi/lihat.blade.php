@@ -4,7 +4,7 @@
 @section('content')
 
   <div class="container-fluid">
-    <h1 class="h3 mb-2 text-gray-800">Detail {{ $prodi->prodi_name}}</h1>
+    <h1 class="h3 mb-2 text-gray-800">Detail {{ $prodi->nama}}</h1>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
       <a href="{{ route('prodi.data') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
       class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali</a>
@@ -22,53 +22,30 @@
         
         <div class="container-fluid">
           <fieldset disabled>
-            <div class="mb-3" class="pl-5">
-              <label for="nama_prodi" class="form-label">Nama Program Studi</label>
-              <input type="text" name="nama_prodi" id="nama_prodi" class="form-control" value="{{ $prodi->prodi_name }}">
-            </div>
+            <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-3" class="pl-5">
+                    <label for="nama_prodi" class="form-label">Nama Program Studi</label>
+                    <input type="text" name="nama_prodi" id="nama_prodi" class="form-control" value="{{ $prodi->nama }}">
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="mb-3" class="pl-5">
+                    <label for="kode_prodi" class="form-label">Kode Program Studi</label>
+                    <input type="text" name="kode_prodi" id="kode_prodi" class="form-control" value="{{ $prodi->kode }}">
+                  </div>
+                </div>
+              </div>
+
+       
 
             <div class="mb-3" class="pl-5">
               <label for="fakultas_id" class="form-label">Fakultas</label>
-              <input type="text" name="fakultas_id" id="fakultas_id" class="form-control" value="{{ $prodi->fakultas->faculty_name }}" >
+              <input type="text" name="fakultas_id" id="fakultas_id" class="form-control" value="{{ $prodi->fakultas->nama }}" >
             </div>
 
-            <div class="mb-3" class="pl-5">
-              <label for="kode_prodi" class="form-label">Kode Program Studi</label>
-              <input type="text" name="kode_prodi" id="kode_prodi" class="form-control" value="{{ $prodi->code }}">
-            </div>
-
-            <div class="mb-3" class="pl-5">
-              <label for="akreditasi" class="form-label">Akreditasi</label>
-              <input type="text" name="akreditasi" id="akreditasi" class="form-control" value="{{ $prodi->accreditation }}">
-            </div>
-
-            <div class="mb-3" class="pl-5">
-              <label for="jenjang" class="form-label">Jenjang</label></label>
-              <input type="text" name="jenjang" id="jenjang" class="form-control" value="{{ $prodi->level }}" >
-            </div>
-          </fieldset>
-        </div>
-
-      <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Id Kelas</th>
-                        <th>Nama Kelas</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  @foreach ($prodi->prodikelas as $prodikls)
-                     <tr>
-                       <td>{{ $prodikls->id }}</td>
-                       <td>{{ $prodikls->nama_kelas }}</td>
-                    </tr>
-                   @endforeach
-                </tbody>
-            </table>
-          </div> 
-        </div> 
+           
       </form>
     </div> 
   </div>

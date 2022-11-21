@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Lecturer extends Model
 {
+    public $table = 'dosens';
+    
     public function user()
     {
         return $this->hasOne(User::class, 'id', 'user_id');

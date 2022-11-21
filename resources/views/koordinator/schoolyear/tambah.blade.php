@@ -19,23 +19,35 @@
           <br>
           <div class="container-fluid">
 
-            <div class="mb-3" class="pl-5">
-              <label for="school_year" class="form-label">Tahun Ajaran</label>
-              <input type="text" name="school_year" id="school_year" class="form-control" >
-            </div>
+            <div class="row">
+              <div class="col-md-6">
 
-            <div class="mb-3" class="pl-5">
-                <label for="semester" class="form-label">Semester</label>
-                <br>
-                <select id="semester" name="semester" class="form-control">
-                  <option >Pilih semester</option>
-                  <option >Ganjil</option>
-                  <option >Genap</option>
-                </select>
+                <div class="mb-3" class="pl-5">
+                  <label for="tahun" class="form-label">Tahun Ajaran</label>
+                  <input type="text" name="tahun" id="tahun" class="form-control @error('tahun') is-invalid @enderror" value="{{ old('tahun') }}">
+
+                  @error('tahun')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
               </div>
 
-            
+              <div class="col-md-6">
+                <div class="mb-3" class="pl-5">
+                    <label for="semester" class="form-label">Semester</label>
+                    <br>
+                    <select id="semester" name="semester" class="form-control @error('semester') is-invalid @enderror" value="{{ old('semester') }}">
+                      <option selected disabled>Pilih semester</option>
+                      <option value="{{ 1 }}">Ganjil</option>
+                      <option value="{{ 2 }}">Genap</option>
+                    </select>
 
+                    @error('semester')
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+              </div>
+            </div>
 
           <button type="submit" class="btn btn-primary">Simpan</button>
       <br><br>

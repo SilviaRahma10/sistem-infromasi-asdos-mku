@@ -18,22 +18,40 @@
       <form class="pl-5" action="{{ route('fakultas.simpan') }}" method="POST">
         @csrf
           <br>
-          <div class="container-fluid">
-          <div class="mb-3" class="pl-5">
-            <label for="nama_fakultas" class="form-label">Nama Fakultas</label>
-            <input type="text" name="nama_fakultas" id="nama_fakultas" class="form-control" >
-          </div>
+          <div class="card-body">
 
-          <div class="mb-3" class="pl-5">
-            <label for="code" class="form-label">Code</label>
-            <input type="text" name="code" id="code" class="form-control" >
-          </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="nama" class="form-label">Nama Fakultas</label>
+                  <input type="text" name="nama" id="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}">
+                      @error('nama')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                      @enderror
+                </div>
+              </div>
 
-          <button type="submit" class="btn btn-primary">Simpan</button>
-      <br><br>
-      </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="kode" class="form-label">Kode</label>
+                  <input type="text" name="kode" id="kode" class="form-control @error('kode') is-invalid @enderror" value="{{ old('kode') }}">
+
+                  @error('kode')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
+              </div>
+            </div>
+            <br><br>
+            
+            <input type="submit" value="Tambah Fakultas" class="btn btn-primary btn-sm">
+          </div>
+      <br>
     </form>
-    <br>
+ </div>
+
+</div>
+  
   {{-- <a class="pl-5" href="{{ route('.index') }}"><button type="submit" class="btn btn-primary" >Cancle</button></a> --}}
   @endsection
           

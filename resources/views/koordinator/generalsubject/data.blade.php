@@ -11,6 +11,17 @@
             <a href="{{ route('generalsubject.tambah') }}"><button type="submit" class="btn btn-primary">
               <i class="fas fa-plus"></i>
               Tambah</button></a>
+
+              <form action="{{ route('generalsubject.search') }}" method="GET" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3  my-md-0 navbar-search" style="float: right;">
+                <div class="input-group pull-right" style="color:white">
+                    <input type="search" class="form-control bg-white border-0 small" placeholder="Cari Data Mata Kuliah Umum" name="search">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
             <br><br>
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -23,7 +34,7 @@
                 <table class="table" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Id</th>
+                            <th>No</th>
                             <th>Nama MKU</th>
                             <th>Kode MKU</th>
                             {{-- <th>Star Periode</th>
@@ -38,11 +49,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($generalsubjects as $generalsubject)
+                        @php
+                        $no=1;
+                        @endphp
+                        @foreach ($generalsubjects as $index => $generalsubject)
                          <tr>
                            <td>{{ $generalsubject->id }}</td>
-                           <td>{{ $generalsubject->name }}</td>
-                           <td>{{ $generalsubject->code }}</td>
+                           <td>{{ $generalsubject->nama }}</td>
+                           <td>{{ $generalsubject->kode }}</td>
                            {{-- <td>{{ $generalsubject->start_period }}</td>
                            <td>{{ $generalsubject->finish_period }}</td>
                            <td>{{ $generalsubject->quota }}</td>
@@ -50,27 +64,30 @@
                            <td>{{ $generalsubject->terms_and_conditions }}</td> --}}
              
                            <td>
-                            <a href="{{ route('generalsubject.lihat', $generalsubject->id) }}"><button type="submit" class="btn btn-primary"> 
+                              <a href="{{ route('generalsubject.lihat', $generalsubject->id) }}"><button type="submit" class="btn btn-primary"> 
                               <i class="fas fa-sharp fa-eye"></i>  
-                            </button> </a>
+                              </button> </a>
+                            </td>
                             
-                             <td>
-                            <a href="{{ route('generalsubject.edit', $generalsubject->id) }}"><button type="submit" class="btn btn-warning"> 
+                            <td>
+                              <a href="{{ route('generalsubject.edit', $generalsubject->id) }}"><button type="submit" class="btn btn-warning"> 
                               <i class="fas fa-pencil-alt"></i>  
-                            </button> </a>
-                          </td>
+                              </button> </a>
+                            </td>
                             
                           <td>
-                            <a href="#" class="btn btn-danger remove-btn" data-id="{{ $generalsubject->id }}">
-                              <i class="fas fa-trash-alt"></i>
-                            </a>
-
-                          </td>
+                              <a href="#" class="btn btn-danger remove-btn" data-id="{{ $generalsubject->id }}">
+                                <i class="fas fa-trash-alt"></i>
+                              </a>
                            </td>
                          </tr>
                          @endforeach
                     </tbody>
                 </table>
+                
+                <div style="float: right">
+                  {{ $generalsubjects->links() }}
+              </div>
             </div>
         </div>
     </div>

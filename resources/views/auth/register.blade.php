@@ -13,6 +13,12 @@
             @csrf
 
             <!-- Name -->
+
+            <div style="text-align: center; padding-top:30px; padding-bottom:30px;  font-size: 30px; ">
+                {{-- <h3>Registrasi</h3> --}}
+                <h6 style="font-size: 25px;">Sistem Informasi Asdos MKU</h6>
+                <h4 style="font-size: 25px;">Universitas Bengkulu</h4>
+            </div>
             <div>
                 <x-input-label for="name" :value="__('Name')" />
 
@@ -49,6 +55,8 @@
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
                     {{ __('Already registered?') }}
                 </a>
+            </div>
+            <div style="text-align: center;  padding-top: 20px; padding-bottom:20px;">
 
                 <x-primary-button class="ml-4">
                     {{ __('Register') }}

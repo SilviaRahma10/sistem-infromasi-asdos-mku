@@ -22,22 +22,30 @@
             @csrf
             <div class="container-fluid">
             <fieldset disabled>
-                <div class="mb-3" class="pl-5">
-                    <label for="nama_fakultas" class="form-label">Nama Fakultas</label>
-                    <input type="text" name="nama_fakultas" id="nama_fakultas" class="form-control" value="{{ $fakultas->faculty_name }}">
-                </div>
 
-                <div class="mb-3" class="pl-5">
-                    <label for="code" class="form-label">Code Fakultas</label>
-                    <input type="text" name="code" id="code" class="form-control" value="{{ $fakultas->code }}">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3" class="pl-5">
+                            <label for="nama_fakultas" class="form-label">Nama Fakultas</label>
+                            <input type="text" name="nama_fakultas" id="nama_fakultas" class="form-control" value="{{ $fakultas->nama }}">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-3" class="pl-5">
+                            <label for="code" class="form-label">Code Fakultas</label>
+                            <input type="text" name="code" id="code" class="form-control" value="{{ $fakultas->kode }}">
+                        </div>
+                    </div>
                 </div>
+               
             </fieldset>
             </div>
         </form>
     </div>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Data Program Studi {{ $fakultas->faculty_name }}</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Data Program Studi {{ $fakultas->nama }}</h6>
         </div>
         
         <div class="card-body">
@@ -48,9 +56,7 @@
                             <th>Id Program Studi</th>
                             <th>Kode Program Studi</th>
                             <th>Nama Prodi</th>
-                            <th>Akreditasi</th>
-                            <th>Jenjang</th>
-                            <th>kelas</th>
+                           
                             <th></th>
                             <th>Aksi</th>
                             <th></th>
@@ -58,39 +64,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($fakultas->prodi as $prodis)
+                        @foreach ($prodis as $prodi)
                          <tr>
-                           <td>{{ $prodis->id }}</td>
-                           <td>{{ $prodis->code }}</td>
-                           <td>{{ $prodis->prodi_name }}</td>
-                           <td>{{ $prodis->accreditation }}</td>
-                           <td>{{ $prodis->level }}</td>
+                           <td>{{ $prodi->id }}</td>
+                           <td>{{ $prodi->kode }}</td>
+                           <td>{{ $prodi->nama }}</td>
                           
-                           <td>
-                            <select name="prodikelas[{{ $prodis->id }}]" id="" class="form-control">
-                              @foreach ($prodis->prodikelas as $prodikls)
-                                  <option value="{{ $prodikls->id }}">{{ $prodikls->nama_kelas }}</option>
-                              @endforeach
-                            </select>
-                          </td>
-                           
-                           <td>
-                            <a href="{{ route('prodikelas.tambah',$prodis->id) }}"><button type="submit" class="btn btn-primary">
-                                <i class="fas fa-plus"></i>
-                                </button> </a>
-                        </td>
                                 <td>
-                                    <a href="{{ route('prodi.lihat',$prodis->id) }}"><button type="submit" class="btn btn-primary">
+                                    <a href="{{ route('prodi.lihat',$prodi->id) }}"><button type="submit" class="btn btn-primary">
                                         <i class="fas fa-sharp fa-eye"></i>
                                     </button> </a>
                                 </td>
                                 <td>
-                                    <a href="{{ route('prodi.edit', $prodis->id) }}"><button type="submit" class="btn btn-warning">
+                                    <a href="{{ route('prodi.edit', $prodi->id) }}"><button type="submit" class="btn btn-warning">
                                         <i class="fas fa-pencil-alt"></i>
                                     </button> </a>
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-danger remove-btn" data-id="{{ $prodis->id }}">
+                                    <a href="#" class="btn btn-danger remove-btn" data-id="{{ $prodi->id }}">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                 </td> 
@@ -105,8 +96,8 @@
   @endsection
 
   @section('custom_html')
-  @foreach ($fakultas->prodi as $prodis)
-  <form action="{{ route('prodi.destroy', $prodis->id) }}" id="delete-form-{{ $prodis->id }}" method="post">
+  @foreach ($prodis as $prodi)
+  <form action="{{ route('prodi.destroy', $prodi->id) }}" id="delete-form-{{ $prodi->id }}" method="post">
     @csrf
     @method('DELETE')
 </form>

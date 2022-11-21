@@ -6,6 +6,7 @@ use App\Models\Prodi;
 use App\Models\Fakultas;
 use App\Http\Requests\StoreProdiRequest;
 use App\Http\Requests\UpdateProdiRequest;
+use App\Models\Mata_kuliah_prodi;
 
 class ProdiController extends Controller
 {
@@ -20,17 +21,21 @@ class ProdiController extends Controller
     // fungsi simpan data ke db dari yang diinputkan user
     public function simpan(Request $request)
     {
+
+        $request->validate([
+            'id_fakultas'=> 'required',
+            'kode' => 'required | unique:prodis',
+            'nama' => 'required',
+        ]);
+
         // mengirimkan data yang diinput dihalaman daftar ke db
         $prodi = new Prodi;
-        $prodi->fakultas_id = $request->fakultas_id;
-        // $prodi->fakultas_id = $fakultas->id;
-        $prodi->code = $request->kode_prodi;
-        $prodi->prodi_name = $request->nama_prodi;
-        $prodi->accreditation = $request->akreditasi;
-        $prodi->level = $request->jenjang;
-        // menyimpan ke db
+        $prodi->id_fakultas = $request->id_fakultas;
+        $prodi->kode = $request->kode;
+        $prodi->nama = $request->nama;
+    
         $prodi->save();
-        // prodi.konfirmasi
+       
         return redirect()
         ->to(route('prodi.konfirmasi', $prodi->id))
         ->withSuccess('Berhasil menambah Data Program Studi');
@@ -44,16 +49,17 @@ class ProdiController extends Controller
 
     // menampilkan semua data prodi
     public function data()
-    {   
-        $prodis = Prodi::all();
-        $fakultas = Fakultas::all();
+    {
+        $prodis = Prodi::paginate(10);
+        $fakultas = Fakultas::paginate(10);
+
         
-        return view('koordinator.prodi.data', compact('prodis','fakultas'));
+        return view('koordinator.prodi.data', compact('prodis', 'fakultas'));
     }
 
     public function pilih(Fakultas $fakultas)
     {   
-        $prodis = Prodi::where('fakultas_id', $fakultas->id)->get();
+        $prodis = Prodi::where('id_fakultas', $fakultas->id)->get();
         return view('koordinator.prodi.pilih', compact('fakultas', 'prodis'));
     }
 
@@ -73,11 +79,18 @@ class ProdiController extends Controller
 
     public function update( Request $request, Prodi $prodi)
     {
-        $prodi->fakultas_id = $request->fakultas;
-        $prodi->code = $request->kode_prodi;
-        $prodi->prodi_name = $request->nama_prodi;
-        $prodi->accreditation = $request->akreditasi;
-        $prodi->level = $request->jenjang;
+
+        $request->validate([
+            
+            'kode' => 'required',
+            'nama' => 'required',
+        ]);
+
+        $prodi->id_fakultas = $request->id_fakultas;
+        $prodi->kode = $request->kode;
+        $prodi->nama = $request->nama;
+        // $prodi->accreditation = $request->akreditasi;
+        // $prodi->level = $request->jenjang;
 
          // simpan
         $prodi->save();
@@ -93,5 +106,17 @@ class ProdiController extends Controller
     {
         $prodi->delete();
         return redirect()->to(route('fakultas.data'));
+    }
+
+    public function search(Request $request) {
+        if($request->has('search')) {
+            $prodis = Prodi::where('nama', 'like', '%'.$request->search.'%')
+            ->orWhere('kode', 'like', '%'.$request->search.'%')->paginate();
+            // ->paginate(10);
+        } else {
+            $prodis = Prodi::paginate(10);
+        }
+        $fakultas = Fakultas::paginate(10);
+        return view('koordinator.prodi.data', compact('prodis', 'fakultas'));
     }
 }

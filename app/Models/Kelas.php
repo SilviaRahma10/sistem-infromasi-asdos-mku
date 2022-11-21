@@ -16,15 +16,15 @@ class Kelas extends Model
     //     return $this->hasOne(Prodi::class, 'id', 'id_prodi');
     // }
 
-    public function lecturer()
-    {
-        return $this->hasOne(Lecturer::class, 'id', 'id_dosen_pengampu');
-    }
+    // public function lecturer()
+    // {
+    //     return $this->hasOne(Lecturer::class, 'id', 'id_dosen_pengampu');
+    // }
 
-    public function program()
-    {
-        return $this->hasOne(Program::class, 'id', 'id_program');
-    }
+    // public function program()
+    // {
+    //     return $this->hasOne(Program::class, 'id', 'id_program');
+    // }
 
     public function asisten()
     {
@@ -36,11 +36,20 @@ class Kelas extends Model
         return $this->hasOne(Program::class, 'id', 'id_prodikelas');
     }
 
+    //baru
+    public function dosen()
+    {
+        return $this->belongsToMany(Dosen::class, 'dosen_pengampus', 'id_kelas', 'id_dosen');
+    }
 
+    public function mku_prodi()
+    {
+        return $this->belongsTo(Mata_kuliah_prodi::class, 'id_mata_kuliah_prodi','id' );
+    }
 
-
-
-
-
+    // public function dosen_pengampu()
+    // {
+    //     return $this->belongsTo(Mata_kuliah_prodi::class, 'id_mata_kuliah_prodi','id' );
+    // }
 }
 

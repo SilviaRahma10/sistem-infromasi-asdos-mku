@@ -4,17 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Prodi;
-use App\Models\Lecturer;
+use App\Models\Dosen;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreLecturerRequest;
-use App\Http\Requests\UpdateLecturerRequest;
+use App\Http\Requests\StoreDosenRequest;
+use App\Http\Requests\UpdateDosenRequest;
 
 class LecturerController extends Controller
 {
     public function data()
     {
-        $lecturers = Lecturer::all();
-        $prodis = Prodi::all();
+        $lecturers = Dosen::paginate(10);
+        $prodis = Prodi::paginate(10);
         return view('koordinator.lecturer.data', compact('lecturers', 'prodis'));
     }
 
@@ -29,69 +29,69 @@ class LecturerController extends Controller
     // fungsi simpan data ke db dari yang diinputkan user
     public function simpan(Request $request)
     {
-        // menambah akun dosen ke tb users
-        $user = new User;
-        $user->name = $request->name_dosen;
-        $user->email = $request->email;
-        $user->email_verified_at = now();
-        $user->password = bcrypt($request->password);
-        $user->role = 'dosen';
-        $user->save();
+        $request->validate([
+            'id_prodi'=> 'required',
+            'nama' => 'required | string',
+            'nip' => 'required | numeric | unique:dosens',
+            'nidn' => 'required | numeric',
+            'no_hp' => 'required | numeric |unique:dosens',
+            
+        ]);
 
-        // dd($request); 
-        // mengirimkan data yang diinput dihalaman daftar ke db
-        $lecturer = new Lecturer;
-        $lecturer->prodi_id = $request->prodi;
-        $lecturer->user_id = $user->id;
-        $lecturer->nip = $request->nip_dosen;
-        $lecturer->nidn = $request->nidn_dosen;
+        $lecturer = new Dosen;
+        $lecturer->id_prodi = $request->id_prodi;
+        $lecturer->nama = $request->nama;
+        $lecturer->nip = $request->nip;
+        $lecturer->nidn = $request->nidn;
         $lecturer->no_hp = $request->no_hp;
-        $lecturer->gender = $request->gender;
-        $lecturer->highest_education = $request->pendidikan;
+        $lecturer->jenis_kelamin = $request->jenis_kelamin;
 
         // menyimpan ke db
         $lecturer->save();
+
         return redirect()
             ->to(route('lecturer.lihat', $lecturer->id))
             ->withSuccess('Berhasil menambah data Dosen');
     }
 
     // melihat read / lihat detail data
-    public function lihat(Lecturer $lecturer)
+    public function lihat(Dosen $lecturer)
     {
         return view('koordinator.lecturer.lihat', compact('lecturer'));
     }
 
     public function pilih(Prodi $prodi)
     {
-        $lecturers = Lecturer::where('prodi_id', $prodi->id)->get();
+        $lecturers = Dosen::where('id_prodi', $prodi->id)->get();
         return view('koordinator.lecturer.pilih', compact('prodi', 'lecturers'));
     }
 
     // edit data atau menampilkan data yang di klik untuk di edit
-    public function edit(Lecturer $lecturer)
+    public function edit(Dosen $lecturer)
     {
         $prodis = Prodi::all();
         return view('koordinator.lecturer.edit', compact('lecturer', 'prodis'));
     }
 
-    public function update(Request $request, Lecturer $lecturer, User $user)
+    public function update(Request $request, Dosen $lecturer, User $user)
     {
-        // mengirimkan data yang diinput dihalaman daftar ke db
-        // lecture->user->name
-        $lecturer->prodi_id = $request->prodi;
-        $lecturer->nip = $request->nip_dosen;
-        $lecturer->nidn = $request->nidn_dosen;
-        $lecturer->no_hp = $request->no_hp;
-        $lecturer->gender = $request->gender;
-        $lecturer->highest_education = $request->pendidikan;
-        $lecturer->save();
 
-        $user_id = $user->id;
-        $user->name = $request->name_dosen;
-        $user->email = $request->email;
-        $user->password = bcrypt($user->password) ;
-        $user->save();
+        $request->validate([
+           
+            'nama' => 'required | string',
+            'nip' => 'required | numeric',
+            'nidn' => 'required | numeric',
+            'no_hp' => 'required | numeric',
+            
+        ]);
+
+        $lecturer->id_prodi = $request->id_prodi;
+        $lecturer->nama = $request->nama;
+        $lecturer->nip = $request->nip;
+        $lecturer->nidn = $request->nidn;
+        $lecturer->no_hp = $request->no_hp;
+        $lecturer->jenis_kelamin = $request->jenis_kelamin;
+        $lecturer->save();
 
         // $lecturer->user->name = $request->name_dosen;
         // $user->email = $request->email;
@@ -102,9 +102,26 @@ class LecturerController extends Controller
     }
 
     // menampilkan detail data hasil perubahan
-    public function destroy(Lecturer $lecturer)
+    public function destroy(Dosen $lecturer)
     {
         $lecturer->delete();
         return redirect()->to(route('lecturer.data'));
     }
+
+    public function search(Request $request) {
+        if($request->has('search')) {
+            $lecturers = Dosen::where('nama', 'like', '%'.$request->search.'%')
+            ->orWhere('nip', 'like', '%'.$request->search.'%')
+            ->orWhere('nidn', 'like', '%'.$request->search.'%')
+            ->paginate();
+           
+        } else {
+            $lecturers = Dosen::paginate(10);
+        }
+        $prodis = Prodi::paginate(10);
+        return view('koordinator.lecturer.data', compact('lecturers', 'prodis'));
+    }
+
+    // $lecturers = Dosen::all();
+    // $prodis = Prodi::all();
 }

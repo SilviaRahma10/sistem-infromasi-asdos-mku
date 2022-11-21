@@ -13,4 +13,9 @@ class ProdiKelas extends Model
     {
         return $this->hasOne(Prodi::class, 'id', 'prodi_id');
     }
+
+    public function kelas()
+    {
+        return $this->hasOne(Kelas::class, 'id_prodikelas', 'id');
+    }
 }

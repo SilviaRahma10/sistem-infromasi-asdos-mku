@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('id_tahun_ajaran')->constrained('tahun_ajarans')->cascadeOnDelete();
             $table->date('tanggal_buka');
             $table->date('tanggal_tutup');
-            $table->integer('kuota');
+            // $table->integer('kuota');
             $table->boolean('is_active')->default(false);
             $table->timestamps();
         });

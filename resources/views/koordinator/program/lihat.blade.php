@@ -11,6 +11,10 @@
       class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali</a>
     </div>
 
+    <a href="{{ route('mkuprogram.tambah', $program->id) }}"><button type="submit" class="btn btn-primary"> 
+      <i class="fas fa-folder-plus"></i>
+      </button> </a>
+
     <div class="card shadow mb-4">
       <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Data Program</h6>
@@ -21,85 +25,161 @@
         <div class="container-fluid">
           
             <br>
-            <div class="mb-3" class="pl-5">
-              <label for="id" class="form-label">Id MKU</label>
-              <input type="number" name="id" id="id" class="form-control" value="{{ $program->id }}" readonly>
-            </div>
-
-            <div class="mb-3" class="pl-5">
-              <label for="name" class="form-label">Nama MKU</label>
-              <input type="text" name="name" id="name" class="form-control" value="{{ $program->generalsubject->name }}" readonly>
-            </div>
-
-            <div class="mb-3" class="pl-5">
-              <label for="code" class="form-label">Kode MKU</label>
-              <input type="text" name="code" id="code" class="form-control" value="{{ $program->generalsubject->code }}" readonly>
-            </div>
-
-            <div class="mb-3" class="pl-5">
-              <label for="start_period" class="form-label">Periode Awal pendafataran</label>
-              <input type="date" name="start_period" id="start_period" class="form-control" value="{{ $program->start_period }}" readonly>
-            </div>
-
-            <div class="mb-3" class="pl-5">
-              <label for="finish_period" class="form-label">Periode Akhir pendafataran</label>
-              <input type="date" name="finish_period" id="finish_period" class="form-control" value="{{ $program->finish_period }}" readonly>
-            </div>
-
-            <div class="mb-3" class="pl-5">
-              <label for="quota" class="form-label">Kuota</label>
-              <input type="number" name="quota" id="quota" class="form-control" value="{{ $program->quota }}" readonly>
-            </div>
-
-            <div class="mb-3" class="pl-5">
-              <label for="qualification" class="form-label">Kualifikasi</label>
-              <input type="text" name="qualification" id="qualification" class="form-control" value="{{ $program->qualification }}" readonly>
-            </div>
-
-            <div class="mb-3" class="pl-5">
-              <label for="terms_and_conditions" class="form-label">Syarat Dan Ketentuan</label>
-              <input type="text" name="terms_and_conditions" id="terms_and_conditions" class="form-control" value="{{ $program->terms_and_conditions }}" readonly>
-            </div>
-            
-             <div class="multiselect" >
-              <label for="" class="form-label">Prodi</label>
-                  <div class="table-responsive">
-                      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
-                        <thead>
-                            <tr>
-                                <th>Id prodi kelas</th>
-                                
-                                <th>Kode Program Studi</th>
-                                <th>Nama Prodi</th>
-                                <th>Jenjang</th>
-                                <th>Nama Kelas</th>
-                                <th>Dosen Pengampu</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                               @foreach ($program->kelas as $kelasmku )
-                                 <div id="checkboxes">
-                                     <tr>
-                                      
-                                      <td>{{ $kelasmku->prodikelas->prodi->code }}</td>
-                                      <td>{{ $kelasmku->prodikelas->prodi->prodi_name }}</td>
-                                      <td>{{ $kelasmku->prodikelas->prodi->level }}</td>
-                                     <td>{{ $kelasmku->prodikelas->nama_kelas }}</td>
-                                      <td>{{ $kelasmku->lecturer->user->name }}</td>
-                        
-                                    </tr>
-                                  </div>
-                              @endforeach 
-                          </tbody>
-                      </table>
-                    </div>
+            <div class="row">
+              <div class="col-6">
+                  <div class="mb-3" class="pl-5">
+                    <label for="id" class="form-label">Id Program</label>
+                    <input type="number" name="id" id="id" class="form-control" value="{{ $program->id }}" readonly>
+                  </div>
                 </div>
-            <br>
-        </form>
-      </div>
+
+                <div class="col-6">
+                  <div class="mb-3" class="pl-5">
+                    <label for="status" class="form-label">Status</label>
+                        @if($program->is_active==0)
+                          <input type="text" name="status" id="status" class="form-control" value="Non- Aktif" readonly>
+
+                        @else($program->is_active==1)
+                          <input type="text" name="status" id="status" class="form-control" value="Aktif" readonly>
+                        @endif
+                  </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-6">
+                <div class="mb-3" class="pl-5">
+                  <label for="id_schoolyear" class="form-label">Tahun Ajaran</label>
+                  <input type="text" name="id_schoolyear" id="id_schoolyear" class="form-control" value="{{ $program->tahun_ajaran->tahun }}" readonly>
+                </div>
+              </div>
+              
+              <div class="col-6">
+                <div class="mb-3" class="pl-5">
+                  <label for="semester" class="form-label">Semester</label>
+                    @if ($program->tahun_ajaran->semester == 1)
+                      <input type="text" name="semester" id="semester" class="form-control" value="Ganjil" readonly>
+                    @else ($program->tahun_ajaran->semester == 2)
+                      <input type="text" name="id_schoolyear" id="id_schoolyear" class="form-control" value="Genap" readonly>
+                    @endif
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-6">
+                <div class="mb-3" class="pl-5">
+                  <label for="start_period" class="form-label">Periode Awal pendafataran</label>
+                  <input type="date" name="start_period" id="start_period" class="form-control" value="{{ $program->tanggal_buka }}" readonly>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="mb-3" class="pl-5">
+                  <label for="finish_period" class="form-label">Periode Akhir pendafataran</label>
+                  <input type="date" name="finish_period" id="finish_period" class="form-control" value="{{  $program->tanggal_tutup }}" readonly>
+                </div>
+              </div>
+            </div>
+
+
+          </form>
+            <label for="mku_program" class="form-label">Program MKU yang Dibuka</label>
+            <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
+                <thead>
+                    <tr>
+                        <th>Kode MKU</th>
+                        <th>Nama MKU</th>
+                        <th>Kuota Penerimaan Asiten</th>
+                        <th>syarat & ketentuan</th>
+                        <th>kualifikasi</th>
+                        <th></th>
+                        <th>Aksi</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                      @foreach ($mku_program as $mkuprogram )
+                            <tr>
+                              
+                              <td>{{ $mkuprogram->mku->kode }}</td>
+                              <td>{{ $mkuprogram->mku->nama }}</td>
+                              <td>{{ $mkuprogram->kuota }}</td>
+                              <td>{{ $mkuprogram->syarat }}</td>
+                              <td>{{ $mkuprogram->kualifikasi }}</td>
+                              <td>
+                                <a href="{{ route('mkuprogram.lihat', $mkuprogram->id) }}"><button type="button" class="btn btn-primary"> 
+                                  <i class="fas fa-sharp fa-eye"></i>  
+                                  </button> </a>
+                              </td>
+
+                              <td>
+                                <a href="{{ route('mkuprogram.edit',$mkuprogram->id) }}"><button type="button" class="btn btn-warning"> 
+                                  <i class="fas fa-pencil-alt"></i>  
+                                </button> </a>
+                               </td>
+
+                               <td>
+                                <a href="#" class="btn btn-danger remove-btn" data-id="{{ $mkuprogram->id }}">
+                                  <i class="fas fa-trash-alt"></i>
+                                </a>
+                               </td>
+
+
+                              
+                            </tr>
+                      @endforeach  
+                  </tbody>
+              </table>
+            </div><br>
+         </div>    
     </div>
+</div>
+
     <br>
   {{-- <a class="pl-5" href="{{ route('.index') }}"><button type="submit" class="btn btn-primary" >Cancle</button></a> --}}
   @endsection
+
+  
+  @section('custom_html')
+  @foreach ($mku_program as $mkuprogram )
+  <form action="{{ route('mkuprogram.destroy', $mkuprogram->id) }}" id="delete-form-{{ $mkuprogram->id }}" method="post">
+    @csrf
+    @method('DELETE')
+</form>
+  @endforeach
+  @endsection
+
+  @push('custom_js')
+      <script>
+        let removeBtns = document.querySelectorAll('.remove-btn');
+        removeBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                let id = btn.getAttribute('data-id');
+                let deleteForm = document.querySelector('#delete-form-'+ id);
+
+                Swal.fire({
+  title: 'apakah anda yakin hapus MKU Program?',
+  text: "Anda tidak dapat mengembalikan data yang sudah dihapus!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes'
+}).then((result) => {
+  if (result.isConfirmed) {
+    deleteForm.submit();
+  }
+})
+            })
+        })
+
+      </script>
+  @endpush
           

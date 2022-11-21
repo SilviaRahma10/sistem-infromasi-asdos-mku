@@ -14,23 +14,31 @@
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-primary">Data mahasiswa</h6>
                 </div>
+
+                
             
                 <div class="card-body">
-                    <div class="mb-3" class="pl-5">
-                        <label for="kode_prodi" class="form-label">kode Prodi</label>
-                        <input type="text" name="kode_prodi" id="kode_prodi" class="form-control" value="{{ $prodi->code}}" readonly>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3" class="pl-5">
+                                <label for="kode_prodi" class="form-label">kode Prodi</label>
+                                <input type="text" name="kode_prodi" id="kode_prodi" class="form-control" value="{{ $prodi->kode}}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-3" class="pl-5">
+                                <label for="nama_prodi" class="form-label">Nama prodi</label>
+                                <input type="text" name="nama_prodi" id="nama_prodi" class="form-control" value="{{ $prodi->nama}}" readonly>
+                            </div>
+                        </div>
                     </div>
-        
-                    <div class="mb-3" class="pl-5">
-                        <label for="nama_prodi" class="form-label">Id prodi</label>
-                        <input type="text" name="nama_prodi" id="nama_prodi" class="form-control" value="{{ $prodi->prodi_name}}" readonly>
-                    </div>
-                </div>
-            </div>
+                <br>
             
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Data Mahasiswa Pogram studi {{ $prodi->prodi_name}} </h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Data Mahasiswa Pogram studi {{ $prodi->nama}} </h6>
                 </div>
                 
                  <div class="card-body">

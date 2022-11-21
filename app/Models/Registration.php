@@ -29,4 +29,7 @@ class Registration extends Model
         return $this->hasOne(DocumentRegistration::class, 'id_registration', 'id');
     }
 
+
+
+
 }

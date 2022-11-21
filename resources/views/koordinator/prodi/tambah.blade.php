@@ -19,54 +19,47 @@
         <br>
         <div class="container-fluid">
 
-          <div class="mb-3" class="pl-5">
-            <label for="fakultas_id" class="form-label">Fakultas</label>
-            <br>
-            <select id="fakultas_id" name="fakultas_id" class="form-control" required>
-              <option>Pilih Fakultas</option>
-              @foreach ($fakultas as $fakulty)
-                <option value="{{ $fakulty->id }}">{{ $fakulty->faculty_name }}</option>
-              @endforeach
-            </select>
-          </div>
+            <div class="mb-3" class="pl-5">
+              <label for="id_fakultas" class="form-label">Fakultas</label>
+              <br>
+              <select id="id_fakultas" name="id_fakultas" class="form-control @error('id_fakultas') is-invalid @enderror" value="{{ old('id_fakultas') }}">
+                <option selected disabled>Pilih Fakultas</option>
+                  @foreach ($fakultas as $faculty)
+                    <option value="{{ $faculty->id }}">{{ $faculty->nama }}</option>
+                  @endforeach
+              </select>
 
-          <div class="mb-3" class="pl-5">
-            <label for="kode_prodi" class="form-label">Kode Program Studi</label>
-            <input type="text" name="kode_prodi" id="kode_prodi" class="form-control" >
-          </div>
+              @error('id_fakultas')
+                <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
 
-          <div class="mb-3" class="pl-5">
-            <label for="nama_prodi" class="form-label">Nama Program Studi</label>
-            <input type="text" name="nama_prodi" id="nama_prodi" class="form-control" >
-          </div>
+            </div>
 
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3" class="pl-5">
+                  <label for="kode" class="form-label">Kode Program Studi</label>
+                  <input type="text" name="kode" id="kode" class="form-control @error('kode') is-invalid @enderror" value="{{ old('kode') }}">
 
-          <div class="mb-3" class="pl-5">
-            <label for="akreditasi" class="form-label">Akreditasi</label>
-            <br>
-            <select id="akreditasi" name="akreditasi" class="form-select">
-              <option>Pilih Akreditasi</option>
-              <option>A</option>
-              <option>B</option>
-              <option>C</option>
-              <option>Unggul</option>
-              <option>Baik Sekali</option>
-              <option>Baik</option>
-            </select>
-          </div>
+                  @error('kode')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
+              </div>
 
-          <div class="mb-3" class="pl-5">
-            <label for="jenjang" class="form-label">Jenjang</label>
-            <br>
-            <select id="jenjang" name="jenjang" class="form-select">
-              <option>Pilih Jenjang</option>
-              <option>S1</option>
-              <option>D3</option>
-            </select>
-          </div>
+              <div class="col-md-6">
+                <div class="mb-3" class="pl-5">
+                  <label for="nama" class="form-label">Nama Program Studi</label>
+                  <input type="text" name="nama" id="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}">
 
-
-          <button type="submit" class="btn btn-primary">Simpan</button>
+                  
+                  @error('nama')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
+              </div>
+            </div>
+           <button type="submit" class="btn btn-primary">Simpan</button>
         </div>
         <br><br>
     </form>

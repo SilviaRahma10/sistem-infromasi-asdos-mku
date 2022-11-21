@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     use HasFactory;
-    public function user()
-    {
-        return $this->hasOne(User::class, 'id', 'user_id');
-    }
+    // public function user()
+    // {
+    //     return $this->hasOne(User::class, 'id', 'user_id');
+    // }
 
     public function prodi()
     {

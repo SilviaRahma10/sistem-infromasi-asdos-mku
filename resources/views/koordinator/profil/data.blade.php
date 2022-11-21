@@ -23,31 +23,15 @@
             <input type="text" name="name" id="name" class="form-control" value="{{ auth()->user()->name }}">
           </div>
 
-          <div class="mb-3" class="pl-5">
-            <label for="nip" class="form-label">Nip</label>
-            <input type="number" name="nip" id="nip" class="form-control" value="">
-          </div>
-        
-          <div class="mb-3" class="pl-5">
-            <label for="nidn" class="form-label">Nidn</label>
-            <input type="number" name="nidn" id="nidn" class="form-control" value="">
-          </div>
-
-
-          <div class="mb-3" class="pl-5">
-            <label for="address" class="form-label">Alamat</label>
-            <input type="text" name="address" id="address" class="form-control" value="">
-          </div>
-
-            <div class="mb-3" class="pl-5">
-              <label for="No_Hp" class="form-label">No HP</label>
-              <input type="number" name="No_Hp" id="No_Hp" class="form-control" value="">
-            </div> 
-
             <div class="mb-3" class="pl-5">
               <label for="email" class="form-label">Email </label> 
               <input type="text" name="email" id="email" class="form-control" value="{{ auth()->user()->email }}">
             </div>
+
+          <div class="mb-3" class="pl-5">
+            <label for="role" class="form-label">Role</label>
+            <input type="text" name="role" id="role" class="form-control" value="{{ auth()->user()->role }}">
+          </div>
 
             <div class="mb-3" class="pl-5">
               <label for="password" class="form-label">Password </label> 

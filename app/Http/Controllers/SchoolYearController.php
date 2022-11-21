@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\SchoolYear;
+use App\Models\Tahun_ajaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreSchoolYearRequest;
@@ -17,59 +17,99 @@ class SchoolYearController extends Controller
     
      public function simpan(Request $request)
      {
-          DB::table('school_years')->update([
-               'is_active' => false
+          $request->validate([
+               'tahun' => 'required| min:8 | max: 10',
+               'semester' => 'required',
+          ], [
+               'tahun.required' => "tahun ajaran harus diisi",
+               'tahun.min' => "tahun ajaran memiliki minimal 8 karakter, ex: 2022/2023",
+               'tahun.max' => "tahun ajaran memiliki minimal 9 karakter, ex: 2022/2023",
+               'semester.required' => "semester harus diisi"
+
           ]);
 
-            $schoolyear = new SchoolYear;
-            $schoolyear->school_year = $request->school_year;
-            $schoolyear->semester = $request->semester;
-            $schoolyear->is_active = true;
-            $schoolyear->save();
+            $tahun = new Tahun_ajaran;
+            $tahun->tahun = $request->tahun;
+            $tahun->semester = $request->semester;
+            $tahun->save();
             
 
             return redirect()
-          ->to(route('school_year.konfirmasi', $schoolyear->id))
+          ->to(route('school_year.konfirmasi', $tahun->id))
           ->withSuccess('Berhasil menambah data Tahun Akademik');
      
      }
 
-     public function konfirmasi(SchoolYear $schoolyear)
+     public function konfirmasi(Tahun_ajaran $tahun)
           {
-               return view('koordinator.schoolyear.konfirmasi', compact('schoolyear'));
+               return view('koordinator.schoolyear.konfirmasi', compact('tahun'));
           }
     
        public function data()
        {
-            $schoolyears = SchoolYear::all();
-            return view('koordinator.schoolyear.data', compact('schoolyears'));
+            $tahuns = Tahun_ajaran::paginate(10);
+            return view('koordinator.schoolyear.data', compact('tahuns'));
        }
     
-       public function lihat(SchoolYear $schoolyear)
+       public function lihat(Tahun_ajaran $tahun)
        {
-            return view('koordinator.schoolyear.lihat', compact('schoolyear'));
+            return view('koordinator.schoolyear.lihat', compact('tahun'));
        }
     
-       public function edit(SchoolYear $schoolyear)
+       public function edit(Tahun_ajaran $tahun)
        {
-            return view('koordinator.schoolyear.edit', compact('schoolyear'));
+            return view('koordinator.schoolyear.edit', compact('tahun'));
        }
     
-       public function update(Request $request, SchoolYear $schoolyear)
+       public function update(Request $request, Tahun_ajaran $tahun)
        {
-            $schoolyear->school_year = $request->school_year;
-            $schoolyear->semester = $request->semester;
-            $schoolyear->save();
+          $request->validate([
+               'tahun' => 'required| min:8 | max: 10',
+               'semester' => 'required',
+          ], [
+               'tahun.required' => "tahun ajaran harus diisi",
+               'tahun.min' => "tahun ajaran memiliki minimal 8 karakter, ex: 2022/2023",
+               'tahun.max' => "tahun ajaran memiliki minimal 9 karakter, ex: 2022/2023",
+               'semester.required' => "semester harus diisi"
+
+          ]);
+
+            $tahun->tahun = $request->tahun;
+            $tahun->semester = $request->semester;
+            $tahun->save();
         
             return redirect()
-            ->to(route('school_year.konfirmasi', $schoolyear->id))
+            ->to(route('school_year.konfirmasi', $tahun->id))
             ->withSuccess('Berhasil memperbarui data Tahun Akademik');
        }
-       public function destroy(SchoolYear $schoolyear)
+
+       public function destroy(Tahun_ajaran $tahun)
        {
-           $schoolyear->delete();
+           $tahun->delete();
            return redirect()->to(route('school_year.data'));
        }
+
+       public function search(Request $request) {
+          if($request->has('search')) {
+               if(strtolower($request->search) == 'ganjil'){
+                    $tahuns = Tahun_ajaran::where('tahun', 'like', '%'.$request->search.'%')
+                    ->orWhere('semester', '1')
+                    ->paginate();
+               }elseif(strtolower($request->search) == 'genap'){
+                    $tahuns = Tahun_ajaran::where('tahun', 'like', '%'.$request->search.'%')
+                    ->orWhere('semester', '2')
+                    ->paginate();
+               }else{
+                    $tahuns = Tahun_ajaran::where('tahun', 'like', '%'.$request->search.'%')
+                    ->paginate();
+               }
+               
+          }else{
+               $tahuns = Tahun_ajaran::paginate(10);
+              }
+              return view('koordinator.schoolyear.data', compact('tahuns'));
+      
+          }
     
     }
     

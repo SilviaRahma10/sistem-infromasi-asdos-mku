@@ -11,11 +11,15 @@ class Dosen extends Model
 
     public function prodi()
     {
-        return $this->hasOne(Prodi::class, 'id', 'prodi_id');
+        return $this->hasOne(Prodi::class, 'id', 'id_prodi');
     }
 
     public function user()
     {
         return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    public function kelas(){
+        return $this->belongsToMany(Kelas::class, 'dosen_pengampus', 'id_dosen', 'id_kelas');
     }
 }

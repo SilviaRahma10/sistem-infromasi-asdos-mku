@@ -20,17 +20,28 @@
         @method('PUT')
         <br>
         <div class="container-fluid">
-          <div class="mb-3" class="pl-5">
-            <label for="nama_fakultas" class="form-label">Nama Fakultas</label>
-            <input type="text" name="nama_fakultas" id="nama_fakultas" class="form-control" value="{{ $fakultas->nama }}" >
+          <div class="row">
+            <div class="col-md-6">
+            
+                <div class="mb-3" class="pl-5">
+                  <label for="nama" class="form-label">Nama Fakultas</label>
+                  <input type="text" name="nama" id="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ $fakultas->nama }}" >
+                    @error('nama')
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3" class="pl-5">
+                <label for="kode" class="form-label">Kode Fakultas</label>
+                <input type="text" name="kode" id="kode" class="form-control @error('kode') is-invalid @enderror" value="{{ $fakultas->kode }}">
+                  @error('kode')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+              </div>
+            </div>
           </div>
-
-          <div class="mb-3" class="pl-5">
-            <label for="code" class="form-label">Code Fakultas</label>
-            <input type="text" name="code" id="code" class="form-control" value="{{ $fakultas->kode }}">
-          </div>
-
-          <button type="submit" class="btn btn-primary">Simpan</button>
+          <button type="submit" class="btn btn-primary">Update</button>
       <br><br>
       </div>
     </form>

@@ -21,54 +21,49 @@
         <div class="container-fluid">
           <fieldset disabled>
             <br>
-            <div class="mb-3" class="pl-5">
-              <label for="id" class="form-label">Id MKU</label>
-              <input type="number" name="id" id="id" class="form-control" value="{{ $generalsubject->id }}">
-            </div>
 
-            <div class="mb-3" class="pl-5">
-              <label for="name" class="form-label">Nama MKU</label>
-              <input type="text" name="name" id="name" class="form-control" value="{{ $generalsubject->name }}">
-            </div>
-
-            <div class="mb-3" class="pl-5">
-              <label for="code" class="form-label">Kode MKU</label>
-              <input type="text" name="code" id="code" class="form-control" value="{{ $generalsubject->code }}"">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3" class="pl-5">
+                  <label for="name" class="form-label">Nama MKU</label>
+                  <input type="text" name="name" id="name" class="form-control" value="{{ $generalsubject->nama }}">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3" class="pl-5">
+                  <label for="code" class="form-label">Kode MKU</label>
+                  <input type="text" name="code" id="code" class="form-control" value="{{ $generalsubject->kode }}"">
+                </div>
+              </div>
             </div>
 
             
-             {{-- <div class="multiselect" >
-              <label for="" class="form-label">Prodi</label>
+             
+              <label for="" class="form-label">Program Studi</label>
                   <div class="table-responsive">
                       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
                         <thead>
                             <tr>
                                 <th>Kode Program Studi</th>
                                 <th>Nama Prodi</th>
-                                <th>Jenjang</th>
-                                <th>dosen</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                              {{-- @foreach ($generalsubject->kelas as $kelasmku )
-                                  <div id="checkboxes">
+                              @foreach ($mata_kuliah_prodis as  $mku_prodi )
                                     <tr>
-                                      
-                                      <td>{{ $kelasmku->prodi->code }}</td>
-                                      <td>{{ $kelasmku->prodi->prodi_name }}</td>
-                                      <td>{{ $kelasmku->prodi->level }}</td>
-                                      <td>{{ $kelasmku->lecturer->user->name }}</td>
+                                      <td>{{ $mku_prodi->prodi->nama }}</td>
+                                      <td>{{ $mku_prodi->prodi->kode }}</td>
                         
                                     </tr>
-                                  </div>
                               @endforeach 
+                    
+                              
                           </tbody>
                       </table>
-                    </div>
-                </div>  --}}
-            <br>
+                    </div><br>
             </fieldset>
+          </div>
         </form>
       </div>
     </div>

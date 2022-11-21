@@ -24,91 +24,102 @@
         <div class="container-fluid">
           
             <br>
-            <div class="mb-3" class="pl-5">
-              <label for="id" class="form-label">Id Program</label>
-              <input type="number" name="id" id="id" class="form-control" value="{{ $program->id }}">
-            </div>
+            {{-- <div class="row">
+              <div class="col-6">
+                <div class="mb-3" class="pl-5">
+                  <label for="id_schoolyear" class="form-label">Tahun Ajaran</label>
+                  <input type="text" name="id_schoolyear" id="id_schoolyear" class="form-control" value="{{ $program->tahun_ajaran->tahun }}" readonly>
+                </div>
+              </div>
 
-            {{-- <div class="mb-3" class="pl-5">
-              <label for="name" class="form-label">Nama MKU</label>
-              <input type="text" name="name" id="name" class="form-control" value="{{ $program->generalsubject->name }}">
-            </div>
-
-            <div class="mb-3" class="pl-5">
-              <label for="code" class="form-label">Kode MKU</label>
-              <input type="text" name="code" id="code" class="form-control" value="{{ $program->generalsubject->code }}"">
+              <div class="col-6">
+                <div class="mb-3" class="pl-5">
+                  <label for="semester" class="form-label">Semester</label>
+                    @if ($program->tahun_ajaran->semester == 1)
+                      <input type="text" name="id_scsemesterhoolyear" id="semester" class="form-control" value="Ganjil" readonly>
+                    @else ($program->tahun_ajaran->semester == 2)
+                      <input type="text" name="id_schoolyear" id="id_schoolyear" class="form-control" value="Genap" readonly>
+                    @endif
+                </div>
+              </div>
             </div> --}}
 
-            <div class="container-fluid">
-                <div class="mb-3" class="pl-5">
-                  <label for="id_generalsubject" class="form-label">MKU</label>
-                  <br>
-                  <select id="id_generalsubject" name="id_generalsubject" class="form-control" required>
-                    <option value="{{ $program->generalsubject->id }}"> {{ $program->generalsubject->name }}</option>
-                    @foreach ($generalsubjects as $generalsubject)
-                      <option value="{{ $generalsubject->id }}">{{ $generalsubject->name }}</option>
+            <div class="mb-3" class="pl-5">
+              <label for="id_tahun_ajaran" class="form-label">Tahun Ajaran</label>
+              <br>
+              <select id="id_tahun_ajaran" name="id_tahun_ajaran" class="form-control @error('id_fakultas') is-invalid @enderror" value="{{ old('id_fakultas') }}">
+                <option value="{{ $program->tahun_ajaran->id }}">{{ $program->tahun_ajaran->tahun }} -
+                  @if($program->tahun_ajaran->semester==1)
+                      ganjil
+                  @else
+                    genap
+                  @endif
+                </option>
+                    @foreach ($tahun_ajarans as $tahun_ajaran)
+                      <option value="{{ $tahun_ajaran->id }}">{{ $tahun_ajaran->tahun }} - 
+                        @if($tahun_ajaran->semester==1)
+                          ganjil
+                        @else
+                          genap
+                        @endif
+                      </option>
                     @endforeach
-                  </select>
+              </select>
+
+            </div>
+
+
+            <div class="row">
+              <div class="col-6">
+                <div class="mb-3" class="pl-5">
+                  <label for="tanggal_buka" class="form-label">Periode Awal pendafataran</label>
+                  <input type="date" name="tanggal_buka" id="tanggal_buka" class="form-control @error('tanggal_buka') is-invalid @enderror" value="{{ $program->tanggal_buka }}">
+
+                  
+                  @error('tanggal_buka')
+                      <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
                 </div>
+              </div>
+
+              <div class="col-6">
+                <div class="mb-3" class="pl-5">
+                  <label for="tanggal_tutup" class="form-label">Periode Akhir pendafataran</label>
+                  <input type="date" name="tanggal_tutup" id="tanggal_tutup" class="form-control @error('tanggal_tutup') is-invalid @enderror" value="{{  $program->tanggal_tutup }}">
+
+                  @error('tanggal_tutup')
+                      <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
+              </div>
+            </div>
+                
   
 
             <div class="mb-3" class="pl-5">
-              <label for="start_period" class="form-label">Periode Awal pendafataran</label>
-              <input type="date" name="start_period" id="start_period" class="form-control" value="{{ $program->start_period }}">
+              <label for="status" class="form-label">Status</label>
+              <select name="status" id="status" class="form-control">
+                <option value="{{ $program->is_active }}">
+                  @if($program->is_active==0)
+                      Non-aktif
+                  @else($program->is_active==1)
+                     Aktif
+                   @endif
+                </option>
+                
+                <option value="{{ $program->is_active=0}}">Non-aktif</option>
+                <option value="{{ $program->is_active=1}}">aktif</option>
+              </select>
             </div>
+          </div>
 
-            <div class="mb-3" class="pl-5">
-              <label for="finish_period" class="form-label">Periode Akhir pendafataran</label>
-              <input type="date" name="finish_period" id="finish_period" class="form-control" value="{{ $program->finish_period }}">
-            </div>
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary">Simpan</button>
+          </div>
 
-            <div class="mb-3" class="pl-5">
-              <label for="quota" class="form-label">Kuota</label>
-              <input type="number" name="quota" id="quota" class="form-control" value="{{ $program->quota }}">
-            </div>
-
-            <div class="mb-3" class="pl-5">
-              <label for="qualification" class="form-label">Kualifikasi</label>
-              <input type="text" name="qualification" id="qualification" class="form-control" value="{{ $program->qualification }}">
-            </div>
-
-            <div class="mb-3" class="pl-5">
-              <label for="terms_and_conditions" class="form-label">Syarat Dan Ketentuan</label>
-              <input type="text" name="terms_and_conditions" id="terms_and_conditions" class="form-control" value="{{ $program->terms_and_conditions }}">
-            </div>
             
-             {{-- <div class="multiselect" >
-              <label for="" class="form-label">Prodi</label>
-                  <div class="table-responsive">
-                      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
-                        <thead>
-                            <tr>
-                                <th>Kode Program Studi</th>
-                                <th>Nama Prodi</th>
-                                <th>Jenjang</th>
-                                <th>dosen</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                              {{-- @foreach ($generalsubject->kelas as $kelasmku )
-                                  <div id="checkboxes">
-                                    <tr>
-                                      
-                                      <td>{{ $kelasmku->prodi->code }}</td>
-                                      <td>{{ $kelasmku->prodi->prodi_name }}</td>
-                                      <td>{{ $kelasmku->prodi->level }}</td>
-                                      <td>{{ $kelasmku->lecturer->user->name }}</td>
-                        
-                                    </tr>
-                                  </div>
-                              @endforeach 
-                          </tbody>
-                      </table>
-                    </div>
-                </div>  --}}
-            <br>
-            <button type="submit" class="btn btn-primary">Simpan</button>
+             
+            
         </form>
       </div>
     </div>

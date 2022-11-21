@@ -15,7 +15,18 @@ return new class extends Migration
     {
         Schema::create('mahasiswas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('npm')->unique;
+            $table->foreignId('prodi_id')->constrained('prodis')->onDelete('cascade');
+            $table->year('angkatan');
+            $table->bigInteger('no_hp');
+            $table->text('address');
+            $table->enum('gender',['laki-laki','perempuan']);
             $table->timestamps();
+
+            
+
+
         });
     }
 

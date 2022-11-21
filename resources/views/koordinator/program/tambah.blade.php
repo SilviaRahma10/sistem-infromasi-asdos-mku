@@ -18,102 +18,59 @@
         @csrf
           <br>
            <div class="container-fluid">
+              
+
               <div class="mb-3" class="pl-5">
-                <label for="id_generalsubject" class="form-label">MKU</label>
+                <label for="id_tahun_ajaran" class="form-label">Tahun Akademik</label>
                 <br>
-                <select id="id_generalsubject" name="id_generalsubject" class="form-control" required>
-                  <option>Pilih MKU</option>
-                  @foreach ($generalsubjects as $generalsubject)
-                    <option value="{{ $generalsubject->id }}">{{ $generalsubject->name }}</option>
+                <select id="id_tahun_ajaran" name="id_tahun_ajaran" class="form-control @error('id_tahun_ajaran') is-invalid @enderror" value="{{ old('id_tahun_ajaran') }}">
+                  <option selected disabled>Pilih Tahun Akademik</option>
+                  @foreach ($tahun_ajaran as $tahun)
+                    <option value="{{ $tahun->id }}">{{ $tahun->tahun }} -  
+                      @if($tahun->semester==1)
+                        ganjil
+                      @else
+                        genap
+                      @endif
+                      
+                    </option>
                   @endforeach
                 </select>
+
+                @error('id_tahun_ajaran')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
               </div>
 
-              <div class="mb-3" class="pl-5">
-                <label for="id_schoolyear" class="form-label">Tahun Akademik</label>
-                <br>
-                <select id="id_schoolyear" name="id_schoolyear" class="form-control" required>
-                  <option>Pilih Tahun Akademik</option>
-                  @foreach ($schoolyears as $schoolyear)
-                    <option value="{{ $schoolyear->id }}">{{ $schoolyear->school_year }} - {{ $schoolyear->semester }} </option>
-                  @endforeach
-                </select>
+              <div class="row">
+                <div class="col-6">
+                  <div class="mb-3" class="pl-5">
+                    <label for="tanggal_buka" class="form-label">Periode Awal pendafataran</label>
+                    <input type="date" name="tanggal_buka" id="tanggal_buka" class="form-control @error('tanggal_buka') is-invalid @enderror" value="{{ old('tanggal_buka') }}">
+
+                    
+                    @error('tanggal_buka')
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                  </div>
+                </div>
+
+                <div class="col-6">
+                  <div class="mb-3" class="pl-5">
+                    <label for="tanggal_tutup" class="form-label">Periode Akhir pendafataran</label>
+                    <input type="date" name="tanggal_tutup" id="tanggal_tutup" class="form-control @error('tanggal_tutup') is-invalid @enderror" value="{{ old('tanggal_tutup') }}">
+
+                    @error('tanggal_tutup')
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                  </div>
+                </div>
               </div>
 
-
-              <div class="mb-3" class="pl-5">
-                <label for="start_period" class="form-label">Periode Awal pendafataran</label>
-                <input type="date" name="start_period" id="start_period" class="form-control" >
-              </div>
-
-              <div class="mb-3" class="pl-5">
-                <label for="finish_period" class="form-label">Periode Akhir pendafataran</label>
-                <input type="date" name="finish_period" id="finish_period" class="form-control" >
-              </div>
-
-              <div class="mb-3" class="pl-5">
-                <label for="quota" class="form-label">Kuota</label>
-                <input type="number" name="quota" id="quota" class="form-control" >
-              </div>
-
-              <div class="mb-3" class="pl-5">
-                <label for="qualification" class="form-label">Kualifikasi</label>
-                <input type="text" name="qualification" id="qualification" class="form-control" >
-              </div>
-
-              <div class="mb-3" class="pl-5">
-                <label for="terms_and_conditions" class="form-label">Syarat Dan Ketentuan</label>
-                <input type="text" name="terms_and_conditions" id="terms_and_conditions" class="form-control" >
-              </div>
-                
-              <div class="multiselect" >
-                <label for="" class="form-label">Assing Prodi</label>
-                    <div class="table-responsive">
-                      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                                                                    <th><input type="checkbox" /></th>
-                                <th>Id prodi kelas</th>
-                                <th>Kode Program Studi</th>
-                                <th>Nama Prodi</th>
-                                <th>Jenjang</th>
-                                <th>Nama Kelas</th>
-                                <th>Dosen Pengampu</th>
-                                
-                            </tr>
-                        </thead>
-                        <tbody>
-                              @foreach ($prodikelas as $prodikls)
-                                <div id="checkboxes">
-                                  <tr>
-                                    <label for="{{ $prodikls->id  }}">
-                                      <td><input type="checkbox" id="{{ $prodikls->id }}" name="prodikelas[]" value="{{ $prodikls->id }}" /></td>
-                                       <td id="{{ $prodikls->id }}">{{ $prodikls->id }}</td> 
-                                       <td id="{{ $prodikls->id }}">{{ $prodikls->prodi->code}}</td>
-                                      <td id="{{ $prodikls->id }}">{{ $prodikls->prodi->prodi_name }}</td>
-                                      <td id="{{ $prodikls->id }}">{{ $prodikls->prodi->level}}</td>
-                                      <td id="{{ $prodikls->id }}">{{ $prodikls->nama_kelas }}</td> 
-
-                                      <td>
-                                        <select name="dosen_pengampu[{{ $prodikls->id }}]" id="" class="form-control">
-                                                <option>Pilih Dosen Pengampu</option>
-                                          @foreach ($prodikls->prodi->lectures as $dosen)
-                                              <option value="{{ $dosen->id }}">{{ $dosen->user->name }}</option>
-                                          @endforeach
-                                        </select>
-                                      </td>
-                                      
-                                    </label>
-                                  </tr>
-                                </div>
-                              @endforeach
-                          </tbody>
-                      </table>
-                    </div>
-              </div>
             <br>
-          <button type="submit" class="btn btn-primary">Simpan Mku</button>
+          <button type="submit" class="btn btn-primary">Simpan Program</button>
           <br><br>
+          </div>
         </form>
     </div>
   </div>

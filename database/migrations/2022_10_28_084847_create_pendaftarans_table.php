@@ -19,6 +19,10 @@ return new class extends Migration
             $table->foreignId('id_mahasiswa')->constrained('mahasiswas')->cascadeOnDelete();
             $table->foreignId('id_program')->constrained('programs')->cascadeOnDelete();
             $table->foreignId('id_mata_kuliah')->constrained('mata_kuliahs')->cascadeOnDelete();
+            $table->string('nilai_matkul');
+            $table->string('KHS');
+            $table->string('KRS');
+            $table->string('surat_rekomendasi');
             $table->enum('status', ['0', '1', '2']);
             $table->timestamps();
         });
