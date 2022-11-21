@@ -235,9 +235,14 @@ class MahasiswaController extends Controller
 
   public function  notifikasi()
   {
-    $asistens = auth()->user()->mahasiswa->pendaftaran;
+    $asistens = Asisten_kelas::
+      whereHas('pendaftaran.mahasiswa.user', function ($query) {
+        return $query->where('id', auth()->user()->id);
+      })
+      ->with(['pendaftaran', 'pendaftaran.mahasiswa', 'pendaftaran.mahasiswa.user'])
+      ->get();
 
-    dd($asistens);
+    // dd($asistens);
 
     return view('mahasiswa.ProfilStudent.notifikasi', compact('asistens'));
 

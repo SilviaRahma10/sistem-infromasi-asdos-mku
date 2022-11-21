@@ -13,7 +13,7 @@
 
 <section class="section-50">
     <div class="container">
-        <h3 class="m-b-50 heading-line">Notifikasi<i class="fa fa-bell text-muted"></i></h3>
+        <h3 class="m-b-50 heading-line">Notifikasi<i class="fa fa-bell text-muted"></i> {{ auth()->user()->id }}</h3>
 
         @foreach ($asistens as $asisten)
         
@@ -22,8 +22,9 @@
                 <div class="notification-list_content">
                     <div class="notification-list_detail">
                         <p><b>PENGUMUMAN !!</b> Hi, {{ auth()->user()->name }}</p>
-                        <p class="text-muted">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde, dolorem.</p>
-                        <p class="text-muted"><small>{{ $asisten }}</small></p>
+                        <p class="text-muted">{{ $asisten->kelas->mku_prodi->prodi->nama }}</p>
+                        <p class="text-muted">{{ $asisten->kelas->nama }} {{ $asisten->kelas->hari }}</p>
+                        <p class="text-muted"><small>{{ $asisten->pendaftaran->mku->nama }}</small></p>
                     </div>
                 </div>
                 <div class="notification-list_feature-img">

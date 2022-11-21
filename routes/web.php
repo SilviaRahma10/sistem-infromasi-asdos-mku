@@ -206,7 +206,7 @@ Route::get('/sertifikat', function () {
 
 Route::group(['middleware' => ['auth', 'role:mahasiswa']], function() {
 
-    Route::get('/mahasiswa/notifikasi',function(){return view('mahasiswa.ProfilStudent.notifikasi');})->name('mahasiswa.contact');
+    Route::get('/mahasiswa/notifikasi', [MahasiswaController::class, 'notifikasi'])->name('mahasiswa.contact');
 
     Route::get('/mahasiswa/program/{mku_program}/detail', [MahasiswaController ::class, 'detail'])->name('mahasiswa.detail');
     Route::get('/mahasiswa/program/{mku_program}/daftar', [MahasiswaController ::class, 'daftar'])->name('mahasiswa.daftar');
