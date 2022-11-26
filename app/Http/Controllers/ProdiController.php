@@ -111,7 +111,11 @@ class ProdiController extends Controller
     public function search(Request $request) {
         if($request->has('search')) {
             $prodis = Prodi::where('nama', 'like', '%'.$request->search.'%')
-            ->orWhere('kode', 'like', '%'.$request->search.'%')->paginate();
+            ->orWhere('kode', 'like', '%'.$request->search.'%')
+            ->orWhereHas('fakultas', function($query) use ($request) {
+                $query->where('nama', 'like', '%'.$request->search.'%');
+            })
+            ->paginate();
             // ->paginate(10);
         } else {
             $prodis = Prodi::paginate(10);

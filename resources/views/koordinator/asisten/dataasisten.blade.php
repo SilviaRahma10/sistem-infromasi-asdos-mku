@@ -5,18 +5,30 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Pendaftaran Asisten Dosen MKU </h1>
+    <h1 class="h3 mb-2 text-gray-800">Data Asisten Dosen MKU </h1>
     <p class="mb-4"></a></p>
 
-    {{-- <div class="nav-item dropdown back bg-primary" style="width: max-content; border-radius:8px">
+    <div class="nav-item dropdown back bg-primary" style="width: max-content; border-radius:8px">
         <a style="color:white" class="nav-link dropdown-toggle" href="#" id="dropdown1" data-toggle="dropdown"
             arial-haspopup="true" arial-expanded="false">Mata Kuliah Umum</a>
         <div class="dropdown-menu" arial-labelledby="dropdown1">
             @foreach ($generalsubjects as $generalsubject)
-                <a class="dropdown-item" href="{{ route('registration.pilih', $generalsubject->id) }}">{{ $generalsubject->nama }}</a>
+                <a class="dropdown-item" href="{{ route('asisten.pilih', $generalsubject->id) }}">{{ $generalsubject->nama }}</a>
             @endforeach
         </div>
-    </div><br> --}}
+    </div><br>
+
+    <form action="{{ route('asisten.search') }}" method="GET" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3  my-md-0 navbar-search" style="float: right;">
+        <div class="input-group pull-right" style="color:white">
+                <input type="search" class="form-control bg-white border-0 small" placeholder="Cari Data Asisten" name="search">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+            </div>
+    </form>
+    <br><br>
 
 
     <div class="card shadow mb-4">
@@ -26,22 +38,6 @@
 
         <div class="table-responsive">
             <div class="card-body">
-                <div class="row">
-                    <div style="margin-left: 20px">
-                        <a class="active" href="{{route ('registration.databelum')}}"><button  type="submit" class="btn btn-warning">Belum Diverifikasi</button></a>
-                    </div>
-                    
-                    <div style="margin-left: 20px">
-                        <a class="active" href="{{route ('registration.dataterima')}}"><button  type="submit" class="btn btn-success">Diterima</button></a>
-                    </div>
-            
-                    <div style="margin-left: 20px">
-                        <a class="active" href="{{route ('registration.datatolak')}}"><button  type="submit" class="btn btn-danger">Ditolak</button></a>
-                    </div>
-                    
-                </div><br>
-
-                    
                     <table class="table" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
@@ -96,17 +92,11 @@
                                     @endif
                                 </td>
 
-                                {{-- <td>
-                                        <a href="{{ route('registration.lihat', $registration->id) }}"><button type="submit" class="btn btn-primary">
-                                            <i class="fas fa-sharp fa-eye"></i> 
-                                        </button> </a>
-                                </td> --}}
-
                                 <td>
-                                    <a href="{{ route('registration.edit', $registration->id) }}"><button type="submit" class="btn btn-primary">
-                                        <i class="fas fa-pencil-alt"></i>
+                                    <a href="{{ route('asisten.lihat', $registration->id) }}"><button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-sharp fa-eye"></i> 
                                     </button> </a>
-                            </td>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

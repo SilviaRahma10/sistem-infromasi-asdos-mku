@@ -31,4 +31,9 @@ class Mata_kuliah extends Model
         return $this->hasMany(Pendaftaran::class, 'id_mata_kuliah', 'id');
     }
 
+    public function koordinator()
+    {
+        return $this->hasOne(Koordinator::class, 'id_mku', 'id');
+    }
+
 }

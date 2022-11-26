@@ -13,7 +13,8 @@
 
     <form action="{{ route('student.search') }}" method="GET" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3  my-md-0 navbar-search" style="float: right;">
       <div class="input-group pull-right" style="color:white">
-          <input type="search" class="form-control bg-white border-0 small" placeholder="Cari Data Mahasiswa" name="search">
+          <input type="search" class="form-control bg-white border-0 small" placeholder="Cari Data Mahasiswa"
+            value="{{ request()->get('search') }}" name="search">
           <div class="input-group-append">
               <button class="btn btn-primary" type="submit">
                   <i class="fas fa-search fa-sm"></i>

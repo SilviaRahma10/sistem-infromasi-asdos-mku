@@ -20,23 +20,15 @@
           <img src="{{url('themes/frontend/assets/img/about.jpg')}}" class="img-fluid" alt="">
         </div>
         <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
-          <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
-          <p class="fst-italic">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-            magna aliqua.
-          </p>
+          <br>
+          <h3>Sekilas Tentang Asisten Dosen Mata  kuliah Umum .</h3><br>
           <ul>
-            <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-            <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-            <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
+            <li><i class="bi bi-check-circle"></i> Asisten Dosen merupakan pihak yang membantu dosen terkait dengan pelaksanaan praktikum.</li>
+            <li><i class="bi bi-check-circle"></i> Asisten Dosen memeiliki peran dalam melaksanakan kegiatan mengajar, memeriksa tugas dan lapora pratikum, dan merekap nilai tugas dan laporan mahasiswa.</li>
+            <li><i class="bi bi-check-circle"></i> Asisten Dosen memperoleh beberapa benefit</li>
           </ul>
-          <p>
-            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-          </p>
-
         </div>
       </div>
-
     </div>
   </section><!-- End About Section -->
 

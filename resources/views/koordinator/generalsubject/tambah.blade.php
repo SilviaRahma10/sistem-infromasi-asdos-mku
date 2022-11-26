@@ -48,7 +48,7 @@
                         </div>
                     </div>
 
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="">Prodi yang mengambil mata kuliah</label>
                        <div>
                         <select name="prodi[]" id="" class="prodi-dropdown" multiple="multiple"
@@ -58,7 +58,7 @@
                           @endforeach
                       </select>
                        </div>
-                    </div>
+                    </div> --}}
 
 
 

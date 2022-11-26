@@ -20,21 +20,27 @@
             <form action="{{ route('kelas.store') }}" method="post">
                 @csrf
                 <div class="card-body">
-                    <div class="form-group">
-                        <label for="prodi">Prodi</label>
-                        <select name="id_prodi" id="prodi" class="form-control">
-                            <option selected disabled>Pilih Prodi</option>
-                            @foreach ($prodis as $item)
-                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
-                            @endforeach
-                        </select>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="mata_kuliah">Mata Kuliah</label>
-                        <select name="id_mata_kuliah" id="mata_kuliah" class="form-control">
-                            <option selected disabled>Pilih Mata Kuliah</option>
-                        </select>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="prodi">Prodi</label>
+                                <select name="id_prodi" id="prodi" class="form-control">
+                                    <option selected disabled>Pilih Prodi</option>
+                                    @foreach ($prodis as $item)
+                                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="mata_kuliah">Mata Kuliah</label>
+                                <select name="id_mata_kuliah" id="mata_kuliah" class="form-control">
+                                    <option selected disabled>Pilih Mata Kuliah</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
                     

@@ -31,9 +31,9 @@
         {{-- sidebar --}}
 
         @if (auth()->user()->role == 'admin')
-            @include('includes.sidebarKoordinator')
-        @else
             @include('includes.sidebarAdmin')
+        @else
+            @include('includes.sidebarkoordinator')
             
         @endif
 

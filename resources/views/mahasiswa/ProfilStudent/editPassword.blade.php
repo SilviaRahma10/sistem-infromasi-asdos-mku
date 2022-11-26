@@ -11,7 +11,7 @@
         <form class="pl-5"action="{{ route('mahasiswa.updatePassword') }}" method="POST">
             @csrf
             @method('PUT')
-            <br> <br>
+            
 
             <div class="container-fluid">
                 <div class="mb-3" class="pl-5">

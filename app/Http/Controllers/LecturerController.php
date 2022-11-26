@@ -113,6 +113,9 @@ class LecturerController extends Controller
             $lecturers = Dosen::where('nama', 'like', '%'.$request->search.'%')
             ->orWhere('nip', 'like', '%'.$request->search.'%')
             ->orWhere('nidn', 'like', '%'.$request->search.'%')
+            ->orWhereHas('prodi', function($query) use ($request) {
+                $query->where('nama', 'like', '%'.$request->search.'%');
+            })
             ->paginate();
            
         } else {

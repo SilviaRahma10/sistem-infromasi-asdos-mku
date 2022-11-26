@@ -13,6 +13,7 @@ class StudentController extends Controller
         {
             $students= Mahasiswa::paginate(20);
             $prodis = Prodi::paginate(20);
+
             return view('koordinator.student.data', compact('students', 'prodis'));
         }
           
@@ -28,7 +29,6 @@ class StudentController extends Controller
             return view('koordinator.student.pilih',compact('prodi','student'));
         }
         
-    
         public function destroy(Mahasiswa $student)
         {
             $student->delete();
@@ -41,8 +41,16 @@ class StudentController extends Controller
                 ->orWhere('angkatan', 'like', '%'.$request->search.'%')
                 ->orWhere('no_hp', 'like', '%'.$request->search.'%')
                 ->orWhere('address', 'like', '%'.$request->search.'%')
+                ->orWhereHas('user', function($query) use ($request) {
+                    $query->where('name', 'like', '%'.$request->search.'%');
+                })
+                ->orWhereHas('user', function($query) use ($request) {
+                    $query->where('email', 'like', '%'.$request->search.'%');
+                })
+                ->orWhereHas('prodi', function($query) use ($request) {
+                    $query->where('nama', 'like', '%'.$request->search.'%');
+                })
                 ->paginate();
-                // ->paginate(10);
             } else {
                 $students = Mahasiswa::paginate(20);
             }
@@ -50,9 +58,6 @@ class StudentController extends Controller
             
             return view('koordinator.student.data', compact('prodis', 'students'));
         }
-
-        // $students= Mahasiswa::paginate(20);
-        // $prodis = Prodi::paginate(20);
 
 
     }

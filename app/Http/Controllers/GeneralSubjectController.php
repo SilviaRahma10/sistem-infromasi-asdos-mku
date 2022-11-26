@@ -17,7 +17,6 @@ class GeneralSubjectController extends Controller
         return view('koordinator.generalsubject.tambah', compact('prodis'));
     }
 
-
     // fungsi simpan data ke db dari yang diinputkan user
     public function simpan(Request $request)
     {
@@ -33,10 +32,10 @@ class GeneralSubjectController extends Controller
     
             $generalsubject->save();
 
-            $prodi = $request->prodi;
-            foreach ($prodi as $p) {
-                $generalsubject->prodi()->attach($p);
-            }
+            // $prodi = $request->prodi;
+            // foreach ($prodi as $p) {
+            //     $generalsubject->prodi()->attach($p);
+            // }
             return redirect()
             ->to(route('generalsubject.lihat', $generalsubject->id))
             ->withSuccess('Berhasil menambah data MKU');
@@ -65,9 +64,9 @@ class GeneralSubjectController extends Controller
         $program_studis = $generalsubject->prodi; //prodi yg mengambil mata kuliah
         $program_studi = [];
 
-        foreach ($program_studis as $p) {
-            $program_studi[] = $p->id;
-        }
+        // foreach ($program_studis as $p) {
+        //     $program_studi[] = $p->id;
+        // }
 
         $prodis = Prodi::all();
         return view('koordinator.generalsubject.edit', compact('generalsubject', 'prodis', 'program_studi'));
@@ -86,10 +85,10 @@ class GeneralSubjectController extends Controller
 
         $generalsubject->prodi()->sync([]);
 
-        $prodi = $request->prodi;
-            foreach ($prodi as $p) {
-                $generalsubject->prodi()->attach($p);
-            }
+        // $prodi = $request->prodi;
+        //     foreach ($prodi as $p) {
+        //         $generalsubject->prodi()->attach($p);
+        //     }
 
         return redirect()
             ->to(route('generalsubject.lihat', $generalsubject->id))

@@ -55,6 +55,11 @@ class Program extends Model
         return $this->belongsTo(Tahun_ajaran::class, 'id_tahun_ajaran', 'id');
     }
 
+    public function tahun_ajaran2()
+    {
+        return $this->hasOne(Tahun_ajaran::class, 'id_tahun_ajaran', 'id');
+    }
+
     public function mataKuliah()
     {
         return $this->belongsToMany(Mata_kuliah::class, 'mku_programs', 'id_program', 'id_mata_kuliah');

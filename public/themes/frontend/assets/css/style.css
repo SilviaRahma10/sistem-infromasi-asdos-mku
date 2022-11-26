@@ -893,6 +893,21 @@ section {
   margin: auto;
 }
 
+.card-0-0-1379 {
+  padding: 32px 24px 12px 24px;
+  
+  background: #FFFFFF;
+  flex-basis: 800px;
+  min-height: 415px;
+  border-color: transparent;
+  border-width: 1px;
+  margin-right: 16px;
+  border-radius: 16px;
+  margin-bottom: 0px;
+  margin: auto;
+ 
+}
+
 .courses .course-item {
   border-radius: 5px;
   border: 1px solid #eef0ef;

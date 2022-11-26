@@ -18,7 +18,9 @@ use App\Http\Controllers\CoordinatorController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\GeneralSubjectController;
 use App\Http\Controllers\KelasAssistentController;
-use App\Http\Controllers\KoordinatorMkuController;
+use App\Http\Controllers\KoordinatorController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AsistenController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,7 +66,7 @@ Route::get ('asisten/laporan/data', [KelasAssistentController ::class, 'laporand
 
 Route::group(['middleware' => ['auth', 'role:admin']], function() {
 //    route untuk halaman utama koordinator
-    Route::get('/admin', [FakultasController ::class, 'dashboard'])->name('admin');
+    Route::get('/admin', [DashboardController ::class, 'dashboard'])->name('admin');
 
 // profil koordonator login
 Route::get ('profil/data', function(){
@@ -116,6 +118,17 @@ Route::get ('generalsubject/{generalsubject}/edit', [GeneralSubjectController ::
 Route::put('generalsubject/{generalsubject}', [GeneralSubjectController ::class, 'update'])->name('generalsubject.update');
 Route::delete('generalsubject/{generalsubject}', [GeneralSubjectController::class,'destroy'])->name('generalsubject.destroy');
 Route::get ('matakuliah/search', [GeneralSubjectController ::class, 'search'])->name('generalsubject.search');
+
+// route untuk menu koordinator
+Route::get ('koordinator/tambah', [KoordinatorController ::class, 'tambah'])->name('koordinator.tambah');
+Route::post ('koordinator/simpan', [KoordinatorController ::class, 'simpan'])->name('koordinator.simpan');
+Route::get ('koordinator/data', [KoordinatorController ::class, 'data'])->name('koordinator.data');
+Route::get ('koordinator/{koordinator}', [KoordinatorController ::class, 'lihat'])->name('koordinator.lihat');
+Route::get ('koordinator/{koordinator}/edit', [KoordinatorController ::class, 'edit'])->name('koordinator.edit');
+Route::put('koordinator/{koordinator}', [KoordinatorController ::class, 'update'])->name('koordinator.update');
+Route::delete('koordinator/{koordinator}', [KoordinatorController::class,'destroy'])->name('koordinator.destroy');
+Route::get ('koordinator/mku/search', [KoordinatorController ::class, 'search'])->name('koordinator.search');
+
 
 //5. route untuk menu kelas(crud ) 
 Route::get('/kelas/create', [KelasController::class, 'create'])->name('kelas.create');
@@ -172,34 +185,60 @@ Route::get ('student/prodi/{prodi}', [StudentController ::class, 'pilih'])->name
 Route::get('mahasiswa/search', [StudentController::class,'search'])->name('student.search');
 
 //8. route untuk menu tahun pendaftran(crud ) FIKS
-Route::get ('registration/data', [RegistrationController ::class, 'data'])->name('registration.data');
-Route::get ('registration/data/belumdiverifikasi', [RegistrationController ::class, 'databelum'])->name('registration.databelum');
-Route::get ('registration/data/diterima', [RegistrationController ::class, 'dataterima'])->name('registration.dataterima');
-Route::get ('registration/data/ditolak', [RegistrationController ::class, 'datatolak'])->name('registration.datatolak');
-Route::get ('registration/{registration}/edit', [RegistrationController ::class, 'edit'])->name('registration.edit');
-Route::put('registration/{registration}', [RegistrationController ::class, 'update'])->name('registration.update');
-Route::get ('registration/pilih/{generalsubject}/belumdiverifikasi', [RegistrationController ::class, 'pilih'])->name('registration.pilih');
-Route::get ('registration/pilih/{generalsubject}/diterima', [RegistrationController ::class, 'pilihterima'])->name('registration.pilihterima');
-Route::get ('registration/pilih/{generalsubject}/ditolak', [RegistrationController ::class, 'pilihtolak'])->name('registration.pilihtolak');
-Route::get('pendaftar/search', [RegistrationController::class,'search'])->name('registration.search');
+
+Route::get ('data/asisten', [AsistenController ::class, 'datasisten'])->name('asisten.datasisten');
+Route::get ('data/asisten/lihat{registration}', [AsistenController ::class, 'lihat'])->name('asisten.lihat');
+Route::get ('data/asisten/mku/{generalsubject}/diterima', [AsistenController ::class, 'pilihasisten'])->name('asisten.pilih');
+Route::get('data/asisten/search', [AsistenController::class,'search'])->name('asisten.search');
 //9. route untuk menu tahun berkas(crud )
 
 //10. route untuk menu tahun sisten kelas(crud )
-Route::get ('asisten/data/', [KelasAssistentController ::class, 'data'])->name('asisten.data');
-Route::get('assiten/{pendaftaran}/pemetaan', [KelasAssistentController ::class, 'pemetaan'])->name('asisten.pemetaan');
-Route::post('assiten/tambahasissten/{pendaftaran}', [KelasAssistentController ::class, 'tambah'])->name('asisten.tambah');
-Route::get('asisten/lihat/{asisten}', [KelasAssistentController ::class, 'lihat'])->name('asisten.lihat');
-Route::get('asisten/{asisten}/edit', [KelasAssistentController ::class, 'edit'])->name('asisten.edit');
-Route::put('asisten/{asisten}', [KelasAssistentController ::class, 'update'])->name('asisten.update');
-Route::get ('asisten/pilih/{generalsubject}', [KelasAssistentController ::class, 'pilih'])->name('asisten.pilih');
+// Route::get ('asisten/data/', [KelasAssistentController ::class, 'data'])->name('asistenn.data');
+// Route::get('assiten/{pendaftaran}/pemetaan', [KelasAssistentController ::class, 'pemetaan'])->name('asisten.pemetaan');
+// Route::post('assiten/tambahasissten/{pendaftaran}', [KelasAssistentController ::class, 'tambah'])->name('asisten.tambah');
+// Route::get('asisten/lihat/{asisten}', [KelasAssistentController ::class, 'lihat'])->name('asistenn.lihat');
+// Route::get('asisten/{asisten}/edit', [KelasAssistentController ::class, 'edit'])->name('asisten.edit');
+// Route::put('asisten/{asisten}', [KelasAssistentController ::class, 'update'])->name('asisten.update');
+// Route::get ('asisten/pilih/{generalsubject}', [KelasAssistentController ::class, 'pilih'])->name('asistenn.pilih');
 
-Route::get('asisten/export', [KelasAssistentController::class, 'export'])->name('asisten.export');
+// Route::get('asisten/export', [KelasAssistentController::class, 'export'])->name('asisten.export');
+
 
 // LAPORAN
 // SERTIFIKAT
 Route::get('/sertifikat', function () {
     return view('sertifikat');
 });
+
+});
+
+Route::group(['middleware' => ['auth', 'role:koordinator']], function() {
+
+
+// menu profil
+Route::get('/koordinator/profil/data', [KoordinatorController ::class, 'profil'])->name('koordinator.profil');
+Route::get ('/koordinator/profil/data/edit', [KoordinatorController ::class, 'editProfil'])->name('koordinator.editProfil');
+Route::put ('/koordinator/profil/data/update', [KoordinatorController ::class, 'updateProfil'])->name('koordinator.updateProfil');
+
+//1. route untuk menu dashboard koordinator
+Route::get('/koordinator', [DashboardController ::class, 'dashboardkoordinator'])->name('koordinator');
+
+
+//2. route untuk menu pendaftaran 
+Route::get ('registration/data', [RegistrationController ::class, 'data'])->name('registration.data');
+Route::get ('registration/data/belumdiverifikasi', [RegistrationController ::class, 'databelum'])->name('registration.databelum');
+Route::get ('registration/data/diterima', [RegistrationController ::class, 'dataterima'])->name('registration.dataterima');
+Route::get ('registration/data/ditolak', [RegistrationController ::class, 'datatolak'])->name('registration.datatolak');
+Route::get ('registration/{registration}/lihat', [RegistrationController ::class, 'lihat'])->name('registration.lihat');
+Route::get ('registration/{registration}/edit', [RegistrationController ::class, 'edit'])->name('registration.edit'); //edit dilakukan oleh koordinator utk verifikasi
+Route::put('registration/{registration}', [RegistrationController ::class, 'update'])->name('registration.update');
+Route::get ('registration/pilih/{generalsubject}/belumdiverifikasi', [RegistrationController ::class, 'pilih'])->name('registration.pilih');
+Route::get ('registration/pilih/{generalsubject}/diterima', [RegistrationController ::class, 'pilihterima'])->name('registration.pilihterima');
+Route::get ('registration/pilih/{generalsubject}/ditolak', [RegistrationController ::class, 'pilihtolak'])->name('registration.pilihtolak');
+Route::get('pendaftar/search', [RegistrationController::class,'search'])->name('registration.search');
+  
+Route::get ('/koordinator/data/asisten', [AsistenController ::class, 'data'])->name('asisten.data');
+Route::get ('/koordinator/data/asisten/detail{registration}', [AsistenController ::class, 'lihat'])->name('asisten.detail');
 
 });
 
@@ -220,6 +259,7 @@ Route::group(['middleware' => ['auth', 'role:mahasiswa']], function() {
     Route::put ('/mahasiswa/profil/update/password', [MahasiswaController ::class, 'updatePassword'])->name('mahasiswa.updatePassword');
 
     Route::get('/mahasiswa/profil/sertifikat', [MahasiswaController ::class, 'sertifikat'])->name('mahasiswa.sertifikat');
+    Route::get('/mahasiswa/profil/sertifikat/cetak/{id}', [MahasiswaController ::class, 'print'])->name('mahasiswa.print');
     Route::get('/sertifikat', function () {
         return view('sertifikat');
     });

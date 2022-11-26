@@ -51,7 +51,7 @@
                         </div>
                     </div>
 
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="">Prodi yang mengambil mata kuliah</label>
                         <div>
                             <select name="prodi[]" id="" class="prodi-dropdown" multiple="multiple"
@@ -61,17 +61,15 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div>
-
-                    
-
-
+                    </div> --}}
                     <br>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button><br><br>
             </form>
-            <br>
+        </div>
+    </div>
+    <br>
             {{-- <a class="pl-5" href="{{ route('.index') }}"><button type="submit" class="btn btn-primary" >Cancle</button></a> --}}
-        @endsection
+ @endsection
 
 
         @push('custom_js')

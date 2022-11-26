@@ -26,10 +26,7 @@
             </fieldset>
             </div>
 
-            <button type="submit" class="btn btn-danger" ><a href="{{route('mahasiswa.editPassword') }}" style="color:white">Ubah Password</a></button>
-
-
-                
+            <button type="submit" class="btn btn-danger" ><a href="{{route('mahasiswa.editPassword') }}" style="color:white">Ubah Password</a></button>             
     </form>
     </div>
                

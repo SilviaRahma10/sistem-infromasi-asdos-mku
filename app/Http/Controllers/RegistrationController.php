@@ -19,9 +19,13 @@ class RegistrationController extends Controller
 {
   public function data()
   {
+    $idMku = auth()->user()->koordinator->id_mku;
+
+    // dd($idMku);
+
     $generalsubjects = Mata_Kuliah::paginate(10);
     $program = Program::where('is_active', '1')->get();
-    $registrations = Pendaftaran::whereBelongsTo($program)
+    $registrations = Pendaftaran::where('id_mata_kuliah', $idMku)
       ->paginate(10);
 
     return view('koordinator.registration.data', compact('generalsubjects', 'program', 'registrations'));
@@ -89,17 +93,16 @@ class RegistrationController extends Controller
     return view('koordinator.registration.pilih', compact('generalsubject', 'program', 'registrations'));
   }
 
-
-  public function simpan(Request $request)
+  public function lihat(Pendaftaran $registration)
   {
-    // $registration = new Registration;
-    // $registration->id_student = $request->
-    // $registration->id_schoolyear =$request->
-    // $registration->id_generalsubject =$request->
-    // $registration->status = $request->
-    // $registration->save();
+    $students = Mahasiswa::all();
+    $programs = Program::all();
+    $generalsubjects = Mata_kuliah::all();
+
+    return view('koordinator.registration.lihat', compact('registration', 'students', 'programs', 'generalsubjects'));
   }
 
+// koordinator edit atau verifikasi berkas pendafatran sesuai dengan mku yang dikelolanya
   public function edit(Pendaftaran $registration)
   {
     $students = Mahasiswa::all();
@@ -114,13 +117,11 @@ class RegistrationController extends Controller
     $registration->status = $request->status;
     $registration->save();
 
-    if ($registration->status == "1") {
-      return redirect()->to(route('asisten.pemetaan', $registration->id));
-    } else {
-      return redirect()->to(route('registration.data'))
-        ->withSuccess('Berhasil verifikasi data pendaftaran');
-    }
+    return redirect()->to(route('registration.data'))
+      ->withSuccess('Berhasil verifikasi data pendaftaran');
   }
+
+
 
   //   public function search(Request $request) {
   //     $program = Program::where('is_active', '1')->get();

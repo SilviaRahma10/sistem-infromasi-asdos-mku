@@ -5,7 +5,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Pendaftaran Asisten Dosen MKU </h1>
+    <h1 class="h3 mb-2 text-gray-800">Data Asisten Dosen MKU </h1>
     <p class="mb-4"></a></p>
 
     {{-- <div class="nav-item dropdown back bg-primary" style="width: max-content; border-radius:8px">
@@ -13,10 +13,11 @@
             arial-haspopup="true" arial-expanded="false">Mata Kuliah Umum</a>
         <div class="dropdown-menu" arial-labelledby="dropdown1">
             @foreach ($generalsubjects as $generalsubject)
-                <a class="dropdown-item" href="{{ route('registration.pilih', $generalsubject->id) }}">{{ $generalsubject->nama }}</a>
+                <a class="dropdown-item" href="{{ route('asisten.pilih', $generalsubject->id) }}">{{ $generalsubject->nama }}</a>
             @endforeach
         </div>
     </div><br> --}}
+    <br><br>
 
 
     <div class="card shadow mb-4">
@@ -26,22 +27,6 @@
 
         <div class="table-responsive">
             <div class="card-body">
-                <div class="row">
-                    <div style="margin-left: 20px">
-                        <a class="active" href="{{route ('registration.databelum')}}"><button  type="submit" class="btn btn-warning">Belum Diverifikasi</button></a>
-                    </div>
-                    
-                    <div style="margin-left: 20px">
-                        <a class="active" href="{{route ('registration.dataterima')}}"><button  type="submit" class="btn btn-success">Diterima</button></a>
-                    </div>
-            
-                    <div style="margin-left: 20px">
-                        <a class="active" href="{{route ('registration.datatolak')}}"><button  type="submit" class="btn btn-danger">Ditolak</button></a>
-                    </div>
-                    
-                </div><br>
-
-                    
                     <table class="table" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
@@ -97,16 +82,10 @@
                                 </td>
 
                                 {{-- <td>
-                                        <a href="{{ route('registration.lihat', $registration->id) }}"><button type="submit" class="btn btn-primary">
-                                            <i class="fas fa-sharp fa-eye"></i> 
-                                        </button> </a>
-                                </td> --}}
-
-                                <td>
-                                    <a href="{{ route('registration.edit', $registration->id) }}"><button type="submit" class="btn btn-primary">
-                                        <i class="fas fa-pencil-alt"></i>
+                                    <a href="{{ route('asisten.lihat', $registration->id) }}"><button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-sharp fa-eye"></i> 
                                     </button> </a>
-                            </td>
+                                </td> --}}
                             </tr>
                             @endforeach
                         </tbody>

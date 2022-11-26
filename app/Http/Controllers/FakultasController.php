@@ -16,30 +16,7 @@ use App\Models\Tahun_ajaran;
 class FakultasController extends Controller
 {
     // controller untuk halaman dashboard
-    public function dashboard(){
-        $tahun_ajaran = Tahun_ajaran::all();
-        $fakultas = Fakultas::all(); 
-        $prodis = Prodi::all();
-        $mku = Mata_kuliah::all();
 
-        $program = Program::where('is_active', '1')->get();
-
-        $mku_program = Mku_program::whereBelongsTo($program)->get();
-
-        $registration = Pendaftaran::whereBelongsTo($program)->get();
-
-        $registrationsBelumVerifikasi = Pendaftaran::whereBelongsTo($program)
-        ->where('status', '0')->get();
-
-        $registrationsTerima = Pendaftaran::whereBelongsTo($program)
-        ->where('status', '1')->get();
-
-        $registrationsTolak = Pendaftaran::whereBelongsTo($program)
-        ->where('status', '2')->get();
-
-        $asisten = Asisten_kelas::all();
-        return view('admin', compact('tahun_ajaran','fakultas', 'program', 'prodis', 'mku', 'mku_program', 'registration', 'registrationsBelumVerifikasi', 'registrationsTerima', 'registrationsTolak', 'asisten'));
-    }
 
 
 
@@ -73,7 +50,7 @@ class FakultasController extends Controller
 
    public function DataFakultas()
    {
-        $fakultas=Fakultas::paginate(5);
+        $fakultas=Fakultas::paginate(10);
     return view('koordinator.fakultas.DataFakultas', compact('fakultas'));
    }
 
@@ -119,9 +96,9 @@ class FakultasController extends Controller
     if($request->has('search')) {
         $fakultas = Fakultas::where('nama', 'like', '%'.$request->search.'%')
         ->orWhere('kode', 'like', '%'.$request->search.'%')
-        ->paginate(5);
+        ->paginate(10);
     }else{
-            $fakultas = Fakultas::paginate(5);
+            $fakultas = Fakultas::paginate(10);
         }
         return view('koordinator.fakultas.DataFakultas', compact('fakultas'));
 

@@ -11,7 +11,9 @@ use App\Models\Mata_kuliah;
 use App\Models\Mku_program;
 use App\Models\Pendaftaran;
 use App\Models\Asisten_kelas;
+use App\Models\Tahun_ajaran;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MahasiswaController extends Controller
 {
@@ -19,6 +21,7 @@ class MahasiswaController extends Controller
   public function dataDiri(User $user)
   {
     $prodis = Prodi::all();
+
     return view('mahasiswa.ProfilStudent.registerMahasiswa', compact('user', 'prodis'));
   }
 
@@ -28,7 +31,7 @@ class MahasiswaController extends Controller
         'npm' => 'required | min:9 | max:9 |unique:mahasiswas',
         'prodi_id' => 'required',
         'angkatan' => 'required| min:4 | max:4',
-        'no_hp' => 'required | unique:mahasiswas',
+        'no_hp' => 'required | numeric | unique:mahasiswas',
         'address' => 'required',
         'gender' => 'required',
   ],[
@@ -58,6 +61,9 @@ class MahasiswaController extends Controller
     $mahasiswa->gender= $request->gender;
 
     $mahasiswa->save();
+
+    //logout authenticated user
+    auth()->logout();
 
     // return ke halaman login
     return redirect()
@@ -93,37 +99,39 @@ class MahasiswaController extends Controller
     return view('mahasiswa.ProfilStudent.form', compact('mku_program'));
   }
 
+  // simpan data pendaftaran
   public function simpan(Request $request, Mku_program $mku_program)
   {
     $request->validate([
       'nilai_matkul' => 'required',
-      'KHS' =>'required | image |file',
-      'KRS' => 'required | image |file ',
-      'surat_rekomendasi' => 'required | image |file',
+      'KHS' =>'required',
+      'KRS' => 'required',
+      'surat_rekomendasi' => 'required ',
     ], [
-      'nilai_matkul.required' => "nilai matkul harus diisi",
-      'KHS.required' => "KHS harus diisi",
-      'KHS.image' => "KHS harus berupa gambar",
-      'KHS.file' => "KHS harus berupa file",
-      'KRS.required' => "KRS harus diisi",
-      'KRS.image' => "KRS harus berupa gambar",
-      'KRS.file' => "KRS harus berupa file",
-      'surat_rekomendasi.required' => "surat rekomendasi harus diisi",
-      'surat_rekomendasi.image' => "surat rekomendasi harus berupa gambar",
-      'surat_rekomendasi.file' => "surat rekomendasi harus berupa file",
+    'nilai_matkul.required' => "nilai matkul harus diisi",
+    'KHS.required' => "KHS harus diisi",
+    //   'KHS.image' => "KHS harus berupa gambar",
+    //   'KHS.file' => "KHS harus berupa file",
+    'KRS.required' => "KRS harus diisi",
+    //   'KRS.image' => "KRS harus berupa gambar",
+    //   'KRS.file' => "KRS harus berupa file",
+    'surat_rekomendasi.required' => "surat rekomendasi harus diisi",
+    //   'surat_rekomendasi.image' => "surat rekomendasi harus berupa gambar",
+    //   'surat_rekomendasi.file' => "surat rekomendasi harus berupa file",
     ]);
-    $extentionKRS = $request->file('KRS')->getClientOriginalExtension();
-    $extentionKHS = $request->file('KHS')->getClientOriginalExtension();
-    $extentionsurat = $request->file('surat_rekomendasi')->getClientOriginalExtension();
 
-    $krs = $request->nilai_matkul.'-'.now()->timestamp.'.'.$extentionKRS;
-    $KRS = $request->file('KRS')->storeAs('krs', $krs  );
+    // $extentionKRS = $request->file('KRS')->getClientOriginalExtension();
+    // $extentionKHS = $request->file('KHS')->getClientOriginalExtension();
+    // $extentionsurat = $request->file('surat_rekomendasi')->getClientOriginalExtension();
 
-    $krs = $request->nilai_matkul.'-'.now()->timestamp.'.'.$extentionKHS;
-    $KHS = $request->file('KHS')->storeAs('khs', $krs  );
+    // $krs = $request->nilai_matkul.'-'.now()->timestamp.'.'.$extentionKRS;
+    // $KRS = $request->file('KRS')->storeAs('krs', $krs  );
 
-    $surat = $request->nilai_matkul.'-'.now()->timestamp.'.'.$extentionsurat;
-    $Surat = $request->file('surat_rekomendasi')->storeAs('surat', $surat  );
+    // $krs = $request->nilai_matkul.'-'.now()->timestamp.'.'.$extentionKHS;
+    // $KHS = $request->file('KHS')->storeAs('khs', $krs  );
+
+    // $surat = $request->nilai_matkul.'-'.now()->timestamp.'.'.$extentionsurat;
+    // $Surat = $request->file('surat_rekomendasi')->storeAs('surat', $surat  );
 
     // dd($KRS);
 
@@ -132,9 +140,9 @@ class MahasiswaController extends Controller
     $registration->id_program = $mku_program->program->id;
     $registration->id_mata_kuliah = $mku_program->mku->id;
     $registration->nilai_matkul = $request->nilai_matkul;
-    $registration->KHS = $KHS;
-    $registration->KRS = $KRS;
-    $registration->surat_rekomendasi = $Surat;
+    $registration->KHS = $request->KHS;
+    $registration->KRS = $request->KRS;
+    $registration->surat_rekomendasi = $request->surat_rekomendasi;
     $registration->status = '0';
 
     $registration->save();
@@ -187,23 +195,19 @@ class MahasiswaController extends Controller
 
 ]);
     $user = User::find(auth()->id());
-
     $user->update([
-      
       'name' => $request->name,
       'email' => $request->email,
       // $user->save();
     ]);
 
     $user->mahasiswa->update([
-      
       'npm'=> $request->npm,
       'prodi_id' =>$request->prodi_id,
       'angkatan'=>$request->angkatan,
       'address'=> $request->address,
       'no_hp'=> $request->no_hp,
       'gender' => $request->gender,
-    
   ]);
     return redirect()
     ->to(route('mahasiswa.profil'))
@@ -216,7 +220,6 @@ class MahasiswaController extends Controller
   }
 
   public function editPassword(){
-  
     return view('mahasiswa.ProfilStudent.editPassword');
   }
 
@@ -224,7 +227,6 @@ class MahasiswaController extends Controller
     $user = User::find(auth()->id());
 
     $user->update([
-      
       'password' => bcrypt($request->password),
     ]);
 
@@ -248,9 +250,19 @@ class MahasiswaController extends Controller
 
   }
 
-  public function sertifikat(){
-  
-    return view('mahasiswa.ProfilStudent.halamansertifikat');
+  public function sertifikat()
+  {
+    $items = Pendaftaran::where('id_mahasiswa', Auth::user()->mahasiswa->id)
+    ->where('status', '1')
+    ->get();
+
+    return view('mahasiswa.ProfilStudent.halamansertifikat', compact('items'));
+  }
+
+  public function print($id)
+  {
+    $item = Pendaftaran::where('id', $id)->where('id_mahasiswa', Auth::user()->mahasiswa->id)->first();
+    return view('mahasiswa.ProfilStudent.sertifikat', compact('item'));
   }
 
 }

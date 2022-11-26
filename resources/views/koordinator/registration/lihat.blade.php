@@ -20,7 +20,7 @@
           <br>
         
         <div class="container-fluid">
-          
+          <fieldset disabled>
             <div class="mb-3" class="pl-5">
               <label for="id_registration" class="form-label">Id Pendaftaran</label>
               <input type="id" name="id_registration" id="id_registration" class="form-control" value="{{ $registration->id }}" readonly>
@@ -172,7 +172,7 @@
                   <option value="{{ 2 }}">Tolak</option>
                 </select>
               </div>
-
+            </fieldset>
         </div>
 
         <button type="submit" class="btn btn-primary">Simpan</button><br><br>

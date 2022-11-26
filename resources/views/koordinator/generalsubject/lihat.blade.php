@@ -35,11 +35,11 @@
                   <input type="text" name="code" id="code" class="form-control" value="{{ $generalsubject->kode }}"">
                 </div>
               </div>
-            </div>
+            </div><br><br>
 
             
              
-              <label for="" class="form-label">Program Studi</label>
+              {{-- <label for="" class="form-label">Program Studi</label>
                   <div class="table-responsive">
                       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
                         <thead>
@@ -61,7 +61,7 @@
                               
                           </tbody>
                       </table>
-                    </div><br>
+                    </div><br> --}}
             </fieldset>
           </div>
         </form>

@@ -28,41 +28,67 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-
-               
-                    {{-- <div class="form-group"> --}}
+                {{-- revisi --}}
+{{-- 
                     <div class="mb-3">
-                        <label for="KRS">KRS Terbaru</label><br>
+                        <label for="KRS"> Link Gdrive KRS Terbaru</label><br>
                         <input type="file" name="KRS" class="form-control @error('KRS') is-invalid @enderror" value="{{ old('KRS') }}" id="KRS">
 
                         @error('KRS')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-               
-
                 
-                    {{-- <div class="form-group"> --}}
+                 
                     <div class="mb-3">
-                        <label for="KHS">KHS Terbaru</label><br>
+                        <label for="KHS">Link Gdrive KHS Terbaru</label><br>
                         <input type="file" name="KHS" class="form-control @error('KHS') is-invalid @enderror" value="{{ old('KHS') }}" id="KHS">
 
                         @error('KHS')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-               
-  
                 
-                    {{-- <div class="form-group"> --}}
+            
                     <div class="mb-3">
-                        <label for="surat_rekomendasi">Surat Rekomendasi</label><br>
+                        <label for="surat_rekomendasi">Link Gdrive Surat Rekomendasi</label><br>
                         <input type="file" name="surat_rekomendasi" class="form-control @error('surat_rekomendasi') is-invalid @enderror" value="{{ old('surat_rekomendasi') }}" id="KHS" id="surat_rekomendasi">
 
                         @error('surat_rekomendasi')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
+                    </div> --}}
+
+                    {{-- hasil revisi --}}
+
+                    <div class="mb-3" class="pl-5">
+                        <label for="KHS" class="form-label">Link Gdrive KRS Terbaru</label>
+                        <input type="text" name="KHS" id="KHS" class="form-control @error('KHS') is-invalid @enderror" value="{{ old('KHS') }}">
+    
+                        @error('KHS')
+                          <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
+
+                    <div class="mb-3" class="pl-5">
+                        <label for="KRS" class="form-label">Link Gdrive KHS Terbaru</label>
+                        <input type="text" name="KRS" id="KRS" class="form-control @error('KRS') is-invalid @enderror" value="{{ old('KRS') }}">
+    
+                        @error('KRS')
+                          <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3" class="pl-5">
+                        <label for="surat_rekomendasi" class="form-label">Link Gdrive Surat Rekomendasi</label>
+                        <input type="text" name="surat_rekomendasi" id="surat_rekomendasi" class="form-control @error('surat_rekomendasi') is-invalid @enderror" value="{{ old('surat_rekomendasi') }}">
+    
+                        @error('surat_rekomendasi')
+                          <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                
+                    
                     <div style="text-align: center; padding-top:20px; padding:bottom :30px">
                         <button type="submit" class="btn" style="background: #15246a; color:white">Daftar</button> 
                     </div>

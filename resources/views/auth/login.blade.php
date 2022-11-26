@@ -19,6 +19,11 @@
             <div style="text-align: center; padding-top:20px; padding-bottom:30px;   ">
                 {{-- <h1 style="font-size: 30px;">Login</h1>
                 <br> --}}
+
+                <div class="flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+                    {{-- < class="logo me-auto"><a href="{{route ('mahasiswa')}}"> --}}
+                        <img src="{{url('themes/frontend/assets/img/logo2.png')}}" alt=""></a>
+                </div>
                 <h6 style="font-size: 25px;">Sistem Informasi Asdos MKU</h6>
                 <h4 style="font-size: 25px;">Universitas Bengkulu</h4>
             </div>

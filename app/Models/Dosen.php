@@ -11,7 +11,7 @@ class Dosen extends Model
 
     public function prodi()
     {
-        return $this->hasOne(Prodi::class, 'id', 'id_prodi');
+        return $this->belongsTo(Prodi::class, 'id_prodi', 'id');
     }
 
     public function user()

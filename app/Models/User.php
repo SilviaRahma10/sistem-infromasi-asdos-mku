@@ -16,6 +16,10 @@ class User extends Authenticatable
         return $this->hasOne(Mahasiswa::class,'user_id','id');
     }
 
+    public function koordinator(){
+        return $this->hasOne(Koordinator::class,'user_id','id');
+    }
+
     /**
      * The attributes that are mass assignable.
      *

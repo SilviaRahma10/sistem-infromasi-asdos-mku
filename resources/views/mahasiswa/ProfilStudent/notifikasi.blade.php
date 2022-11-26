@@ -13,7 +13,7 @@
 
 <section class="section-50">
     <div class="container">
-        <h3 class="m-b-50 heading-line">Notifikasi<i class="fa fa-bell text-muted"></i> {{ auth()->user()->id }}</h3>
+        <h3 class="m-b-50 heading-line">Notifikasi<i class="fa fa-bell text-muted"></i></h3>
 
         @foreach ($asistens as $asisten)
         
@@ -22,22 +22,17 @@
                 <div class="notification-list_content">
                     <div class="notification-list_detail">
                         <p><b>PENGUMUMAN !!</b> Hi, {{ auth()->user()->name }}</p>
-                        <p class="text-muted">{{ $asisten->kelas->mku_prodi->prodi->nama }}</p>
-                        <p class="text-muted">{{ $asisten->kelas->nama }} {{ $asisten->kelas->hari }}</p>
-                        <p class="text-muted"><small>{{ $asisten->pendaftaran->mku->nama }}</small></p>
+                        <p><b>Selamat, Pendaftaran Asdos Anda Dinyatakan Lulus</b></p>
+                        <br>
+                        <p class="text-muted">Informasi Penempatan : </p>
+                        <p class="text-muted">Prodi: {{ $asisten->kelas->mku_prodi->prodi->nama }}</p>
+                        <p class="text-muted">Kelas : {{ $asisten->kelas->nama }} {{ $asisten->kelas->hari }}</p>
+                        <p class="text-muted">Mku : {{ $asisten->pendaftaran->mku->nama }}</></p>
                     </div>
-                </div>
-                <div class="notification-list_feature-img">
-                    <img src="https://i.imgur.com/bpBpAlH.jpg" alt="Feature image">
                 </div>
             </div>
         </div>
         @endforeach
-
-        <div class="text-center">
-            <a href="#!" class="dark-link">Load more activity</a>
-        </div>
-
     </div>
 </section>
 

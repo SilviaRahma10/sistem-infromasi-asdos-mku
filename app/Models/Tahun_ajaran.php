@@ -13,4 +13,9 @@ class Tahun_ajaran extends Model
     {
         return $this->hasOne(Program::class, 'id_tahun_ajaran', 'id');
     }
+
+    public function tahun_ajaran()
+    {
+        return $this->belongsTo(Program::class, 'id_tahun_ajaran', 'id');
+    }
 }
