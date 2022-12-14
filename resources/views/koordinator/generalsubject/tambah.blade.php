@@ -7,6 +7,7 @@
 
 @section('content')
     <div class="container-fluid">
+        <h1 class="h3 mb-2 text-gray-800">Tambah Data Mata Kuliah Umum</h1>
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <a href="{{ route('generalsubject.data') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
@@ -15,7 +16,7 @@
 
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Masukkan Mku DAN Assign Prodi</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Masukkan Mata Kuliah Umum</h6>
             </div>
 
             <form action="{{ route('generalsubject.simpan') }}" method="POST">

@@ -6,8 +6,14 @@
   <div class="container-fluid">
     <h1 class="h3 mb-2 text-gray-800">Detail {{ $registration->mahasiswa->user->name }}</h1>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-      <a href="{{ route('asisten.datasisten') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+      @if(auth()->user()->role == 'koordinator')
+      <a href="{{ route('asisten.data') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
       class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali</a>
+
+      @else
+      <a href="{{ route('asisten.datasisten') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+        class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali</a>  
+      @endif
     </div>
     <div class="card shadow mb-4">
       <div class="card-header py-3">
@@ -20,9 +26,6 @@
           <br>
         
         <div class="container-fluid">
-          
-          
-
             <div class="row">
               <div class="col-md-6">
                 <div class="mb-3" class="pl-5">
@@ -133,7 +136,7 @@
             
         </div>
 
-        <button type="submit" class="btn btn-primary">Simpan</button><br><br>
+        {{-- <button type="submit" class="btn btn-primary">Simpan</button><br><br> --}}
       
       </form>
      

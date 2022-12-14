@@ -68,14 +68,14 @@
               </div>
             </div>
 
-            <div class="row">
+            {{-- <div class="row">
               <div class="col-md-6">
                 <div class="mb-3" class="pl-5">
                   <label for="password" class="form-label">Password Koordinator</label>
                   <input type="text" name="password" id="password" class="form-control" value="{{ $koordinator->user->password }}">
                 </div>
               </div>
-            </div>
+            </div> --}}
         </div>
         <br><br>
     </form>

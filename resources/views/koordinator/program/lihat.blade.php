@@ -11,9 +11,7 @@
       class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali</a>
     </div>
 
-    <a href="{{ route('mkuprogram.tambah', $program->id) }}"><button type="submit" class="btn btn-primary"> 
-      <i class="fas fa-folder-plus"></i>
-      </button> </a>
+
 
     <div class="card shadow mb-4">
       <div class="card-header py-3">
@@ -96,9 +94,9 @@
                         <th>Kuota Penerimaan Asiten</th>
                         <th>syarat & ketentuan</th>
                         <th>kualifikasi</th>
-                        <th></th>
+                       
                         <th>Aksi</th>
-                        <th></th>
+                       
                     </tr>
                 </thead>
 
@@ -117,7 +115,7 @@
                                   </button> </a>
                               </td>
 
-                              <td>
+                              {{-- <td>
                                 <a href="{{ route('mkuprogram.edit',$mkuprogram->id) }}"><button type="button" class="btn btn-warning"> 
                                   <i class="fas fa-pencil-alt"></i>  
                                 </button> </a>
@@ -127,7 +125,7 @@
                                 <a href="#" class="btn btn-danger remove-btn" data-id="{{ $mkuprogram->id }}">
                                   <i class="fas fa-trash-alt"></i>
                                 </a>
-                               </td>
+                               </td> --}}
 
 
                               

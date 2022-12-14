@@ -60,6 +60,18 @@
               <li><i class="bi bi-check-circle"></i> Mewujudkan tata kelola penyelenggaraan pendidikan tinggi di Universitas Bengkulu sebagai good university governance.</li>
             </ul>
           </div>
+
+          <div class="box-0-0-3 ">
+            
+            <h3 class="m-b-50 heading-line">Struktur Pengelola LPMPP <i class="fa fa-bell text-muted"></i></h3>
+            <p class="">
+              Pengelola Selingkung Lembaga Penjaminan Mutu dan Pengembangan Pembelajaran (LPMPP) Universitas Bengkulu
+            </p>
+           
+           
+              <img src="{{url('themes/frontend/assets/img/BAGAN.PNG')}}" class="img-fluid">
+            
+          </div>
        
 
       </div>

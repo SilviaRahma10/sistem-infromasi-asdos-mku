@@ -31,17 +31,12 @@
               <input type="text" name="email" id="email" class="form-control" value="{{ auth()->user()->email }}" >
             </div>
 
-          <div class="mb-3" class="pl-5">
-            <label for="role" class="form-label">Role</label>
-            <input type="text" name="role" id="role" class="form-control" value="{{ auth()->user()->role }}" readonly>
-          </div>
-
             <div class="mb-3" class="pl-5">
-              <label for="password" class="form-label">Password </label> 
-              <input type="text" name="password" id="password" class="form-control" value="{{ auth()->user()->password }}" >
+              <label for="role" class="form-label">Jabatan</label>
+              <input type="text" name="role" id="role" class="form-control" value="{{ auth()->user()->role }} {{ auth()->user()->koordinator->mku->nama }}" readonly>
             </div>
 
-            <div class="mb-3" class="pl-5">
+              <div class="mb-3" class="pl-5">
                 <label for="no_hp" class="form-label">no_hp </label> 
                 <input type="text" name="no_hp" id="no_hp" class="form-control" value="{{ auth()->user()->koordinator->no_hp }}" >
               </div>

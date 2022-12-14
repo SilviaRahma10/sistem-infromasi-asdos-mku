@@ -50,7 +50,8 @@ class FakultasController extends Controller
 
    public function DataFakultas()
    {
-        $fakultas=Fakultas::paginate(10);
+        $fakultas=Fakultas::orderBy('id', 'DESC')
+        ->paginate(10);
     return view('koordinator.fakultas.DataFakultas', compact('fakultas'));
    }
 

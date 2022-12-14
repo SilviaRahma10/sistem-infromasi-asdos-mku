@@ -2,12 +2,16 @@
 @section('title', 'prodi')
 @section('content')
 
+@section('custom_head')
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.1/cr-1.6.1/r-2.4.0/sc-2.0.7/sb-1.4.0/datatables.min.css"/>
+@endsection
+
     <div class="container-fluid">
 
         <h1 class="h3 mb-2 text-gray-800">Program Studi</h1>
         <br>
 
-            <form action="{{ route('prodi.search') }}" method="GET" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3  my-md-0 navbar-search" style="float: right;">
+            {{-- <form action="{{ route('prodi.search') }}" method="GET" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3  my-md-0 navbar-search" style="float: right;">
                 <div class="input-group pull-right" style="color:white">
                         <input type="search" class="form-control bg-white border-0 small" placeholder="Cari Data Program Studi" name="search">
                         <div class="input-group-append">
@@ -16,7 +20,7 @@
                             </button>
                         </div>
                     </div>
-            </form>
+            </form> --}}
             <br><br>
         
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -46,7 +50,7 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table " id="dataTable" width="100%" cellspacing="0">
+                    <table class="table" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -60,7 +64,7 @@
                                 <th></th>
                                 <th>Aksi</th>
                                 <th></th>
-                                <th></th>
+                             
                             </tr>
                         </thead>
                         <tbody>
@@ -105,6 +109,16 @@
         </div>
     </div>
 @endsection
+
+@push('custom_js')
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.13.1/cr-1.6.1/r-2.4.0/sc-2.0.7/sb-1.4.0/datatables.min.js"></script>
+
+      <script>
+        $(document).ready( function () {
+    $('#dataTable').DataTable();
+} );
+      </script>
+  @endpush
 
 @section('custom_html')
     @foreach ($prodis as $prodi)

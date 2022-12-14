@@ -11,7 +11,7 @@
 
     <div class="card shadow mb-4">
       <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Koordinator</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Masukkan Data Koordinator</h6>
       </div>
 
       <form class="pl-5" action="{{ route('koordinator.simpan') }}" method="POST">

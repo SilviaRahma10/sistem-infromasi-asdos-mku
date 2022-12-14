@@ -11,7 +11,7 @@
 
     <div class="card shadow mb-4">
       <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Masukkan Data Koordinator</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Edit Data Koordinator</h6>
       </div>
 
       <form class="pl-5" action="{{ route('koordinator.update', $koordinator->id) }}" method="POST">
@@ -35,14 +35,16 @@
 
               <div class="col-md-6">
                 <div class="mb-3" class="pl-5">
-                  <label for="email" class="form-label">email Koordinator</label>
-                  <input type="text" name="email" id="email" class="form-control @error('email') is-invalid @enderror" value="{{ $koordinator->user->email }}">
+                  <label for="nip" class="form-label">Nip Koordinator</label>
+                  <input type="text" name="nip" id="nip" class="form-control @error('nip') is-invalid @enderror" value="{{ $koordinator->nip }}">
 
-                  @error('email')
+                  @error('nip')
                     <div class="invalid-feedback">{{ $message }}</div>
                   @enderror
                 </div>
               </div>
+
+          
             </div>
 
             <div class="row">
@@ -62,8 +64,19 @@
                 </div>
               </div>
 
-              
               <div class="col-md-6">
+                <div class="mb-3" class="pl-5">
+                  <label for="password" class="form-label">Kode Mku</label>
+                  <input type="text" name="password" id="password" class="form-control @error('password') is-invalid @enderror" value="{{ $koordinator->mku->kode }}">
+
+                  @error('password')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
+              </div>
+
+              
+              {{-- <div class="col-md-6">
                 <div class="mb-3" class="pl-5">
                   <label for="password" class="form-label">Password Koordinator</label>
                   <input type="text" name="password" id="password" class="form-control @error('password') is-invalid @enderror" value="{{ $koordinator->user->password }}">
@@ -72,16 +85,17 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                   @enderror
                 </div>
-              </div>
+              </div> --}}
             </div>
 
             <div class="row">
+       
               <div class="col-md-6">
                 <div class="mb-3" class="pl-5">
-                  <label for="nip" class="form-label">Nip Koordinator</label>
-                  <input type="text" name="nip" id="nip" class="form-control @error('nip') is-invalid @enderror" value="{{ $koordinator->nip }}">
+                  <label for="email" class="form-label">email Koordinator</label>
+                  <input type="text" name="email" id="email" class="form-control @error('email') is-invalid @enderror" value="{{ $koordinator->user->email }}">
 
-                  @error('nip')
+                  @error('email')
                     <div class="invalid-feedback">{{ $message }}</div>
                   @enderror
                 </div>

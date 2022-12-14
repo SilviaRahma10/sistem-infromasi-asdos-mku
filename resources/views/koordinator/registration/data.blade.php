@@ -2,22 +2,17 @@
 @section('title', 'data pendaftar')
 @section('content')
 
+@section('custom_head')
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.1/cr-1.6.1/r-2.4.0/sc-2.0.7/sb-1.4.0/datatables.min.css"/>
+@endsection
+
+
+
 <div class="container-fluid">
 
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Pendaftaran Asisten Dosen MKU </h1>
     <p class="mb-4"></a></p>
-
-    {{-- <div class="nav-item dropdown back bg-primary" style="width: max-content; border-radius:8px">
-        <a style="color:white" class="nav-link dropdown-toggle" href="#" id="dropdown1" data-toggle="dropdown"
-            arial-haspopup="true" arial-expanded="false">Mata Kuliah Umum</a>
-        <div class="dropdown-menu" arial-labelledby="dropdown1">
-            @foreach ($generalsubjects as $generalsubject)
-                <a class="dropdown-item" href="{{ route('registration.pilih', $generalsubject->id) }}">{{ $generalsubject->nama }}</a>
-            @endforeach
-        </div>
-    </div><br> --}}
-
 
     <div class="card shadow mb-4">
         <div class="card-header py-3"> 
@@ -41,7 +36,7 @@
                     
                 </div><br>
 
-                    
+
                     <table class="table" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
@@ -66,8 +61,9 @@
                             @endphp
 
                             @foreach ($registrations as $index => $registration)
+                            @if ($registration->id_mata_kuliah  == $idMku)
                             <tr>
-                                <th scope="row"> {{ $index + $registrations->firstItem() }}</th>
+                                <th scope="row"> {{ $loop->iteration }}</th>
                             <td>{{ $registration->mahasiswa->user->name }}</td>
                             <td>{{ $registration->mahasiswa->npm }}</td>
                             <td>{{ $registration->mahasiswa->user->email }}</td>
@@ -108,15 +104,23 @@
                                     </button> </a>
                             </td>
                             </tr>
+                            @endif
                             @endforeach
                         </tbody>
                     </table>
-                    <div style="float: right">
-                        {{ $registrations->links() }}
-                    </div>
                 </div>
             </div>
     </div>
   
   </div>
   @endsection
+
+  @push('custom_js')
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.13.1/cr-1.6.1/r-2.4.0/sc-2.0.7/sb-1.4.0/datatables.min.js"></script>
+
+      <script>
+        $(document).ready( function () {
+    $('#dataTable').DataTable();
+} );
+      </script>
+  @endpush

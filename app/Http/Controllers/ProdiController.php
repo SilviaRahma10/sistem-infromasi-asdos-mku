@@ -26,7 +26,10 @@ class ProdiController extends Controller
             'id_fakultas'=> 'required',
             'kode' => 'required | unique:prodis',
             'nama' => 'required',
-        ]);
+        ],[
+            'id_fakultas.required'=>"Fakultas harus dipilih",
+        ]
+    );
 
         // mengirimkan data yang diinput dihalaman daftar ke db
         $prodi = new Prodi;
@@ -50,7 +53,8 @@ class ProdiController extends Controller
     // menampilkan semua data prodi
     public function data()
     {
-        $prodis = Prodi::paginate(10);
+        $prodis = Prodi::orderBy('id', 'DESC')
+        ->paginate(10);
         $fakultas = Fakultas::paginate(10);
 
         

@@ -39,23 +39,24 @@
       <div class="row counters">
 
         <div class="col-lg-3 col-6 text-center">
-          <span data-purecounter-start="0" data-purecounter-end="{{ count($registrations) }}" data-purecounter-duration="1" class="purecounter"></span>
-          <p>Pendaftaran</p>
-        </div>
-
-        <div class="col-lg-3 col-6 text-center">
           <span data-purecounter-start="0" data-purecounter-end="{{ count($generalsubjects) }}" data-purecounter-duration="1" class="purecounter"></span>
           <p>Mata Kuliah Umum</p>
         </div>
 
         <div class="col-lg-3 col-6 text-center">
-          <span data-purecounter-start="0" data-purecounter-end="{{ count($kelas) }}" data-purecounter-duration="1" class="purecounter"></span>
-          <p>Kelas Mata Kuliah Umum</p>
+          <span data-purecounter-start="0" data-purecounter-end="{{$kuota }}" data-purecounter-duration="1" class="purecounter"></span>
+          <p>Total Kuota</p>
         </div>
 
         <div class="col-lg-3 col-6 text-center">
+          <span data-purecounter-start="0" data-purecounter-end="{{ count($registrations) }}" data-purecounter-duration="1" class="purecounter"></span>
+          <p>Jumlah Pendaftaran</p>
+        </div>
+
+  
+        <div class="col-lg-3 col-6 text-center">
           <span data-purecounter-start="0" data-purecounter-end="{{ count($asisten) }}" data-purecounter-duration="1" class="purecounter"></span>
-          <p>Asisten Kelas Mata Kuliah Umum </p>
+          <p>Jumlah Asisten Diterima</p>
         </div>
 
       </div>
@@ -70,10 +71,10 @@
       <div class="row">
         <div class="col-lg-3 d-flex align-items-stretch">
           <div class="content">
-            <h3>WHAT ARE THE BENEFITS OF BEING ASDOS?</h3>
+            <h3>Apa Keuntungan Menjadi Asdos ?</h3>
            
             <div class="text-center">
-              <a  href="{{route ('mahasiswa.program')}}" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
+              <a  href="{{route ('mahasiswa.program')}}" class="more-btn">Telusuri <i class="bx bx-chevron-right"></i></a>
             </div>
           </div>
         </div>
@@ -83,35 +84,33 @@
               <div class="col-xl-3 d-flex align-items-stretch">
                 <div class="icon-box mt-4 mt-xl-0">
                   <i class="bx bx-receipt"></i>
-                  <h4>Improve Your Experience and Knowledge</h4>
+                  <h4>Meningkatkan pengalaman dan pengetahuan</h4>
                 </div>
               </div>
 
               <div class="col-xl-3 d-flex align-items-stretch">
                 <div class="icon-box mt-4 mt-xl-0">
                   <i class="bx bx-cube-alt"></i>
-                  <h4>Improve Your Public Speaking SKills</h4>
+                  <h4>Meningkatkan skill Public Speaking</h4>
                 </div>
               </div>
 
               <div class="col-xl-3 d-flex align-items-stretch ">
                 <div class="icon-box mt-4 mt-xl-0" >
                   <i class="bx bx-cube-alt"></i>
-                  <h4>Transportation money</h4>
+                  <h4>Uang Tranportasi</h4>
                 </div>
               </div>
 
               <div class="col-xl-3 d-flex align-items-stretch">
                 <div class="icon-box mt-4 mt-xl-0">
                   <i class="bx bx-images"></i>
-                  <h4>Get Program Certificate</h4>
+                  <h4>Mendapatkan sertifikat program</h4>
                 </div>
               </div>
 
-
-
             </div>
-          </div><!-- End .content-->
+          </div>
         </div>
       </div>
     </div>
@@ -123,10 +122,10 @@
       <div class="row">
         <div class="col-lg-3 d-flex align-items-stretch">
           <div class="content">
-            <h3>WHAT IS THE JOB OF ASDOS?</h3>
+            <h3>Apa Tugas Asdos?</h3>
            
             <div class="text-center">
-              <a  href="{{route ('mahasiswa.program')}}" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
+              <a  href="{{route ('mahasiswa.program')}}" class="more-btn">Telusuri <i class="bx bx-chevron-right"></i></a>
             </div>
           </div>
         </div>
@@ -136,25 +135,25 @@
               <div class="col-xl-3 d-flex align-items-stretch">
                 <div class="icon-box mt-4 mt-xl-0">
                   <i class="bx bx-receipt"></i>
-                  <h4>Teach</h4>
+                  <h4>Mengajar</h4>
                 </div>
               </div>
 
               <div class="col-xl-3 d-flex align-items-stretch">
                 <div class="icon-box mt-4 mt-xl-0">
                   <i class="bx bx-cube-alt"></i>
-                  <h4>Review the Submissions and Report</h4>
+                  <h4>Memeriksa tugas dan laporan</h4>
                 </div>
               </div>
 
               <div class="col-xl-3 d-flex align-items-stretch ">
                 <div class="icon-box mt-4 mt-xl-0" >
                   <i class="bx bx-cube-alt"></i>
-                  <h4>Recap Score</h4>
+                  <h4>Merekap Nilai</h4>
                 </div>
               </div>
             </div>
-          </div><!-- End .content-->
+          </div>
         </div>
       </div>
     </div>

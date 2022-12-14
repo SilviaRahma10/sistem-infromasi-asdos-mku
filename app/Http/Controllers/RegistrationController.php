@@ -23,44 +23,53 @@ class RegistrationController extends Controller
 
     // dd($idMku);
 
-    $generalsubjects = Mata_Kuliah::paginate(10);
+    $generalsubjects = Mata_Kuliah::all();
     $program = Program::where('is_active', '1')->get();
-    $registrations = Pendaftaran::where('id_mata_kuliah', $idMku)
-      ->paginate(10);
+    $registrations = Pendaftaran::whereBelongsTo($program)
+      ->where('id_mata_kuliah', $idMku)
+      ->orderBy('id', 'DESC')
+      ->get();
 
-    return view('koordinator.registration.data', compact('generalsubjects', 'program', 'registrations'));
+    return view('koordinator.registration.data', compact('generalsubjects', 'program', 'registrations', 'idMku'));
   }
 
   public function databelum()
   {
-    $generalsubjects = Mata_Kuliah::all();
+    $idMku = auth()->user()->koordinator->id_mku;
+    $generalsubjects = Mata_Kuliah::paginate(10);
     
     $program = Program::where('is_active', '1')->get();
     $registrations = Pendaftaran::whereBelongsTo($program)
+    ->where('id_mata_kuliah', $idMku)
       ->where('status', '0')->paginate(10);
 
-    return view('koordinator.registration.data', compact('generalsubjects', 'program', 'registrations'));
+    return view('koordinator.registration.data', compact('generalsubjects', 'program', 'registrations', 'idMku'));
   }
 
   public function dataterima()
   {
+    $idMku = auth()->user()->koordinator->id_mku;
     $generalsubjects = Mata_Kuliah::all();
 
     $program = Program::where('is_active', '1')->get();
     $registrations = Pendaftaran::whereBelongsTo($program)
+    ->where('id_mata_kuliah', $idMku)
       ->where('status', '1')->paginate(10);
 
-    return view('koordinator.registration.data', compact('generalsubjects', 'program', 'registrations'));
+    return view('koordinator.registration.data', compact('generalsubjects', 'program', 'registrations', 'idMku'));
   }
 
   public function datatolak()
   {
     $generalsubjects = Mata_Kuliah::all();
+    $idMku = auth()->user()->koordinator->id_mku;
+
     $program = Program::where('is_active', '1')->get();
     $registrations = Pendaftaran::whereBelongsTo($program)
+    ->where('id_mata_kuliah', $idMku)
       ->where('status', '2')->paginate(10);
 
-    return view('koordinator.registration.data', compact('generalsubjects', 'program', 'registrations'));
+    return view('koordinator.registration.data', compact('generalsubjects', 'program', 'registrations', 'idMku'));
   }
 
   public function pilih(Mata_kuliah $generalsubject)
@@ -142,4 +151,48 @@ class RegistrationController extends Controller
   // $program = Program::where('is_active', '1')->get();
   // $registrations = Pendaftaran::whereBelongsTo($program)
   // ->paginate(2);  
+
+  public function search(Request $request){
+    $idMku = auth()->user()->koordinator->id_mku;
+    $program = Program::where('is_active', '1')->get();
+    if($request->has('search')){
+      $generalsubjects = Mata_Kuliah::all();
+      $registrations = Pendaftaran::whereBelongsTo($program)
+        ->where('nilai_matkul', 'LIKE', '%'.$request->search.'%') 
+        ->orwhereHas('mku', function($query) use($request) {
+          $query->where('nama', 'like', '%'.$request->search.'%');
+        })
+        ->where('nilai_matkul', 'LIKE', '%'.$request->search.'%') 
+        ->orwhereHas('mahasiswa', function($query) use($request) {
+          $query->where('angkatan', 'like', '%'.$request->search.'%');
+        })      
+        ->where('nilai_matkul', 'LIKE', '%'.$request->search.'%') 
+        ->orwhereHas('mahasiswa', function($query) use($request) {
+          $query->where('npm', 'like', '%'.$request->search.'%');
+        })
+        ->orwhereHas('mku', function($query) use($request) {
+          $query->where('kode', 'like', '%'.$request->search.'%');
+        })
+        //search name from users table
+        ->orwhereHas('mahasiswa', function($query) use($request) {
+          //search name from users table
+          $query->whereHas('user', function($query) use($request) {
+            $query->where('name', 'like', '%'.$request->search.'%');
+          });
+        })
+        ->paginate();
+
+  // dd($kunjungans);
+  }else{
+    $generalsubjects = Mata_Kuliah::all();
+    $idMku = auth()->user()->koordinator->id_mku;
+    $program = Program::where('is_active', '1')->get();
+    $registrations = Pendaftaran::whereBelongsTo($program)
+      ->where('id_mata_kuliah', $idMku)
+      ->orderBy('id', 'DESC')
+      ->paginate(10);
+  };
+  return view('koordinator.registration.data', compact('generalsubjects', 'program', 'registrations', 'idMku'));
+  
+  }
 }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('id_mku')->constrained('mata_kuliahs')->onDelete('cascade');
-            $table->bigInteger('no_hp');
+            $table->string('no_hp');
             $table->string('nip')->nullable();
             $table->timestamps();
         });

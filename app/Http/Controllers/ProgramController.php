@@ -33,7 +33,7 @@ class ProgramController extends Controller
             ->paginate();
 
         }else{
-            $programs = Program::paginate(10);
+            $programs = Program::orderBy('id', 'DESC')->paginate(10);
         }
         return view('koordinator.program.data', compact('programs'));
     }
@@ -130,6 +130,23 @@ class ProgramController extends Controller
             
         //     return view('koordinator.program.data', compact('programs'));
         // }
+
+        public function search(Request $request)
+        {
+            if($request->has('search')) {
+                
+                $programs = Program::where('is_active', 'like', '%'.$request->search.'%')
+                ->orWhereHas('tahun_ajaran', function($query) use ($request) {
+                    $query->where('tahun', 'like', '%'.$request->search.'%');})
+                ->orWhereHas('tahun_ajaran', function($query) use ($request) {
+                    $query->where('semester', 'like', '%'.$request->search.'%');})
+                ->paginate();
+    
+            }else{
+                $programs = Program::paginate(10);
+            }
+            return view('koordinator.program.data', compact('programs'));
+        }
 
        
 

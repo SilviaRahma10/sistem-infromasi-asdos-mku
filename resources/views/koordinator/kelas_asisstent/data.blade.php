@@ -2,11 +2,9 @@
 @section('title', 'data kelas')
 @section('content')
 <div class="container-fluid">
-    <!-- Example single danger button -->
 
-    <!-- Page Heading -->  
     <h1 class="h3 mb-2 text-gray-800">Asisten Kelas</h1>
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    {{-- <div class="d-sm-flex align-items-center justify-content-between mb-4"> --}}
       <div class="nav-item dropdown back bg-primary" style="width: max-content; border-radius:8px">
         <a style="color:white" class="nav-link dropdown-toggle" href="#" id="dropdown1" data-toggle="dropdown"
             arial-haspopup="true" arial-expanded="false">Mata Kuliah Umum</a>
@@ -29,7 +27,7 @@
             @endforeach
         </div>
       </div>
-    </div>
+  
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">

@@ -74,4 +74,8 @@ class Program extends Model
     {
         return $this->hasMany(Pendaftaran::class, 'id_program', 'id');
     }
+
+    public function mku() {
+        return $this->hasMany(Mku_program::class, 'id', 'id_program');
+    }
 }

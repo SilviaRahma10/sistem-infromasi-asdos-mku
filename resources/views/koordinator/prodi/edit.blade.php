@@ -12,7 +12,7 @@
     <div class="card shadow mb-4">
   
       <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">Edit Data Prodi</h6>
+          <h6 class="m-0 font-weight-bold text-primary">Edit Data Prodi - {{ $prodi->nama }}</h6>
       </div>
 
     <form class="pl-5" action="{{ route('prodi.update', $prodi->id) }}" method="POST">

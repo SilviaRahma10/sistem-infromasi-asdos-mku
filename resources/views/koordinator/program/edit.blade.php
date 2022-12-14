@@ -4,7 +4,7 @@
 @section('content')
 <div class="container-fluid">
   <!-- Page Heading -->
-  <h1 class="h3 mb-2 text-gray-800">Data program</h1>
+  <h1 class="h3 mb-2 text-gray-800">Edit program</h1>
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
       <a href="{{ route('program.data') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
@@ -13,7 +13,7 @@
 
     <div class="card shadow mb-4">
       <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Program</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Edit Data Program</h6>
       </div>
       
       <form class="pl-5" action="{{ route('program.update', $program->id) }}" method="POST">
@@ -114,7 +114,7 @@
           </div>
 
             <div class="card-footer">
-              <button type="submit" class="btn btn-primary">Simpan</button>
+              <button type="submit" class="btn btn-primary">Update</button>
           </div>
 
             

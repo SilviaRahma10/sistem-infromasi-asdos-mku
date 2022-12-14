@@ -58,6 +58,23 @@
               </div>
             </div>
 
+            
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3" class="pl-5">
+                  <label for="prodi" class="form-label">Prodi Asal</label>
+                  <input type="text" name="prodi" id="prodi" class="form-control" value="{{ $registration->mahasiswa->prodi->nama }}" readonly>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="mb-3" class="pl-5">
+                  <label for="fakultas" class="form-label">Fakultas</label>
+                  <input type="text" name="fakultas" id="fakultas" class="form-control" value="{{ $registration->mahasiswa->prodi->fakultas->nama }}" readonly>
+                </div>
+              </div>
+            </div>
+
 
             <div class="row">
               <div class="col-md-6">

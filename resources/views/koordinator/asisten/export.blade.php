@@ -1,4 +1,65 @@
-<table>
+<table class="table" id="dataTable" width="100%" cellspacing="0">
+  <thead>
+      <tr>
+          <th>No</th>
+          <th>Nama mahasiswa</th>
+          <th>NPM mahasiswa</th>
+          <th>Email</th>
+          <th>Prodi mahasiswa</th>
+          <th>Angkatan</th>
+          <th>Tahun ajaran</th>
+          <th>semester</th>
+          <th>nama mku</th>
+          <th>kode mku</th>
+          <th>Status</th>
+          <th>Aksi</th>
+      </tr>
+  </thead>
+  <tbody>
+
+     
+
+      @foreach ($registrations as  $registration)
+      <tr>
+          <td>{{ $registration->id }}</td> 
+      <td>{{ $registration->mahasiswa->user->name }}</td>
+      <td>{{ $registration->mahasiswa->npm }}</td>
+      <td>{{ $registration->mahasiswa->user->email }}</td>
+      <td>{{ $registration->mahasiswa->prodi->nama }}</td>
+      <td>{{ $registration->mahasiswa->angkatan }}</td>
+      <td>{{ $registration->program->tahun_ajaran->tahun }}</td>
+      <td>
+              @if($registration->program->tahun_ajaran->semester==1)
+                  Ganjil
+              @else
+                  Genap
+              @endif
+      </td>
+
+          <td>{{ $registration->mku->nama }}</td>
+          <td>{{ $registration->mku->kode }}</td>
+          <td>
+          
+              @if($registration->status==0)
+                  Belum Diverifikasi
+
+              @elseif($registration->status==1)
+                      Terima
+              @else
+                      Tolak
+              @endif
+          </td>
+
+          <td>
+              <a href="{{ route('asisten.lihat', $registration->id) }}"><button type="submit" class="btn btn-primary">
+                  <i class="fas fa-sharp fa-eye"></i> 
+              </button> </a>
+          </td>
+      </tr>
+      @endforeach
+  </tbody>
+</table>
+{{-- <table>
     <thead>
     <tr style="background-color: red">
             <th><b>ID</b></th>
@@ -58,4 +119,4 @@
          @endif
          @endforeach
     </tbody>
-</table>
+</table> --}}

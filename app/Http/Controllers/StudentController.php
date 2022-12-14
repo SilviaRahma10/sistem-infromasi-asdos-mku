@@ -11,7 +11,8 @@ class StudentController extends Controller
 {
         public function data()
         {
-            $students= Mahasiswa::paginate(20);
+            $students= Mahasiswa::orderBy('id', 'DESC')
+            ->paginate(20);
             $prodis = Prodi::paginate(20);
 
             return view('koordinator.student.data', compact('students', 'prodis'));

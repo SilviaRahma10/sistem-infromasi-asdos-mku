@@ -20,6 +20,9 @@ class User extends Authenticatable
         return $this->hasOne(Koordinator::class,'user_id','id');
     }
 
+    
+
+
     /**
      * The attributes that are mass assignable.
      *

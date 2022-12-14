@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('npm')->unique;
             $table->foreignId('prodi_id')->constrained('prodis')->onDelete('cascade');
             $table->year('angkatan');
-            $table->bigInteger('no_hp');
+            $table->string('no_hp');
             $table->text('address');
             $table->enum('gender',['laki-laki','perempuan']);
             $table->timestamps();

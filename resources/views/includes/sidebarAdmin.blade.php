@@ -8,7 +8,8 @@
                 <img src="{{url('themes/frontend/assets/img/logo2.png')}}" alt="">
         </div>
 
-        <div class="sidebar-brand-text mx-3" style="color: white; text-align:center; font-weight: bold; padding-bottom : 20px;" >Sistem Informasi Asdos MKU</div> 
+        <div class="sidebar-brand-text mx-3" style="color: white; text-align:center; font-size:1.2em; font-weight: bold; padding-bottom : 20px;" >Sistem Informasi Asdos MKU Universitas Bengkulu</div> 
+        
 
     <li class="nav-item active">
         <a class="nav-link" href="{{ route('admin') }}">
@@ -24,7 +25,8 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
             aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fas fa-fw fa-pen"></i>
+            
+            <i class="fas fa-fw fa-university"></i>
             <span>Akademik</span>
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
@@ -41,33 +43,18 @@
 
     <li class="nav-item">
         <a class="nav-link" href="{{ route('generalsubject.data') }}">
-            <i class="fas fa-fw fa-university"></i>
+            <i class="fas fa-fw fa-book"></i>
             <span>Mata Kuliah Umum</span>
         </a>
     </li>
 
     <li class="nav-item">
         <a class="nav-link" href="{{ route('koordinator.data') }}">
-            <i class="fas fa-chalkboard-teacher"></i>
+            <i class="fas fa-fw fa-id-card"></i>
             <span>Koordinator MKU</span>
         </a>
     </li>
 
-    {{-- <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsemku"
-            aria-expanded="true" aria-controls="collapsemku">
-            <i class="fas fa-fw fa-university"></i>
-            <span>Mata Kuliah Umum</span>
-        </a>
-        <div id="collapsemku" class="collapse" aria-labelledby="headingmku"
-            data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Pilih Data:</h6>
-                <a class="collapse-item" href="{{ route('generalsubject.data') }}">Mata Kuliah Umum</a>
-                <a class="collapse-item" href="{{ route('kelas.data') }}">kelas</a>
-            </div>
-        </div>
-    </li> --}}
 
     <li class="nav-item">
         <a class="nav-link" href="{{ route('school_year.data') }}">
@@ -79,8 +66,8 @@
     <li class="nav-item">
         <a class="nav-link" href="{{ route('program.data') }}">
             {{-- <i class="fas fa-fw fa-university"></i> --}}
+            <i class="fas fa-fw fa-pen"></i>
            
-            <i class="fas fa-fw fa-book"></i>
             <span>Program</span>
         </a>
     </li>
@@ -92,36 +79,20 @@
         </a>
     </li>
 
-    {{-- <li class="nav-item">
-        <a class="nav-link" href="{{ route('registration.data') }}">
-            <i class="fas fa-fw fa-id-card"></i>
-        
-            <span>Pendaftar</span>
-        </a>
-    </li> --}}
-
     <li class="nav-item">
         <a class="nav-link" href="{{ route('asisten.datasisten') }}">
             <i class="fas fa-chalkboard-teacher"></i>
-            <span>Asisten Kelas revisi</span>
+            <span>Asisten Kelas</span>
         </a>
     </li>
 
-
-    {{-- ASISTEN LAMA PAKAI KELAS --}}
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('asisten.data') }}">
-            <i class="fas fa-chalkboard-teacher"></i>
-            <span>Asisten Kelas lama</span>
+        <a class="nav-link" href="{{ route('Ketuapusat.lihat') }}">
+            <i class="fas fa-fw fa-user-tie"></i>
+            <span>Ketua Pusat</span>
         </a>
     </li>
 
     <hr class="sidebar-divider">
-
-
 </ul>
-<!-- End of Sidebar -->
-    {{-- <i class="fas fa-id-badge"></i>
-            <i class="fas fa-user-edit"></i>
-            <i class="fas fa-user-check"></i>
-            <i class="fas fa-chalkboard-teacher"></i> --}}
+

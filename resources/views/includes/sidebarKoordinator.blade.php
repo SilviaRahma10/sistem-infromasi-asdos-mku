@@ -7,7 +7,7 @@
             <img src="{{url('themes/frontend/assets/img/logo2.png')}}" alt="">
     </div>
 
-    <div class="sidebar-brand-text mx-3" style="color: white; text-align:center; font-weight: bold; padding-bottom : 20px;" >Sistem Informasi Asdos MKU</div> 
+    <div class="sidebar-brand-text mx-3" style="color: white; text-align:center; font-size:1.2em; font-weight: bold; padding-bottom : 20px;" >Sistem Informasi Asdos MKU Universitas Bengkulu</div> 
 
 <li class="nav-item active">
     <a class="nav-link" href="{{ route('koordinator') }}">
@@ -25,6 +25,13 @@
     </div>
 
     <li class="nav-item">
+        <a class="nav-link" href="{{ route('mkuprogram.data') }}">
+            <i class="fas fa-fw fa-book"></i>
+            <span>Program MKU</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
         <a class="nav-link" href="{{ route('registration.data') }}">
             <i class="fas fa-fw fa-id-card"></i>
             <span>Pendaftar</span>
@@ -33,7 +40,7 @@
 
     
     <li class="nav-item">
-        <a class="nav-link" href="{{ 'asisten.data' }}">
+        <a class="nav-link" href="{{ route('asisten.data') }}">
             <i class="fas fa-chalkboard-teacher"></i>
             <span>Asisten Kelas</span>
         </a>

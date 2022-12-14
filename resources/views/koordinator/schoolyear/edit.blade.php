@@ -13,7 +13,7 @@
   <!-- Page Heading -->
     <div class="card shadow mb-4">
       <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Masukkan Data Tahun Akademik</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Edit Data Tahun Akadeik</h6>
       </div>
       
       <form class="pl-5" action="{{ route('school_year.update', $tahun->id ) }}" method="POST">
@@ -26,7 +26,7 @@
               <div class="col-md-6">
 
                 <div class="mb-3" class="pl-5">
-                  <label for="tahun" class="form-label">Tahun Ajaran</label>
+                  <label for="tahun" class="form-label">Tahun Akademik</label>
                   <input type="text" name="tahun" id="tahun" class="form-control @error('tahun') is-invalid @enderror" value="{{ $tahun->tahun }}">
 
                   @error('tahun')

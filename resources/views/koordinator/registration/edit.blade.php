@@ -4,7 +4,7 @@
 @section('content')
 
   <div class="container-fluid">
-    <h1 class="h3 mb-2 text-gray-800">Detail {{ $registration->mahasiswa->user->name }}</h1>
+    <h1 class="h3 mb-2 text-gray-800">Verifikasi Pendaftaran {{ $registration->mahasiswa->user->name }}</h1>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
       <a href="{{ route('registration.data') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
       class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali</a>
@@ -52,25 +52,8 @@
 
               <div class="col-md-6">
                 <div class="mb-3" class="pl-5">
-                  <label for="student_nphp" class="form-label">NO HP Mahasiswa</label>
-                  <input type="text" name="student_nphp" id="student_nphp" class="form-control" value="{{ $registration->mahasiswa->no_hp}}" readonly>
-                </div>
-              </div>
-            </div>
-
-
-            <div class="row">
-              <div class="col-md-6">
-                <div class="mb-3" class="pl-5">
-                  <label for="prodi" class="form-label">Prodi Asal</label>
-                  <input type="text" name="prodi" id="prodi" class="form-control" value="{{ $registration->mahasiswa->prodi->nama }}" readonly>
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <div class="mb-3" class="pl-5">
-                  <label for="angkatan" class="form-label">Angkatan</label>
-                  <input type="text" name="angkatan" id="angkatan" class="form-control" value="{{ $registration->mahasiswa->angkatan }}" readonly>
+                  <label for="student_nohp" class="form-label">NO HP Mahasiswa</label>
+                  <input type="text" name="student_nohp" id="student_nohp" class="form-control" value="{{ $registration->mahasiswa->no_hp}}" readonly>
                 </div>
               </div>
             </div>
@@ -94,7 +77,7 @@
                 </div>
               </div>
             </div>
-
+          
             <div class="row">
               <div class="col-md-6">
                 <div class="mb-3" class="pl-5">
@@ -105,8 +88,41 @@
 
               <div class="col-md-6">
                 <div class="mb-3" class="pl-5">
-                  <label for="generalsubject_code" class="form-label">Code MKU</label>
+                  <label for="generalsubject_code" class="form-label">Kode MKU</label>
                   <input type="text" name="generalsubject_code" id="generalsubject_code" class="form-control" value="{{ $registration->mku->kode }}" readonly>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3" class="pl-5">
+                  <label for="prodi" class="form-label">Prodi Asal</label>
+                  <input type="text" name="prodi" id="prodi" class="form-control" value="{{ $registration->mahasiswa->prodi->nama }}" readonly>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="mb-3" class="pl-5">
+                  <label for="fakultas" class="form-label">Fakultas Asal</label>
+                  <input type="text" name="fakultas" id="fakultas" class="form-control" value="{{ $registration->mahasiswa->prodi->fakultas->nama }}" readonly>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3" class="pl-5">
+                  <label for="angkatan" class="form-label">Angkatan</label>
+                  <input type="text" name="angkatan" id="angkatan" class="form-control" value="{{ $registration->mahasiswa->angkatan }}" readonly>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="mb-3" class="pl-5">
+                  <label for="gender" class="form-label">Gender</label>
+                  <input type="text" name="gender" id="gender" class="form-control" value="{{ $registration->mahasiswa->gender }}" readonly>
                 </div>
               </div>
             </div>
@@ -121,62 +137,87 @@
 
               <div class="col-md-6">
                 <div class="mb-3" class="pl-5">
-                  <label for="surat_rekomendasi" class="form-label">Surat Rekomendasi</label><br>
-                  <a class="btn btn-primary" href="{{ $registration->surat_rekomendasi}}" role="button">Lihat Surat Rekomendasi</a>
+                  <label for="address" class="form-label">Gender</label>
+                  <input type="text" name="address" id="adress" class="form-control" value="{{ $registration->mahasiswa->address }}" readonly>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3" class="pl-5">
+                    <label for="surat_rekomendasi" class="form-label">Surat Rekomendasi</label><br>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="mb-3" class="pl-5">
+                    <a class="btn btn-primary" href="{{ $registration->surat_rekomendasi}}" role="button">Lihat Surat Rekomendasi</a>
                   {{-- <img src="{{ asset('storage/'. $registration->surat_rekomendasi) }}" alt="" class="img-fluid"> --}}
                 </div>
               </div>
             </div>
 
-
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="mb-3" class="pl-5">
-                    <label for="krs" class="form-label">KRS</label><br>
-
-                    <a class="btn btn-primary" href="{{ $registration->KRS}}" role="button">Lihat KRS</a>
-
-                    {{-- <img src="{{ asset('storage/'. $registration->KRS) }}" alt="" class="img-fluid"> --}}
-
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="mb-3" class="pl-5">
-                    <label for="khs" class="form-label">KHS</label><br>
-
-                    <a class="btn btn-primary" href="{{ $registration->KHS}}" role="button">Lihat KHS</a>
-                    {{-- <img src="{{ asset('storage/'. $registration->KHS) }}" alt="" class="img-fluid"> --}}
-                    
-                  </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3" class="pl-5">
+                  <label for="krs" class="form-label">KRS</label><br>
                 </div>
               </div>
 
+              <div class="col-md-6">
+                <div class="mb-3" class="pl-5">
+                  <a class="btn btn-primary" href="{{ $registration->KRS}}" role="button">Lihat KRS</a>
+                  {{-- <img src="{{ asset('storage/'. $registration->surat_rekomendasi) }}" alt="" class="img-fluid"> --}}
+                </div>
+              </div>
+            </div>
 
-         
-              <div class="mb-3" class="pl-5">
-                <label for="status" class="form-label">Status</label>
-                <select id="status" name="status" class="form-control">
-                  <option value="{{ $registration->status }}"> 
-                    @if($registration->status==0)
-                      Belum Verifikasi
-                    @elseif($registration->status==1)
-                      Terima
-                    @else
-                      Tolak
-                    @endif
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3" class="pl-5">
+                  <label for="krs" class="form-label">KHS</label><br>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="mb-3" class="pl-5">
+                  <a class="btn btn-primary" href="{{ $registration->KHS}}" role="button">Lihat KHS</a>
+                  {{-- <img src="{{ asset('storage/'. $registration->surat_rekomendasi) }}" alt="" class="img-fluid"> --}}
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3" class="pl-5">
+                  <label for="status" class="form-label">Status</label>
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <div class="mb-3" class="pl-5">
+                  <select id="status" name="status" class="form-control">
+                    <option value="{{ $registration->status }}"> 
+                      @if($registration->status==0)
+                        Belum Verifikasi
+                      @elseif($registration->status==1)
+                        Terima
+                      @else
+                        Tolak
+                      @endif
                       
-                  </option>
-                  {{-- <option value="{{ 0 }}">Belum Diverifikasi</option> --}}
-                  <option value="{{ 1 }}">Terima</option> 
-                  <option value="{{ 2 }}">Tolak</option>
-                </select>
+                    </option>
+                     {{-- <option value="{{ 0 }}">Belum Diverifikasi</option> --}}
+                    <option value="{{ 1 }}">Terima</option> 
+                    <option value="{{ 2 }}">Tolak</option>
+                  </select>
+                </div>
               </div>
-
-        </div>
-
-        <button type="submit" class="btn btn-primary">Simpan</button><br><br>
-      
+            </div>
+            <div style="text-align: center; padding-top:80px; ">
+              <button type="submit" class="btn btn-primary" style="align-items:center">Simpan</button><br><br>
+            </div>
       </form>
      
     </div> 

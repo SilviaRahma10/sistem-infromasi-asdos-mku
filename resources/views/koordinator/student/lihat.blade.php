@@ -22,23 +22,34 @@
         <div class="container-fluid">
           <fieldset disabled>
 
-            <div class="mb-3" class="pl-5">
-              <label for="id" class="form-label">Id</label> 
-              <input type="number" name="id" id="id" class="form-control" value="{{ $student->id }}">
-            </div> 
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3" class="pl-5">
+                <label for="id" class="form-label">Id</label> 
+                <input type="number" name="id" id="id" class="form-control" value="{{ $student->id }}">
+              </div> 
+            </div>
+
+            <div class="col-md-6">
+              <div class="mb-3" class="pl-5">
+                <label for="user_id" class="form-label">Nama</label>
+                <input type="text" name="user_id" id="user_id" class="form-control" value="{{ $student->user->name }}">
+              </div>
+            </div>
+          </div>
 
             <div class="row">
               <div class="col-md-6">
                 <div class="mb-3" class="pl-5">
-                  <label for="user_id" class="form-label">Nama</label>
-                  <input type="text" name="user_id" id="user_id" class="form-control" value="{{ $student->user->name }}">
+                  <label for="npm" class="form-label">NPM</label>
+                  <input type="text" name="npm" id="npm" class="form-control" value="{{ $student->npm }}">
                 </div>
               </div>
 
               <div class="col-md-6">
                 <div class="mb-3" class="pl-5">
-                  <label for="npm" class="form-label">NPM</label>
-                  <input type="text" name="npm" id="npm" class="form-control" value="{{ $student->npm }}">
+                  <label for="angkatan" class="form-label">Angkatan</label>
+                  <input type="text" name="angkatan" id="angkatan" class="form-control" value="{{ $student->angkatan }}">
                 </div>
               </div>
             </div>
@@ -53,10 +64,35 @@
 
               <div class="col-md-6">
                 <div class="mb-3" class="pl-5">
-                  <label for="angkatan" class="form-label">Angkatan</label>
-                  <input type="number" name="angkatan" id="angkatan" class="form-control" value="{{ $student->angkatan }}">
+                  <label for="prodi" class="form-label">Kode Prodi</label>
+                  <input type="text" name="prodi" id="prodi" class="form-control" value="{{ $student->prodi->kode }}">
                 </div>
               </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3" class="pl-5">
+                  <label for="namafakultas" class="form-label">Fakultas</label>
+                  <input type="text" name="namafakultas" id="namafakultas" class="form-control" value="{{ $student->prodi->fakultas->nama}}">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="mb-3" class="pl-5">
+                  <label for="fakultas" class="form-label">Kode Fakultas</label>
+                  <input type="text" name="prodi" id="fakultas" class="form-control" value="{{ $student->prodi->fakultas->kode }}">
+                </div>
+              </div>
+              {{-- <div class="col-md-6">
+                <div class="mb-3" class="pl-5">
+                  <label for="prodi" class="form-label">Kode Prodi</label>
+                  <input type="text" name="prodi" id="prodi" class="form-control" value="{{ $student->prodi->kode }}">
+                </div>
+              </div> --}}
+
+              
+
             </div>
 
             <div class="row">

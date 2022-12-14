@@ -22,7 +22,7 @@
           
           <div class=" flex-0-0-2 shadow-0-0-1392 card-0-0-1379 transition-0-0-76">
           
-            <img src="{{url('themes/frontend/assets/img/sertifikat.png')}}" class="img-fluid" alt="...">
+            <img src="{{url('themes/frontend/assets/img/sertif.png')}}" class="img-fluid" alt="...">
             <div class="course-content">
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <div>
@@ -32,7 +32,7 @@
             
               <div class="trainer d-flex justify-content-between align-items-center">
                 <div class="trainer-profile d-flex align-items-center">                      
-                  <a href="{{ route('mahasiswa.print', $item->id) }}" target="_blank">
+                  <a href="{{ route('asdos.sertifikatAsdos', $item->id) }}" target="_blank">
                     <button type="submit" class="btn btn-warning"> 
                     Unduh Sertifikat
                     </button> 

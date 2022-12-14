@@ -1,43 +1,60 @@
 @extends('layouts.mainKoordinator')
-@section('title', 'data pendaftar')
+@section('title', 'data asisten')
 @section('content')
 
+@section('custom_head')
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.1/cr-1.6.1/r-2.4.0/sc-2.0.7/sb-1.4.0/datatables.min.css"/>
+@endsection
+
 <div class="container-fluid">
+    <h1 class="h3 mb-2 text-gray-800">Data Asisten Dosen 
+      
+    
+    </h1><br>
 
-    <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Data Asisten Dosen MKU </h1>
-    <p class="mb-4"></a></p>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        
+        <div>
+            <div class="nav-item dropdown back bg-primary" style="width: max-content; border-radius:8px;">
+                <a style="color:white" class="nav-link dropdown-toggle" href="#" id="dropdown1" data-toggle="dropdown"
+                    arial-haspopup="true" arial-expanded="false">Mata Kuliah Umum</a>
+                <div class="dropdown-menu" arial-labelledby="dropdown1">
+                    @foreach ($generalsubjects as $generalsubject)
+                        <a class="dropdown-item" href="{{ route('asisten.pilih', $generalsubject->id) }}">{{ $generalsubject->nama }}</a>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+        
+        <div>
+            <div class="nav-item dropdown back bg-primary" style="width: max-content; border-radius:8px">
+                <a style="color:white" class="nav-link dropdown-toggle" href="#" id="dropdown1" data-toggle="dropdown"
+                    arial-haspopup="true" arial-expanded="false">
+                    <i class="fas fa-download fa-sm text-white-50"></i>
+                    Export Laporan Asisten Dosen</a>
+                <div class="dropdown-menu" arial-labelledby="dropdown1">
+                    @foreach ($tahun_ajarans as $tahun_ajaran)
+                        <a class="dropdown-item" href="{{ route('asisten.export', ['id_tahun' => $tahun_ajaran->id]) }}">{{ $tahun_ajaran->tahun }} - 
+                            @if($tahun_ajaran->semester==1)
+                                Ganjil
+                            @else
+                                Genap
+                            @endif
 
-    <div class="nav-item dropdown back bg-primary" style="width: max-content; border-radius:8px">
-        <a style="color:white" class="nav-link dropdown-toggle" href="#" id="dropdown1" data-toggle="dropdown"
-            arial-haspopup="true" arial-expanded="false">Mata Kuliah Umum</a>
-        <div class="dropdown-menu" arial-labelledby="dropdown1">
-            @foreach ($generalsubjects as $generalsubject)
-                <a class="dropdown-item" href="{{ route('asisten.pilih', $generalsubject->id) }}">{{ $generalsubject->nama }}</a>
-            @endforeach
+                        </a>
+                    @endforeach
+                </div>
+              </div>
         </div>
     </div><br>
 
-    <form action="{{ route('asisten.search') }}" method="GET" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3  my-md-0 navbar-search" style="float: right;">
-        <div class="input-group pull-right" style="color:white">
-                <input type="search" class="form-control bg-white border-0 small" placeholder="Cari Data Asisten" name="search">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">
-                        <i class="fas fa-search fa-sm"></i>
-                    </button>
-                </div>
-            </div>
-    </form>
-    <br><br>
-
-
-    <div class="card shadow mb-4">
+   <div class="card shadow mb-4">
         <div class="card-header py-3"> 
-            <h6 class="m-0 font-weight-bold text-primary">Data Pendaftar</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Data Asisten Dosen </h6>
         </div>
 
-        <div class="table-responsive">
-            <div class="card-body">
+        <div class="card-body">
+            <div class="table-responsive">
                     <table class="table" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
@@ -61,43 +78,47 @@
                             $no=1;
                             @endphp
 
-                            @foreach ($registrations as $index => $registration)
-                            <tr>
-                                <th scope="row"> {{ $index + $registrations->firstItem() }}</th>
-                            <td>{{ $registration->mahasiswa->user->name }}</td>
-                            <td>{{ $registration->mahasiswa->npm }}</td>
-                            <td>{{ $registration->mahasiswa->user->email }}</td>
-                            <td>{{ $registration->mahasiswa->prodi->nama }}</td>
-                            <td>{{ $registration->mahasiswa->angkatan }}</td>
-                            <td>{{ $registration->program->tahun_ajaran->tahun }}</td>
-                            <td>
-                                    @if($registration->program->tahun_ajaran->semester==1)
-                                        Ganjil
-                                    @else
-                                        Genap
-                                    @endif
-                            </td>
-
-                                <td>{{ $registration->mku->nama }}</td>
-                                <td>{{ $registration->mku->kode }}</td>
-                                <td>
+                            @foreach($registrations as $index => $registration)
                                 
-                                    @if($registration->status==0)
-                                        Belum Diverifikasi
+                                <tr>
+                                    <th scope="row"> {{ $index + $registrations->firstItem() }}</th>
+                                    <td>{{ $registration->mahasiswa->user->name }}</td>
+                                    <td>{{ $registration->mahasiswa->npm }}</td>
+                                    <td>{{ $registration->mahasiswa->user->email }}</td>
+                                    <td>{{ $registration->mahasiswa->prodi->nama }}</td>
+                                    <td>{{ $registration->mahasiswa->angkatan }}</td>
+                                    <td>{{ $registration->program->tahun_ajaran->tahun }}</td>
+                                    <td>
+                                        @if($registration->program->tahun_ajaran->semester==1)
+                                            Ganjil
+                                        @else
+                                            Genap
+                                        @endif
+                                    </td>
+                                    <td>{{ $registration->mku->nama }}</td>
+                                    <td>{{ $registration->mku->kode }}</td>
+                                    <td>
+                                        @if($registration->status==0)
+                                            Belum Diverifikasi
+    
+                                        @elseif($registration->status==1)
+                                                Terima
+                                        @else
+                                                Tolak
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('asisten.lihat', $registration->id) }}"><button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-sharp fa-eye"></i> 
+                                        </button> </a>
+                                    </td>
 
-                                    @elseif($registration->status==1)
-                                            Terima
-                                    @else
-                                            Tolak
-                                    @endif
-                                </td>
+                              
+                                </tr>
+                              
 
-                                <td>
-                                    <a href="{{ route('asisten.lihat', $registration->id) }}"><button type="submit" class="btn btn-primary">
-                                        <i class="fas fa-sharp fa-eye"></i> 
-                                    </button> </a>
-                                </td>
-                            </tr>
+                               
+                             
                             @endforeach
                         </tbody>
                     </table>
@@ -106,7 +127,53 @@
                     </div>
                 </div>
             </div>
-    </div>
-  
-  </div>
+        </div>  
   @endsection
+
+  @push('custom_js')
+  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.13.1/cr-1.6.1/r-2.4.0/sc-2.0.7/sb-1.4.0/datatables.min.js"></script>
+  
+        <script>
+          $(document).ready( function () {
+      $('#dataTable').DataTable();
+  } );
+        </script>
+    @endpush
+
+   
+@section('custom_html')
+@foreach ($registrations as $registration)
+    <form action="{{ route('asisten.destroy', $registration->id) }}" id="delete-form-{{ $registration->id }}" method="post">
+        @csrf
+        @method('DELETE')
+    </form>
+@endforeach
+@endsection
+
+@push('custom_js')
+<script>
+    let removeBtns = document.querySelectorAll('.remove-btn');
+    removeBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            let id = btn.getAttribute('data-id');
+            let deleteForm = document.querySelector('#delete-form-' + id);
+
+            Swal.fire({
+                title: 'apakah anda yakin hapus asisten?',
+                text: "Anda tidak dapat mengembalikan data yang sudah dihapus!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    deleteForm.submit();
+                }
+            })
+        })
+    })
+</script>
+@endpush

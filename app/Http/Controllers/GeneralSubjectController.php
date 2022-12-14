@@ -44,7 +44,8 @@ class GeneralSubjectController extends Controller
     // menampilkan semua data prodi
     public function data()
     {
-        $generalsubjects = Mata_kuliah::paginate(10);
+        $generalsubjects = Mata_kuliah::orderBy('id', 'DESC')
+        ->paginate(10);
         return view('koordinator.generalsubject.data', compact('generalsubjects'));
     }
 

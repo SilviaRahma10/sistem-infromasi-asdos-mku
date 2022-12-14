@@ -2,38 +2,43 @@
 @section('title', 'data mahasiswa')
 @section('content')
 
+
+@section('custom_head')
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.1/cr-1.6.1/r-2.4.0/sc-2.0.7/sb-1.4.0/datatables.min.css"/>
+@endsection
+
+
 <div class="container-fluid">
-    {{-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <a href="{{ route('student.DataProdi') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-        class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali</a>
-      </div> --}}
+    <h1 class="h3 mb-2 text-gray-800">Mahasiswa</h1><br>
 
-    <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Mahasiswa</h1>
-
-    <form action="{{ route('student.search') }}" method="GET" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3  my-md-0 navbar-search" style="float: right;">
-      <div class="input-group pull-right" style="color:white">
-          <input type="search" class="form-control bg-white border-0 small" placeholder="Cari Data Mahasiswa"
-            value="{{ request()->get('search') }}" name="search">
-          <div class="input-group-append">
-              <button class="btn btn-primary" type="submit">
-                  <i class="fas fa-search fa-sm"></i>
-              </button>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <div>
+        <div class="nav-item dropdown back bg-primary" style="width: max-content; border-radius:8px">
+          <a style="color:white" class="nav-link dropdown-toggle" href="#" id="dropdown1" data-toggle="dropdown" arial-haspopup="true" arial-expanded="false">Program studi</a>
+          <div class="dropdown-menu" arial-labelledby="dropdown1">
+              @foreach($prodis as $prodi)
+              <a class="dropdown-item"  href="{{ route('student.pilih', $prodi->id) }}">{{ $prodi->nama }}</a>
+              @endforeach
           </div>
-      </div>
-  </form>
-    
-    <div class="nav-item dropdown back bg-primary" style="width: max-content; border-radius:8px">
-      <a style="color:white" class="nav-link dropdown-toggle" href="#" id="dropdown1" data-toggle="dropdown" arial-haspopup="true" arial-expanded="false">Program studi</a>
-      <div class="dropdown-menu" arial-labelledby="dropdown1">
-          @foreach($prodis as $prodi)
-          <a class="dropdown-item"  href="{{ route('student.pilih', $prodi->id) }}">{{ $prodi->nama }}</a>
-          @endforeach
+        </div>
       </div>
     </div>
-    <br>
+   
 
-
+      {{-- <div>
+        <form action="{{ route('student.search') }}" method="GET" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3  my-md-0 navbar-search" style="float: right;">
+          <div class="input-group pull-right" style="color:white">
+              <input type="search" class="form-control bg-white border-0 small" placeholder="Cari Data Mahasiswa"
+                value="{{ request()->get('search') }}" name="search">
+              <div class="input-group-append">
+                  <button class="btn btn-primary" type="submit">
+                      <i class="fas fa-search fa-sm"></i>
+                  </button>
+              </div>
+          </div>
+        </form>
+      </div> 
+    </div>--}}
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -41,8 +46,9 @@
         </div>
         
         <div class="card-body">
-            <div class="table-responsive">
-                <table class="table " id="dataTable" width="80%" cellspacing="0">
+          <div class="table-responsive">
+            
+                <table class="table " id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -96,6 +102,16 @@
   
   </div>
   @endsection
+
+  @push('custom_js')
+  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.13.1/cr-1.6.1/r-2.4.0/sc-2.0.7/sb-1.4.0/datatables.min.js"></script>
+  
+        <script>
+          $(document).ready( function () {
+      $('#dataTable').DataTable();
+  } );
+        </script>
+    @endpush
 
   
   {{-- @section('custom_html')

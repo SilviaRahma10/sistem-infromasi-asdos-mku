@@ -4,7 +4,7 @@
 @section('content')
 <div class="container-fluid">
   <!-- Page Heading -->
-  <h1 class="h3 mb-2 text-gray-800">Edit data {{ $fakultas->nama}}</h1>
+  <h1 class="h3 mb-2 text-gray-800">Edit data - {{ $fakultas->nama}}</h1>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
       <a href="{{ route('fakultas.data') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
       class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali</a>
@@ -40,7 +40,7 @@
                   @enderror
               </div>
             </div>
-          </div>
+          </div><br><br>
           <button type="submit" class="btn btn-primary">Update</button>
       <br><br>
       </div>

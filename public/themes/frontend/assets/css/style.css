@@ -854,7 +854,7 @@ section {
 --------------------------------------------------------------*/
 
 .card-0-0-1370 {
-  padding: 32px 24px 12px 24px;
+  padding: 12px 24px 12px 24px;
   flex-grow: 0;
   background: #FFFFFF;
   flex-basis: 356px;
@@ -894,18 +894,16 @@ section {
 }
 
 .card-0-0-1379 {
-  padding: 32px 24px 12px 24px;
+  /* padding: 50px 24px 50px 24px; */
   
   background: #FFFFFF;
-  flex-basis: 800px;
+  /* flex-basis: 800px; */
   min-height: 415px;
   border-color: transparent;
   border-width: 1px;
-  margin-right: 16px;
   border-radius: 16px;
-  margin-bottom: 0px;
-  margin: auto;
- 
+  
+  margin-bottom: 27px;
 }
 
 .courses .course-item {

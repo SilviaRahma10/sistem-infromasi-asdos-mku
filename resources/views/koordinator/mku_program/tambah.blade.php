@@ -8,7 +8,7 @@
         <br>
 
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <a href="{{ route('program.data') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            <a href="{{ route('mkuprogram.data') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                     class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali</a>
         </div>
 
@@ -17,17 +17,14 @@
                 <h6 class="m-0 font-weight-bold text-primary">Masukkan Data MKU</h6>
             </div>
 
-            <form action="{{ route('mkuprogram.simpan', $program->id) }}" method="POST">
+            <form action="{{ route('mkuprogram.simpan') }}" method="POST">
                 @csrf
-                <div class="card-body">
-                                
-                            
-                            
+                <div class="card-body">                  
                     <div class="row">
                         <div class="col-6">
                             <div class="mb-3" class="pl-5">
                                 <label for="tahun" class="form-label">Tahun</label>
-                                <input type="text" name="tahun" id="tahun" class="form-control" value="{{ $program->tahun_ajaran->tahun }}" readonly>
+                                <input type="text" name="tahun" id="tahun" class="form-control" value="{{ $program->tahun_ajaran->tahun}}" readonly>
                             </div>
                         </div>
                       
@@ -42,21 +39,21 @@
                             </div>
                         </div>  
                     </div>
-                           
 
-                    <div class="mb-3" class="pl-5">
-                        <label for="id_mata_kuliah" class="form-label">Pogram Studi</label>
-                        <br>
-                        <select id="id_mata_kuliah" name="id_mata_kuliah" class="form-control @error('id_mata_kuliah') is-invalid @enderror" value="{{ old('id_mata_kuliah') }}">
-                            <option selected disabled>Pilih MKU</option>
-                            @foreach ($generalsubjects as $generalsubject)
-                                <option value="{{ $generalsubject->id }}">{{ $generalsubject->kode }} - {{ $generalsubject->nama }}</option>
-                            @endforeach
-                        </select>
-
-                        @error('id_mata_kuliah')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="mb-3" class="pl-5">
+                                <label for="mku" class="form-label">Nama MKU</label>
+                                <input type="text" name="mku" id="mku" class="form-control" value="{{ $idMku->mku->nama }}" readonly>
+                            </div>
+                        </div>
+                      
+                        <div class="col-6">
+                            <div class="mb-3" class="pl-5">
+                                <label for="kode_mku" class="form-label">Kode MKU</label>
+                                <input type="text" name="kode_mku" id="kode_mku" class="form-control" value="{{ $idMku->mku->kode }}" readonly>
+                            </div>
+                        </div> 
                     </div>
 
                     <div class="mb-3" class="pl-5">
@@ -68,23 +65,24 @@
                         @enderror
                     </div>
 
+                    <div class="mb-3" class="pl-5">
                     <label for="syarat" class="form-label">Syarat & Ketentuan</label>
-                    <div class="input-group">
-                        <textarea name="syarat" id="syarat"  class="form-control @error('syarat') is-invalid @enderror" value="{{ old('syarat') }}" aria-label="With textarea"></textarea>
-                        @error('syarat')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                      </div>
+                        <div class="input-group">
+                            <textarea name="syarat" id="syarat"  class="form-control @error('syarat') is-invalid @enderror" value="{{ old('syarat') }}" aria-label="With textarea"></textarea>
+                            @error('syarat')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
 
+                    <div class="mb-3" class="pl-5">
                       <label for="kualifikasi" class="form-label">Kualifikasi</label>
                       <div class="input-group">
                             <textarea name="kualifikasi" id="kualifikasi"  class="form-control @error('kualifikasi') is-invalid @enderror" value="{{ old('kualifikasi') }}" aria-label="With textarea"></textarea>
                             @error('kualifikasi')
                                  <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-                        </div>
-
-                   
+                        </div> 
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Simpan</button>

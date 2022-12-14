@@ -47,7 +47,8 @@ class SchoolYearController extends Controller
     
        public function data()
        {
-            $tahuns = Tahun_ajaran::paginate(10);
+            $tahuns = Tahun_ajaran::orderBy('id', 'DESC')
+            ->paginate(10);
             return view('koordinator.schoolyear.data', compact('tahuns'));
        }
     

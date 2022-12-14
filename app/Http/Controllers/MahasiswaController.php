@@ -10,10 +10,15 @@ use App\Models\Mahasiswa;
 use App\Models\Mata_kuliah;
 use App\Models\Mku_program;
 use App\Models\Pendaftaran;
-use App\Models\Asisten_kelas;
 use App\Models\Tahun_ajaran;
 use Illuminate\Http\Request;
+use App\Models\Asisten_kelas;
+use App\Models\Ketuapusat;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use PhpOffice\PhpWord\Settings;
+use PhpOffice\PhpWord\IOFactory;
+use PhpOffice\PhpWord\TemplateProcessor;
 
 class MahasiswaController extends Controller
 {
@@ -72,11 +77,22 @@ class MahasiswaController extends Controller
   }
 
     public function home(){
-      $registrations = Pendaftaran::all();
+
+      $program = Program::where('is_active', '1')->get();
+      $registrations = Pendaftaran::whereBelongsTo($program)->get();
       $generalsubjects = Mata_kuliah::all();
-      $kelas = Kelas::all();
-      $asisten = Asisten_kelas::all();
-      return view('mahasiswa.ProfilStudent.home', compact('registrations', 'generalsubjects', 'kelas', 'asisten'));
+     
+      $asisten = Pendaftaran::whereBelongsTo($program)
+      ->where('status', '1')->get();
+
+      $kuota  = 0;
+      $mku = Mku_program::where('id_program', $program[0]->id)->get();
+
+      foreach ($mku as $p) {
+        $kuota += $p->kuota;
+      }
+
+      return view('mahasiswa.ProfilStudent.home', compact('registrations', 'generalsubjects', 'asisten', 'kuota'));
     }
 
     // untuk view perogram user
@@ -90,7 +106,9 @@ class MahasiswaController extends Controller
    //untuk detail program user
    public function detail(Mku_program $mku_program)
    {
-     return view('mahasiswa.ProfilStudent.detailprogram', compact('mku_program'));
+        $dt = Carbon::now();
+        $date = $dt->toDateString(); 
+     return view('mahasiswa.ProfilStudent.detailprogram', compact('mku_program', 'date'));
    }
 
   //  untuk daftar program user
@@ -235,20 +253,27 @@ class MahasiswaController extends Controller
     ->withSuccess('success', 'Data berhasil diubah');
   }
 
-  public function  notifikasi()
+  public function notifikasi()
   {
-    $asistens = Asisten_kelas::
-      whereHas('pendaftaran.mahasiswa.user', function ($query) {
-        return $query->where('id', auth()->user()->id);
-      })
-      ->with(['pendaftaran', 'pendaftaran.mahasiswa', 'pendaftaran.mahasiswa.user'])
-      ->get();
-
-    // dd($asistens);
-
-    return view('mahasiswa.ProfilStudent.notifikasi', compact('asistens'));
-
+    $notifications = Pendaftaran::where('id_mahasiswa', auth()->user()->mahasiswa->id)->get();
+    return view('mahasiswa.ProfilStudent.notifikasi', compact('notifications'));
   }
+  
+
+  // public function  notifikasi()
+  // {
+  //   $asistens = Asisten_kelas::
+  //     whereHas('pendaftaran.mahasiswa.user', function ($query) {
+  //       return $query->where('id', auth()->user()->id);
+  //     })
+  //     ->with(['pendaftaran', 'pendaftaran.mahasiswa', 'pendaftaran.mahasiswa.user'])
+  //     ->get();
+
+  //   // dd($asistens);
+
+  //   return view('mahasiswa.ProfilStudent.notifikasi', compact('asistens'));
+
+  // }
 
   public function sertifikat()
   {
@@ -261,8 +286,52 @@ class MahasiswaController extends Controller
 
   public function print($id)
   {
-    $item = Pendaftaran::where('id', $id)->where('id_mahasiswa', Auth::user()->mahasiswa->id)->first();
+    $item = Pendaftaran::where('id', $id)
+    ->where('id_mahasiswa', Auth::user()->mahasiswa->id)->first();
     return view('mahasiswa.ProfilStudent.sertifikat', compact('item'));
+  }
+
+  public function sertifikatAsdos($id){
+
+    // $asdos = Pendaftaran::where('id_mahasiswa', Auth::user()->mahasiswa->id)
+    // ->where('status', '1')
+    // ->get();
+
+    $asdos = Pendaftaran::where('id', $id)
+    ->where('id_mahasiswa', Auth::user()->mahasiswa->id)->first();
+    $tanggal = \Carbon\Carbon::parse(\Carbon\Carbon::now())->translatedFormat('d F Y');
+    $templateProcessor = new TemplateProcessor('templates/sertifikat.docx');
+    $ketua = Ketuapusat::first();
+
+    $templateProcessor->setValues([
+      'nama' => $asdos->mahasiswa->user->name,
+        // 'nama' => '{{ Auth::user()->name }}',
+        'npm' => Auth::user()->mahasiswa->npm,
+        'mku' => $asdos->mku->nama,
+        'tahun_ajaran' => $asdos->program->tahun_ajaran->tahun,
+        'semester' => $asdos->program->tahun_ajaran->semester,
+        'tanggal' => $tanggal,
+        'no' => '1245432q',
+        'nama_ketua' => $ketua->ketua,
+        'nip' => $ketua->nip,
+    ]);
+
+    $fileName = '_temp/Sertifikat - '. time() . '.docx';
+    $templateProcessor->saveAs($fileName);
+    // Make sure you have `dompdf/dompdf` in your composer dependencies.
+    // Settings::setPdfRendererName(Settings::PDF_RENDERER_DOMPDF);
+    // // Any writable directory here. It will be ignored.
+    // Settings::setPdfRendererPath('.');
+
+    // $pdf = 'sertifikat-mahasiswa/sil - '. time() . '.pdf';
+
+    // $phpWord = IOFactory::load($fileName);
+    // $phpWord->save($pdf, 'PDF');
+
+    //remove file
+    // unlink($fileName);
+
+    return response()->download(public_path($fileName));
   }
 
 }

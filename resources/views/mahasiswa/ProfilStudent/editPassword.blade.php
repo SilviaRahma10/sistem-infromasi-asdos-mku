@@ -20,8 +20,8 @@
                 </div>
 
                 <div class="mb-3" class="pl-5">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="text" name="password" id="password" class="form-control" value="{{ auth()->user()->password }}">
+                    <label for="password" class="form-label">Password Baru</label>
+                    <input type="text" name="password" id="password" class="form-control">
                 </div>
             </div>
 

@@ -2,6 +2,10 @@
 @section('title', 'data MKU')
 @section('content')
 
+@section('custom_head')
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.1/cr-1.6.1/r-2.4.0/sc-2.0.7/sb-1.4.0/datatables.min.css"/>
+@endsection
+
 
 <div class="container-fluid">
 
@@ -12,7 +16,7 @@
               <i class="fas fa-plus"></i>
               Tambah</button></a>
 
-              <form action="{{ route('generalsubject.search') }}" method="GET" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3  my-md-0 navbar-search" style="float: right;">
+              {{-- <form action="{{ route('generalsubject.search') }}" method="GET" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3  my-md-0 navbar-search" style="float: right;">
                 <div class="input-group pull-right" style="color:white">
                     <input type="search" class="form-control bg-white border-0 small" placeholder="Cari Data Mata Kuliah Umum" name="search">
                     <div class="input-group-append">
@@ -21,7 +25,7 @@
                         </button>
                     </div>
                 </div>
-            </form>
+            </form> --}}
             <br><br>
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -93,6 +97,16 @@
     </div>
   </div>
   @endsection
+
+  @push('custom_js')
+  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.13.1/cr-1.6.1/r-2.4.0/sc-2.0.7/sb-1.4.0/datatables.min.js"></script>
+  
+        <script>
+          $(document).ready( function () {
+      $('#dataTable').DataTable();
+  } );
+        </script>
+    @endpush
 
   @section('custom_html')
   @foreach ($generalsubjects as $generalsubject)

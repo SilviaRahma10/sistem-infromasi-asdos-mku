@@ -6,11 +6,20 @@
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Detail Progam Mku yang dibuka</h1>
         <br>
+        @if(auth()->user()->role == 'koordinator')
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <a href="{{ route('mkuprogram.data') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                        class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali</a>
+            </div>
+        @else
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <a href="{{ route('program.data') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                        class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali</a>
+            </div>
+        
+        @endif
 
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <a href="{{ route('program.data') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                    class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali</a>
-        </div>
+       
 
         <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -42,6 +51,22 @@
                     </div>
 
                     <div class="row">
+                        <div class="col-6">
+                            <div class="mb-3" class="pl-5">
+                                <label for="tanggal_buka" class="form-label">Tanggal Buka</label>
+                                <input type="text" name="tanggal_buka" id="tanggal_buka" class="form-control" value="{{ $mku_program->program->tanggal_buka }}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="mb-3" class="pl-5">
+                                <label for="tanggal_tutup" class="form-label">Tanggal Tutup</label>
+                                <input type="text" name="tanggal_tutup" id="tanggal_tutup" class="form-control" value="{{ $mku_program->program->tanggal_tutup }}" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
                        <div class="col-6">
                             <div class="mb-3" class="pl-5">
                                 <label for="nama_mata_kuliah" class="form-label">Nama MKU</label>
@@ -57,10 +82,25 @@
                         </div>
                     </div>    
 
-                    <div class="mb-3" class="pl-5">
-                        <label for="kuota" class="form-label">Kuota</label>
-                        <input type="number" name="kuota" id="kuota" class="form-control" value="{{ $mku_program->kuota }}" readonly>
-                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="mb-3" class="pl-5">
+                                <label for="kuota" class="form-label">Kuota</label>
+                                <input type="number" name="kuota" id="kuota" class="form-control" value="{{ $mku_program->kuota }}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="mb-3" class="pl-5">
+                                <label for="is_active" class="form-label">Semester</label>
+                                    @if($mku_program->program->is_active==1)
+                                        <input type="text" name="is_active" id="is_active" class="form-control" value="aktif" readonly>
+                                    @else($mku_program->program->is_active==0)
+                                        <input type="text" name="is_active" id="is_active" class="form-control" value="non-aktif" readonly>
+                                    @endif
+                            </div>
+                        </div>
+                    </div>  
 
                     <label for="syarat" class="form-label">Syarat & Ketentuan</label>
                     <div class="input-group">

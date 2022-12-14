@@ -10,7 +10,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{{url('themes/frontend/assets/img/favicon.png')}}" rel="icon">
+  <link href="{{url('themes/frontend/assets/img/logoweb.png')}}" rel="icon">
   <link href="{{url('themes/frontend/assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -116,7 +116,9 @@
                 </div>
 
             </div>
-            <button type="submit" class="btn" style="background: #15246a; color:white">Simpan</button>
+            <div style="text-align: center; padding-top:20px; padding:bottom :30px">
+            <button type="submit" class="btn" style="background: #15246a; align-item:center; color:white">Simpan</button>
+            </div>
     </form>
     </div>
                

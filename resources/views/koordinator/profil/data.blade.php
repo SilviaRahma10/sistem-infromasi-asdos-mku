@@ -29,13 +29,13 @@
             </div>
 
           <div class="mb-3" class="pl-5">
-            <label for="role" class="form-label">Role</label>
+            <label for="role" class="form-label">Jabatan</label>
             <input type="text" name="role" id="role" class="form-control" value="{{ auth()->user()->role }}">
           </div>
 
             <div class="mb-3" class="pl-5">
               <label for="password" class="form-label">Password </label> 
-              <input type="text" name="password" id="password" class="form-control" value="{{ auth()->user()->password }}">
+              <input type="text" name="password" id="password" class="form-control" value="admin">
             </div>
 
     

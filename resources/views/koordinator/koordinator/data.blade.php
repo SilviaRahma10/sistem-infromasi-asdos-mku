@@ -2,6 +2,10 @@
 @section('title', 'data koordinator')
 @section('content')
 
+@section('custom_head')
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.1/cr-1.6.1/r-2.4.0/sc-2.0.7/sb-1.4.0/datatables.min.css"/>
+@endsection
+
 
 <div class="container-fluid">
 
@@ -15,24 +19,20 @@
             Tambah</button></a>
         </div>
         
-        <div>
-
-        <form action="{{ route('koordinator.search') }}" method="GET" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3  my-md-0 navbar-search" style="float: right;">
-            <div class="input-group pull-right" style="color:white">
-                <input type="search" class="form-control bg-white border-0 small" placeholder="Cari Data Koordinator" name="search">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">
-                        <i class="fas fa-search fa-sm"></i>
-                    </button>
+        {{-- <div>
+            <form action="{{ route('koordinator.search') }}" method="GET" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3  my-md-0 navbar-search" style="float: right;">
+                <div class="input-group pull-right" style="color:white">
+                    <input type="search" class="form-control bg-white border-0 small" placeholder="Cari Data Koordinator" name="search">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </form>
-    </div>
+            </form>
+        </div> --}}
     </div>
     <br>
-
-
-
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -97,6 +97,16 @@
     </div>
   </div>
 @endsection
+
+@push('custom_js')
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.13.1/cr-1.6.1/r-2.4.0/sc-2.0.7/sb-1.4.0/datatables.min.js"></script>
+
+      <script>
+        $(document).ready( function () {
+    $('#dataTable').DataTable();
+} );
+      </script>
+  @endpush
 
 @section('custom_html')
   @foreach ($koordinators as $koordinator)

@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
 
-    <h1 class="h3 mb-2 text-gray-800">Program Studi</h1>
+    <h1 class="h3 mb-2 text-gray-800">Fakultas -{{ $fakultas->nama }} </h1>
     <br>
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <a href="{{ route('fakultas.data') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i

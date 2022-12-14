@@ -33,7 +33,14 @@ class DashboardController extends Controller
         $asistent = Pendaftaran::whereBelongsTo($program)
         ->where('status', '1')->get();
 
-        return view('adminDashboard', compact('tahun_ajaran','fakultas', 'prodis','program',  'mku', 'mku_program', 'registration', 'asistent', 'koordinators'));
+        $kuota  = 0;
+        $kuotamku = Mku_program::where('id_program', $program[0]->id)->get();
+  
+        foreach ($kuotamku as $p) {
+          $kuota += $p->kuota;
+        }
+
+        return view('adminDashboard', compact('tahun_ajaran','fakultas', 'prodis','program',  'mku', 'mku_program', 'registration', 'asistent', 'koordinators', 'kuota'));
        
     }
 
@@ -44,29 +51,45 @@ class DashboardController extends Controller
         $program = Program::where('is_active', '1')->get();
 
         // dashboard koordinator
+        $idMku = auth()->user()->koordinator->id_mku;
+
+        //kuota mku program
+        $mku_program = Mku_program::where('id_mata_kuliah', $idMku)
+        ->whereBelongsTo($program)
+        ->first();
+        // $mku_program = Mku_program::whereBelongsTo($program)->get();
+      
+      
+
+        //jumlah pendaftar
         $registration = Pendaftaran::whereBelongsTo($program)
-        ->where('id_mata_kuliah',auth()->user()->koordinator->id_mku)
-        ->get(); 
-
-        $registrationsBelumVerifikasi = Pendaftaran::whereBelongsTo($program)
-        ->where('status', '0')
-        ->where('id_mata_kuliah',auth()->user()->koordinator->id_mku)
-        ->get(); 
-
-        $registrationsTerima = Pendaftaran::whereBelongsTo($program)
-        ->where('status', '1')
-        ->where('id_mata_kuliah',auth()->user()->koordinator->id_mku)
-        ->get(); 
-
-        $registrationsTolak = Pendaftaran::whereBelongsTo($program)
-        ->where('status', '2')
-        ->where('id_mata_kuliah',auth()->user()->koordinator->id_mku)
+        ->where('id_mata_kuliah',$idMku)
         ->get();
 
+        //jumlah pendaftar belum verifikasi
+        $registrationsBelumVerifikasi = Pendaftaran::whereBelongsTo($program)
+        ->where('status', '0')
+        ->where('id_mata_kuliah',$idMku)
+        ->get(); 
+
+        //jumlah pendaftar terima
+        $registrationsTerima = Pendaftaran::whereBelongsTo($program)
+        ->where('status', '1')
+        ->where('id_mata_kuliah',$idMku)
+        ->get(); 
+
+        //jumlah pendaftar tolak
+        $registrationsTolak = Pendaftaran::whereBelongsTo($program)
+        ->where('status', '2')
+        ->where('id_mata_kuliah',$idMku)
+        ->get();
+
+        //jumlah asisten aktif
         $asistent = Pendaftaran::whereBelongsTo($program)
         ->where('status', '1')
-        ->where('id_mata_kuliah',auth()->user()->koordinator->id_mku)->get(); 
+        ->where('id_mata_kuliah',$idMku)
+        ->get(); 
         
-        return view('adminDashboard', compact('registration', 'registrationsBelumVerifikasi', 'registrationsTerima', 'registrationsTolak', 'asistent')); 
+        return view('adminDashboard', compact('program', 'mku_program','registration', 'registrationsBelumVerifikasi', 'registrationsTerima', 'registrationsTolak', 'asistent')); 
     }   
 }
